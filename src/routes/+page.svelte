@@ -1,9 +1,12 @@
 <script>
-	import AddressSearch from '$lib/components/AddressSearch.svelte';
+	import Map from '$lib/components/map/Map.svelte';
+	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
+	let addressLat = 0.0;
+	let addressLong = 0.0;
 </script>
 
 <br />
-<div class="max-w-6xl flex flex-col gap-4">
+<!-- <div class="max-w-6xl flex flex-col gap-4">
 	<div class="flex flex-col justify-center items-center text-center gap-3">
 		<h1>
 			<strong
@@ -17,11 +20,17 @@
 		<p>Translate audio, subtitles, description, metadata</p>
 		<a href="/auth/signup" class="btn variant-filled-primary"> Action Button </a>
 	</div>
-</div>
+</div> -->
 
 <br />
 
-<AddressSearch />
+<AddressSearch bind:addressLat bind:addressLong />
+
+<p>
+	{addressLat}, {addressLong}
+</p>
+
+<Map lat={addressLat} long={addressLong} />
 
 <br />
 <br />
