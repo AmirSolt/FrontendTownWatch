@@ -1,3 +1,7 @@
+<script>
+	import AddressSearch from '$lib/components/AddressSearch.svelte';
+</script>
+
 <br />
 <div class="max-w-6xl flex flex-col gap-4">
 	<div class="flex flex-col justify-center items-center text-center gap-3">
@@ -16,6 +20,9 @@
 </div>
 
 <br />
+
+<AddressSearch />
+
 <br />
 <br />
 <br />
