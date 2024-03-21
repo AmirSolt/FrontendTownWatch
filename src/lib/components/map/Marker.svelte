@@ -4,7 +4,7 @@
 
 	export let width: number;
 	export let height: number;
-	export let latLng: number[];
+	export let pos: number[];
 
 	let marker: L.Marker | undefined;
 	let markerElement: HTMLElement;
@@ -26,7 +26,7 @@
 				className: 'map-marker',
 				iconSize: leaf.point(width, height)
 			});
-			marker = leaf.marker(latLng as L.LatLngExpression, { icon }).addTo(map);
+			marker = leaf.marker(pos as L.LatLngExpression, { icon }).addTo(map);
 		}
 	});
 

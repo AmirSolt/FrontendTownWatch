@@ -1,12 +1,17 @@
 <script lang="ts">
+	import Area from '$lib/components/areas/Area.svelte';
+	import { createUserArea } from '$lib/components/areas/crud.js';
 	import Map from '$lib/components/map/Map.svelte';
 	import Marker from '$lib/components/map/Marker.svelte';
 	import Popup from '$lib/components/map/Popup.svelte';
 	import { dictionarizeEvents, fetchEvents } from '$lib/components/scan/scan';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
-	let searchActivated = false;
+	export let data;
+	let { user, areas } = data;
+	let areaActivated = false;
 	let addressLat = 43.8394267;
 	let addressLong = -79.511324;
+	let address = '';
 	let radius = 10.0;
 	let events: { [id: string]: Event } = {};
 
@@ -36,10 +41,11 @@
 <br />
 
 <AddressSearch
+	bind:address
 	bind:addressLat
 	bind:addressLong
 	on:click={async () => {
-		searchActivated = true;
+		areaActivated = true;
 		let newEvents = await fetchEvents(addressLat, addressLong, radius);
 		events = dictionarizeEvents(events, newEvents);
 		console.log('events:', events);
@@ -60,15 +66,21 @@
 		<button
 			class="btn variant-filled-secondary absolute top-2 right-2"
 			style="z-index:500;"
-			disabled={!searchActivated}
-			on:click={() => {
-				// is user
-				//
+			disabled={!areaActivated}
+			on:click={async () => {
+				if (user == null) {
+					// popup
+				} else {
+					let newArea = await createUserArea({
+						address
+					});
+					if (newArea) areas.push(newArea);
+				}
 			}}>Get Notified</button
 		>
 
 		{#each getValues(events) as event}
-			<Marker latLng={[event.lat, event.long]} width={40} height={40}>
+			<Marker pos={[event.lat, event.long]} width={40} height={40}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					xml:space="preserve"
@@ -92,6 +104,11 @@
 
 <br />
 <br />
+
+{#each areas as area}
+	<Area {area} />
+{/each}
+
 <br />
 <br />
 <br />

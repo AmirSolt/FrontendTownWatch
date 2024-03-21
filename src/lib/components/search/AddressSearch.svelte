@@ -7,8 +7,7 @@
 
 	export let addressLat = 0.0;
 	export let addressLong = 0.0;
-
-	let address: string = '';
+	export let address = '';
 
 	async function handleClick() {
 		// await fetchAddress();

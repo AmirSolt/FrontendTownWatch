@@ -16,3 +16,13 @@ interface Event {
     long:numer
 }
 
+
+interface AreaParams{
+    id?:string
+    address:string
+}
+
+interface Area{
+    id:string
+    address:string
+}
