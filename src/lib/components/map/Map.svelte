@@ -1,37 +1,72 @@
 <script lang="ts">
-	import type { LatLngExpression } from 'leaflet';
-	import Leaflet from './Leaflet.svelte';
-	// import Marker from '$lib/Marker.svelte';
-	// import Popup from '$lib/Popup.svelte';
+	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
+	import 'leaflet/dist/leaflet.css';
+	import type L from 'leaflet';
 
-	export let lat: number = 0.0;
-	export let long: number = 0.0;
+	export let w: number = 0.0;
+	export let h: number = 0.0;
 
-	const initialView: LatLngExpression = [51.514244, 7.468429]; // Dortmund, Germany
-	const markerLocations: Array<LatLngExpression> = [
-		[51.513870009926, 7.473969975241] // ShipBit Office
-	];
+	export let bounds: L.LatLngBoundsExpression | undefined = undefined;
+	export let view: L.LatLngExpression | undefined = undefined;
+	export let zoom: number | undefined = undefined;
+
+	const dispatch = createEventDispatcher();
+
+	let map: L.Map | undefined;
+	let mapElement: HTMLElement;
+
+	onMount(async () => {
+		const leaf = await import('leaflet');
+
+		if (!bounds && (!view || !zoom)) {
+			throw new Error('Must set either bounds, or view and zoom.');
+		}
+
+		map = leaf
+			.map(mapElement)
+			// example to expose map events to parent components:
+			.on('zoom', (e) => dispatch('zoom', e))
+			.on('popupopen', async (e) => {
+				await tick();
+				e.popup.update();
+			});
+
+		leaf
+			.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+				attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`
+			})
+			.addTo(map);
+	});
+
+	onDestroy(() => {
+		map?.remove();
+		map = undefined;
+	});
+
+	setContext('map', {
+		getMap: () => map
+	});
+
+	$: if (map) {
+		if (bounds) {
+			map.fitBounds(bounds);
+		} else if (view && zoom) {
+			map.setView(view, zoom);
+		}
+	}
 </script>
 
-<Leaflet view={initialView} zoom={14}>
-	<!-- {#each markerLocations as latLng}
-		<Marker {latLng} width={40} height={40}>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				xml:space="preserve"
-				style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
-				viewBox="0 0 45 40"
-			>
-				<path
-					d="m23.046 25.449 9.601 16.885H13.253l9.793-16.885ZM45 23.965H25.702l9.575 16.84L45 23.965ZM44.963 20.923 35.339 4.254l-9.668 16.669h19.292ZM32.771 2.618h-4.17L8.522 37.237l2.08 3.603L32.771 2.618ZM25.084 2.618H11.465L0 22.476l6.768 11.722 18.316-31.58Z"
-					style="fill:#e9204f;fill-rule:nonzero"
-					transform="translate(0 -2.618)"
-				/>
-			</svg>
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+		crossorigin=""
+	/>
+</svelte:head>
 
-			<Popup
-				>Like & Subscribe! This is a very loooooooooooong title and it has many characters.</Popup
-			>
-		</Marker>
-	{/each} -->
-</Leaflet>
+<div id="map" bind:this={mapElement} class="w-full h-full">
+	{#if map}
+		<slot />
+	{/if}
+</div>
