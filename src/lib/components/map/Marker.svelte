@@ -19,7 +19,7 @@
 
 	onMount(async () => {
 		const leaf = await import('leaflet');
-
+		console.log('marker');
 		if (map) {
 			let icon = leaf.divIcon({
 				html: markerElement,
@@ -36,7 +36,7 @@
 	});
 </script>
 
-<div bind:this={markerElement}>
+<div id="marker" bind:this={markerElement}>
 	{#if marker}
 		<slot />
 	{/if}

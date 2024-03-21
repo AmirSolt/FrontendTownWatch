@@ -1,11 +1,20 @@
-<script>
+<script lang="ts">
 	import Map from '$lib/components/map/Map.svelte';
 	import Marker from '$lib/components/map/Marker.svelte';
 	import Popup from '$lib/components/map/Popup.svelte';
+	import { dictionarizeEvents, fetchEvents } from '$lib/components/scan/scan';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
-	let addressLat = 0.0;
-	let addressLong = 0.0;
-	const markerLocations = [[0.0, 0.0]];
+	let searchActivated = false;
+	let addressLat = 43.8394267;
+	let addressLong = -79.511324;
+	let radius = 10.0;
+	let events: { [id: string]: Event } = {};
+
+	function getValues<Type>(dict: { [id: string]: Type }): Type[] {
+		return Object.keys(dict).map(function (key) {
+			return dict[key];
+		});
+	}
 </script>
 
 <br />
@@ -26,17 +35,40 @@
 </div> -->
 <br />
 
-<AddressSearch bind:addressLat bind:addressLong />
-
+<AddressSearch
+	bind:addressLat
+	bind:addressLong
+	on:click={async () => {
+		searchActivated = true;
+		let newEvents = await fetchEvents(addressLat, addressLong, radius);
+		events = dictionarizeEvents(events, newEvents);
+		console.log('events:', events);
+	}}
+/>
+<div class="flex justify-center items-center gap-2">
+	<label for="radius">Radius:</label>
+	<input name="radius" type="range" max="100" bind:value={radius} />
+</div>
 <p>
 	{addressLat}, {addressLong}
 </p>
-
+<p>
+	{getValues(events).length}
+</p>
 <div class="w-96 h-96">
 	<Map view={[addressLat, addressLong]} zoom={12}>
-		{#each markerLocations as latLng}
-			<Marker {latLng} width={40} height={40}>
-				<!-- ShipBit Icon -->
+		<button
+			class="btn variant-filled-secondary absolute top-2 right-2"
+			style="z-index:500;"
+			disabled={!searchActivated}
+			on:click={() => {
+				// is user
+				//
+			}}>Get Notified</button
+		>
+
+		{#each getValues(events) as event}
+			<Marker latLng={[event.lat, event.long]} width={40} height={40}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					xml:space="preserve"

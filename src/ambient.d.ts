@@ -10,3 +10,9 @@ interface Customer {
     tier: int
 }
 
+interface Event {
+    crimeType: string
+    lat:number
+    long:numer
+}
+

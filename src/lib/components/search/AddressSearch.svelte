@@ -1,12 +1,19 @@
 <script lang="ts">
 	import { PUBLIC_HERE_APP_KEY } from '$env/static/public';
+	import { createEventDispatcher } from 'svelte';
 	import { error } from '@sveltejs/kit';
 	import { Search } from 'lucide-svelte';
+	const dispatch = createEventDispatcher();
 
 	export let addressLat = 0.0;
 	export let addressLong = 0.0;
 
 	let address: string = '';
+
+	async function handleClick() {
+		// await fetchAddress();
+		dispatch('click');
+	}
 
 	async function fetchAddress() {
 		const url = 'https://geocode.search.hereapi.com/v1/geocode';
@@ -53,5 +60,5 @@
 		bind:value={address}
 		autocomplete="postal-code"
 	/>
-	<button class="variant-filled-secondary col-span-2" on:click={fetchAddress}><Search /></button>
+	<button class="variant-filled-secondary col-span-2" on:click={handleClick}><Search /></button>
 </div>

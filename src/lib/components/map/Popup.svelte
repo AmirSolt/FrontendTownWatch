@@ -29,7 +29,7 @@
 	});
 </script>
 
-<div bind:this={popupElement}>
+<div id="popup" bind:this={popupElement}>
 	{#if open}
 		<slot />
 	{/if}
