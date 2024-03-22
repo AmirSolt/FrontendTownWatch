@@ -1,5 +1,5 @@
 
-export async function fetchEvents(lat:number, long:number, radius:number):Promise<Event[]>{
+export async function scanEvents(lat:number, long:number, radius:number):Promise<Event[]>{
 
     let minLat = 43.8313
     let maxLat = 43.8415

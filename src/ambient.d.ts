@@ -10,19 +10,62 @@ interface Customer {
     tier: int
 }
 
-interface Event {
-    crimeType: string
+
+// the data needed for the interactive map on the landing page
+interface Explore{
+    point:Point
+    events:Event[]
+}
+
+interface Point {
     lat:number
-    long:numer
+    long:number
 }
 
 
-interface AreaParams{
-    id?:string
-    address:string
+// ==================
+// Geo Server
+
+interface ErrorGeoServer{
+    message:string
+    event_id:string
 }
 
-interface Area{
-    id:string
-    address:string
+
+interface Area {
+    ID: string;
+    CreatedAt: string;
+    UserID: string;
+    IsActive: boolean;
+    Address: string;
+    Region: string;
+    Radius: number;
+    Point: string | null;
+    Lat: number;
+    Long: number;
 }
+
+interface Event {
+    ID: number;
+    CreatedAt: string;
+    OccurAt: string;
+    ExternalID: string;
+    Neighborhood: string;
+    LocationType: string;
+    CrimeType: string; // You need to define CrimeType separately or use a string type
+    Region: string;
+    Point: string | null;
+    Lat: number;
+    Long: number;
+}
+
+interface Report {
+    ID: string;
+    CreatedAt: string;
+    UserID: string;
+    IsReported: boolean;
+    AreaID: string;
+}
+
+
+

@@ -1,5 +1,5 @@
 
-import { stripe } from "$lib/stripe.server";
+import { stripe } from "$lib/server/stripe/stripe";
 import { error, redirect } from "@sveltejs/kit";
 import type Stripe from "stripe";
 import { z } from "zod";

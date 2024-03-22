@@ -1,33 +1,25 @@
 <script lang="ts">
-	// import Area from '$lib/components/areas/Area.svelte';
-	// import Map from '$lib/components/map/Map.svelte';
-	// import Marker from '$lib/components/map/Marker.svelte';
-	// import Popup from '$lib/components/map/Popup.svelte';
+	import Area from '$lib/components/areas/Area.svelte';
+	import { createUserArea } from '$lib/components/areas/crud.js';
+	import Map from '$lib/components/map/Map.svelte';
+	import Marker from '$lib/components/map/Marker.svelte';
+	import Popup from '$lib/components/map/Popup.svelte';
+	import { dictionarizeEvents, fetchEvents } from '$lib/components/scan/scan';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
-	import { page } from '$app/stores';
-	console.log('page data:', $page.data);
-	console.log('page form:', $page.form);
-
-	// export let data;
-	// let { user, areas } = data;
-	// let areaActivated = false;
-	// let addressLat = 43.8394267;
-	// let addressLong = -79.511324;
-	// let address = '';
+	export let data;
+	let { user, areas } = data;
+	let areaActivated = false;
+	let addressLat = 43.8394267;
+	let addressLong = -79.511324;
+	let address = '';
 	let radius = 10.0;
-	// let events: { [id: string]: Event } = {};
-	if ($page.form?.explore != null) {
-		let explore: Explore = $page.form.explore;
-		console.log(explore.point);
-	}
+	let events: { [id: string]: Event } = {};
 
 	function getValues<Type>(dict: { [id: string]: Type }): Type[] {
 		return Object.keys(dict).map(function (key) {
 			return dict[key];
 		});
 	}
-
-	// events = dictionarizeEvents(events, newEvents);
 </script>
 
 <br />
@@ -48,13 +40,22 @@
 </div> -->
 <br />
 
-<AddressSearch {radius} />
-
+<AddressSearch
+	bind:address
+	bind:addressLat
+	bind:addressLong
+	on:click={async () => {
+		areaActivated = true;
+		let newEvents = await scanEvents(addressLat, addressLong, radius);
+		events = dictionarizeEvents(events, newEvents);
+		console.log('events:', events);
+	}}
+/>
 <div class="flex justify-center items-center gap-2">
 	<label for="radius">Radius:</label>
 	<input name="radius" type="range" max="100" bind:value={radius} />
 </div>
-<!-- <p>
+<p>
 	{addressLat}, {addressLong}
 </p>
 <p>
@@ -110,4 +111,4 @@
 
 <br />
 <br />
-<br /> -->
+<br />

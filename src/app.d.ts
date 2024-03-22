@@ -12,7 +12,11 @@ declare global {
     interface Error {
 			message: string;
 		}
-    // interface PageData {}
+    interface PageData {
+      forms: {
+        explore:Explore
+      }
+    }
     // interface Platform {}
   }
 }
