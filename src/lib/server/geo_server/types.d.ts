@@ -38,6 +38,6 @@ interface ScanPointParams {
     region: string;
     from_date: string; 
     to_date: string;
-    scan_events_count_limit: number;
+    limit: number;
     address:string;
 }

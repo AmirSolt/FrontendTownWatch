@@ -1,6 +1,5 @@
 <script lang="ts">
 	// import Area from '$lib/components/areas/Area.svelte';
-	import { enhance } from '$app/forms';
 	import Map from '$lib/components/map/Map.svelte';
 	import Marker from '$lib/components/map/Marker.svelte';
 	import Popup from '$lib/components/map/Popup.svelte';
@@ -22,7 +21,7 @@
 		events: [],
 		address: ''
 	};
-	let radius = 10.0;
+	let radius = 1000;
 	let events: { [id: string]: Event } = {};
 
 	console.log('page data:', $page.data);
@@ -65,13 +64,14 @@
 
 <div class="flex justify-center items-center gap-2">
 	<label for="radius">Radius(kilometers):</label>
-	<input name="radius" type="range" max="100" bind:value={radius} />
+	<!-- <input name="radius" type="range" max="100" bind:value={radius} /> -->
+	<input type="number" name="radius" id="" bind:value={radius} />
 </div>
 
 <div class="w-96 h-96">
 	<Map view={[explore.point.lat, explore.point.long]} zoom={12}>
 		{#if user}
-			<form action="?/create_area" method="post" use:enhance>
+			<form action="?/create_area" method="post">
 				<button
 					type="submit"
 					class="btn variant-filled-secondary absolute top-2 right-2"
