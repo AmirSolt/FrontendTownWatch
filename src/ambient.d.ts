@@ -14,6 +14,7 @@ interface Customer {
 // the data needed for the interactive map on the landing page
 interface Explore{
     point:Point
+    address:string
     events:Event[]
 }
 
@@ -33,38 +34,38 @@ interface ErrorGeoServer{
 
 
 interface Area {
-    ID: string;
-    CreatedAt: string;
-    UserID: string;
-    IsActive: boolean;
-    Address: string;
-    Region: string;
-    Radius: number;
-    Point: string | null;
-    Lat: number;
-    Long: number;
+    id: string;
+    created_at: string;
+    user_id: string;
+    is_active: boolean;
+    address: string;
+    region: string;
+    radius: number;
+    point: string | null;
+    lat: number;
+    long: number;
 }
 
 interface Event {
-    ID: number;
-    CreatedAt: string;
-    OccurAt: string;
-    ExternalID: string;
-    Neighborhood: string;
-    LocationType: string;
-    CrimeType: string; // You need to define CrimeType separately or use a string type
-    Region: string;
-    Point: string | null;
-    Lat: number;
-    Long: number;
+    id: number;
+    created_at: string;
+    occur_at: string;
+    external_id: string;
+    neighborhood: string;
+    location_type: string;
+    crime_type: string; // You need to define CrimeType separately or use a string type
+    region: string;
+    point: string | null;
+    lat: number;
+    long: number;
 }
 
 interface Report {
-    ID: string;
-    CreatedAt: string;
-    UserID: string;
-    IsReported: boolean;
-    AreaID: string;
+    id: string;
+    created_at: string;
+    user_id: string;
+    is_reported: boolean;
+    area_id: string;
 }
 
 

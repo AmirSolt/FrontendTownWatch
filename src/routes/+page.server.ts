@@ -23,13 +23,14 @@ export const actions = {
     address: async ({request})=>{
         const data = await request.formData();
 		const address = data.get('address') as string
-		const radius = Number(data.get('radius')) as number
+		let radiusKm = Number(data.get('radius')) as number
 
+        if(radiusKm<1) radiusKm = 1
         
         if(!addressSchema.safeParse(address).success){
             throw error(400, "Address input is wrong")
         }
-        if(!radiusSchema.safeParse(radius).success){
+        if(!radiusSchema.safeParse(radiusKm).success){
             throw error(400, "Radius input is wrong")
         }
         
@@ -41,15 +42,20 @@ export const actions = {
         const events = await scanEvents({
             lat: point.lat,
             long: point.long,
-            radius: radius,
+            radius: radiusKm*1000,
             region: Region.TORONTO,
-            fromDate: new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000)).toUTCString(),
-            toDate: currentDate.toUTCString(),
-            scanEventsCountLimit: 100,
-        }, true)
+            from_date: new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000)).toUTCString(),
+            to_date: currentDate.toUTCString(),
+            scan_events_count_limit: 100,
+            address: address,
+        }, false)
 
         return {
-            explore:{point, events} as Explore
+            explore:{point, events, address} as Explore
         }
-    }
+    },
+    create_area: async ()=>{
+
+    },
+
 };

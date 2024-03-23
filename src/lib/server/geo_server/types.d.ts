@@ -1,5 +1,5 @@
 interface CreateAreaParams {
-    userID: string;
+    user_id: string;
     address: string;
     region: string;
     radius: number;
@@ -8,18 +8,18 @@ interface CreateAreaParams {
 }
 
 interface DeleteAreaParams {
-    ID: string;
-    userID: string;
+    id: string;
+    user_id: string;
 }
 
 interface GetAreaParams {
-    ID: string;
-    userID: string;
+    id: string;
+    user_id: string;
 }
 
 interface UpdateAreaParams {
-    ID: string;
-    userID: string;
+    id: string;
+    user_id: string;
     address: string;
     radius: number;
     lat: number;
@@ -27,7 +27,7 @@ interface UpdateAreaParams {
 }
 
 interface GetAreasByUserParams {
-    userID: string;
+    user_id: string;
 }
 
 
@@ -36,7 +36,8 @@ interface ScanPointParams {
     long: number;
     radius: number;
     region: string;
-    fromDate: string; 
-    toDate: string;
-    scanEventsCountLimit: number;
+    from_date: string; 
+    to_date: string;
+    scan_events_count_limit: number;
+    address:string;
 }

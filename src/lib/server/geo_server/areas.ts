@@ -3,16 +3,16 @@ import { fetchGeo } from "./utils"
 
 export async function fetchUserAreas(locals:App.Locals):Promise<Area[]>{
     if(locals.user==null){
-        throw error(401, "")
+        return []
     }
 
     let areas = fetchGeo<Area[]>({
         relativeURL: "/api/areas/user",
         method:"POST",
-        body: {userID:locals.user.id} as GetAreasByUserParams
+        body: {user_id:locals.user.id} as GetAreasByUserParams
     })
 
-    return areas
+    return areas!=null? areas : []
 }
 
 export async function createUserArea(locals:App.Locals, params:CreateAreaParams):Promise<Area>{
@@ -20,7 +20,7 @@ export async function createUserArea(locals:App.Locals, params:CreateAreaParams)
         throw error(401, "")
     }
 
-    params.userID = locals.user.id
+    params.user_id = locals.user.id
 
     let area = fetchGeo<Area>({
         relativeURL: "/api/areas/create",
@@ -40,7 +40,7 @@ export async function updateUserArea(locals:App.Locals, params:UpdateAreaParams)
         throw error(401, "")
     }
 
-    params.userID = locals.user.id
+    params.user_id = locals.user.id
 
     let area = fetchGeo<Area>({
         relativeURL: "/api/areas/update",
@@ -60,7 +60,7 @@ export async function deleteUserArea(locals:App.Locals, params:DeleteAreaParams)
         throw error(401, "")
     }
 
-    params.userID = locals.user.id
+    params.user_id = locals.user.id
 
     fetchGeo<any>({
         relativeURL: "/api/areas/delete",

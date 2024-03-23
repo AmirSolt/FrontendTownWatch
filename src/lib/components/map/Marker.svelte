@@ -26,7 +26,8 @@
 				className: 'map-marker',
 				iconSize: leaf.point(width, height)
 			});
-			marker = leaf.marker(pos as L.LatLngExpression, { icon }).addTo(map);
+
+			marker = leaf.marker(pos as L.LatLngTuple, { icon }).addTo(map);
 		}
 	});
 

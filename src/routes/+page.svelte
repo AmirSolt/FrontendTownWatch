@@ -1,24 +1,37 @@
 <script lang="ts">
 	// import Area from '$lib/components/areas/Area.svelte';
-	// import Map from '$lib/components/map/Map.svelte';
-	// import Marker from '$lib/components/map/Marker.svelte';
-	// import Popup from '$lib/components/map/Popup.svelte';
+	import { enhance } from '$app/forms';
+	import Map from '$lib/components/map/Map.svelte';
+	import Marker from '$lib/components/map/Marker.svelte';
+	import Popup from '$lib/components/map/Popup.svelte';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
 	import { page } from '$app/stores';
-	console.log('page data:', $page.data);
-	console.log('page form:', $page.form);
+	import { dictionarizeEvents } from '$lib/components/events/scan';
 
-	// export let data;
-	// let { user, areas } = data;
+	export let data;
+	let { user, areas } = data;
 	// let areaActivated = false;
 	// let addressLat = 43.8394267;
 	// let addressLong = -79.511324;
 	// let address = '';
+	let explore: Explore = {
+		point: {
+			lat: 43.8394267,
+			long: -79.511324
+		},
+		events: [],
+		address: ''
+	};
 	let radius = 10.0;
-	// let events: { [id: string]: Event } = {};
+	let events: { [id: string]: Event } = {};
+
+	console.log('page data:', $page.data);
+	console.log('page form:', $page.form);
+	console.log('page events:', getValues(events).length);
 	if ($page.form?.explore != null) {
-		let explore: Explore = $page.form.explore;
-		console.log(explore.point);
+		explore = $page.form.explore;
+		events = dictionarizeEvents(events, $page.form.explore.events);
+		console.log('page events:', getValues(events).length);
 	}
 
 	function getValues<Type>(dict: { [id: string]: Type }): Type[] {
@@ -51,32 +64,32 @@
 <AddressSearch {radius} />
 
 <div class="flex justify-center items-center gap-2">
-	<label for="radius">Radius:</label>
+	<label for="radius">Radius(kilometers):</label>
 	<input name="radius" type="range" max="100" bind:value={radius} />
 </div>
-<!-- <p>
-	{addressLat}, {addressLong}
-</p>
-<p>
-	{getValues(events).length}
-</p>
+
 <div class="w-96 h-96">
-	<Map view={[addressLat, addressLong]} zoom={12}>
-		<button
-			class="btn variant-filled-secondary absolute top-2 right-2"
-			style="z-index:500;"
-			disabled={!areaActivated}
-			on:click={async () => {
-				if (user == null) {
-					// popup
-				} else {
-					let newArea = await createUserArea({
-						address
-					});
-					if (newArea) areas.push(newArea);
-				}
-			}}>Get Notified</button
-		>
+	<Map view={[explore.point.lat, explore.point.long]} zoom={12}>
+		{#if user}
+			<form action="?/create_area" method="post" use:enhance>
+				<button
+					type="submit"
+					class="btn variant-filled-secondary absolute top-2 right-2"
+					style="z-index:500;"
+					disabled={explore.address == ''}>Get Notified</button
+				>
+			</form>
+		{:else}
+			<button
+				type="button"
+				class="btn variant-filled-secondary absolute top-2 right-2"
+				style="z-index:500;"
+				disabled={explore.address == ''}
+				on:click={async () => {
+					// notify to signup
+				}}>Get Notified</button
+			>
+		{/if}
 
 		{#each getValues(events) as event}
 			<Marker pos={[event.lat, event.long]} width={40} height={40}>
@@ -104,10 +117,10 @@
 <br />
 <br />
 
-{#each areas as area}
+<!-- {#each areas as area}
 	<Area {area} />
-{/each}
+{/each} -->
 
 <br />
 <br />
-<br /> -->
+<br />
