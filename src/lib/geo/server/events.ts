@@ -1,8 +1,8 @@
-import { fetchGeo } from "./utils"
+import { geofetch } from "../utils"
 
-export async function scanEvents(params:ScanPointParams,  censorEvents:boolean):Promise<Event[]>{
+export async function scanEventsServer(params:ScanPointParams,  censorEvents:boolean):Promise<Event[]>{
 
-    let events = await fetchGeo<Event[]>({
+    let events = await geofetch<Event[]>({
         relativeURL: `/api/events/scan?${censorEventsQuery(censorEvents)}`,
         method:"POST",
         body: params

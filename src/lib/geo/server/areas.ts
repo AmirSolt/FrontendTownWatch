@@ -1,12 +1,12 @@
 import { error } from "@sveltejs/kit"
-import { fetchGeo } from "./utils"
+import { geofetch } from "../utils"
 
-export async function fetchUserAreas(locals:App.Locals):Promise<Area[]>{
+export async function fetchUserAreasServer(locals:App.Locals):Promise<Area[]>{
     if(locals.user==null){
         return []
     }
 
-    let areas = fetchGeo<Area[]>({
+    let areas = geofetch<Area[]>({
         relativeURL: "/api/areas/user",
         method:"POST",
         body: {user_id:locals.user.id} as GetAreasByUserParams
@@ -15,14 +15,14 @@ export async function fetchUserAreas(locals:App.Locals):Promise<Area[]>{
     return areas!=null? areas : []
 }
 
-export async function createUserArea(locals:App.Locals, params:CreateAreaParams):Promise<Area>{
+export async function createUserAreaServer(locals:App.Locals, params:CreateAreaParams):Promise<Area>{
     if(locals.user==null){
         throw error(401, "")
     }
 
     params.user_id = locals.user.id
 
-    let area = fetchGeo<Area>({
+    let area = geofetch<Area>({
         relativeURL: "/api/areas/create",
         method:"POST",
         body: params
@@ -35,14 +35,14 @@ export async function createUserArea(locals:App.Locals, params:CreateAreaParams)
     return area
 }
 
-export async function updateUserArea(locals:App.Locals, params:UpdateAreaParams):Promise<Area>{
+export async function updateUserAreaServer(locals:App.Locals, params:UpdateAreaParams):Promise<Area>{
     if(locals.user==null){
         throw error(401, "")
     }
 
     params.user_id = locals.user.id
 
-    let area = fetchGeo<Area>({
+    let area = geofetch<Area>({
         relativeURL: "/api/areas/update",
         method:"PATCH",
         body: params
@@ -55,14 +55,14 @@ export async function updateUserArea(locals:App.Locals, params:UpdateAreaParams)
     return area
 }
 
-export async function deleteUserArea(locals:App.Locals, params:DeleteAreaParams){
+export async function deleteUserAreaServer(locals:App.Locals, params:DeleteAreaParams){
     if(locals.user==null){
         throw error(401, "")
     }
 
     params.user_id = locals.user.id
 
-    fetchGeo<any>({
+    geofetch<any>({
         relativeURL: "/api/areas/delete",
         method:"DELETE",
         body: params
