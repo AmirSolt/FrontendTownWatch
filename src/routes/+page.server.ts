@@ -1,6 +1,6 @@
 import { Region } from '$lib/enums.js';
-import { fetchUserAreas } from '$lib/server/geo_server/areas.js';
-import { scanEvents } from '$lib/server/geo_server/events.js';
+import { fetchUserAreas } from '$lib/geo/server/areas.js';
+import { scanEvents } from '$lib/geo/server/events.js';
 import { fetchGeocode } from '$lib/server/here/geocoding.js';
 import { error } from '@sveltejs/kit';
 import { z } from "zod";
