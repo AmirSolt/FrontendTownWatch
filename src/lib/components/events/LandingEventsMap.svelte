@@ -4,6 +4,7 @@
 	import Popup from '$lib/components/map/Popup.svelte';
 	import { dictionarizeEvents } from '$lib/components/events/scan';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
@@ -19,12 +20,21 @@
 
 	let events: { [id: string]: Event } = {};
 	let timerId: NodeJS.Timeout | null | undefined;
+
 	onMount(() => {
 		explore.subscribe(async (newExplore) => {
+			let delay = 500;
 			if (timerId) {
 				clearTimeout(timerId);
+			} else {
+				delay = 0;
 			}
 			timerId = setTimeout(async () => {
+				console.log('==================');
+				console.log(newExplore.point.lat);
+				console.log(newExplore.point.long);
+				console.log('==================');
+
 				let newEvents = await scanEvents({
 					lat: newExplore.point.lat,
 					long: newExplore.point.long,
@@ -33,13 +43,13 @@
 					address: newExplore.address
 				});
 				events = dictionarizeEvents(events, newEvents);
-			}, 500);
+			}, delay);
 		});
 	});
 </script>
 
 <div class="w-96 h-96">
-	<Map view={[$explore.point.lat, $explore.point.long]} zoom={12}>
+	<Map view={[$explore.point.lat, $explore.point.long]} zoom={14}>
 		<!-- {#if user}
 			<form action="?/create_area" method="post">
 				<button
@@ -60,25 +70,32 @@
 				}}>Get Notified</button
 			>
 		{/if} -->
+		{#if $explore.address}
+			<Marker pos={[$explore.point.lat, $explore.point.long]} width={40} height={40}>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 24 24">
+					<path
+						d="M2.168,10.555a1,1,0,0,1,.278-1.387l9-6a1,1,0,0,1,1.11,0l9,6A1,1,0,0,1,21,11H19v9a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V11H3l.019-.019A.981.981,0,0,1,2.168,10.555Z"
+					/>
+				</svg>
+			</Marker>
+		{/if}
 
 		{#each getValues(events) as event}
 			<Marker pos={[event.lat, event.long]} width={40} height={40}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					xml:space="preserve"
-					style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
-					viewBox="0 0 45 40"
-				>
-					<path
-						d="m23.046 25.449 9.601 16.885H13.253l9.793-16.885ZM45 23.965H25.702l9.575 16.84L45 23.965ZM44.963 20.923 35.339 4.254l-9.668 16.669h19.292ZM32.771 2.618h-4.17L8.522 37.237l2.08 3.603L32.771 2.618ZM25.084 2.618H11.465L0 22.476l6.768 11.722 18.316-31.58Z"
-						style="fill:#e9204f;fill-rule:nonzero"
-						transform="translate(0 -2.618)"
-					/>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+					<circle cx="12" cy="12" r="10" stroke="#ff0000" stroke-width="2" />
+					<path d="M12 7V13M12 16.5V17" stroke="#ff0000" stroke-width="2" stroke-linecap="round" />
 				</svg>
 
-				<Popup
-					>Like & Subscribe! This is a very loooooooooooong title and it has many characters.</Popup
-				>
+				<Popup>
+					{#if $page.data.customer != null && $page.data.customer?.tier > 0}
+						show details
+					{:else}
+						<p>
+							<a href="/pricing">Subscribe to see event details</a>
+						</p>
+					{/if}
+				</Popup>
 			</Marker>
 		{/each}
 	</Map>

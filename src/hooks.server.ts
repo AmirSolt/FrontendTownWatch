@@ -7,7 +7,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   
   event.locals.pb = new PocketBase(PRIVATE_USER_SERVER_URL);
   event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '')
- 
+  event.locals.customer = null
+
   try {
     if (event.locals.pb.authStore.isValid) {
       await event.locals.pb.collection('users').authRefresh()
