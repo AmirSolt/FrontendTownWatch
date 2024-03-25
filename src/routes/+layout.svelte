@@ -5,10 +5,20 @@
 	export let data;
 	let { user } = data;
 
+	// Explore store
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+	const explore = writable<Explore>({
+		point: { lat: 0.0, long: 0.0 },
+		address: '',
+		radiuskm: 2,
+		events: {}
+	} as Explore);
+	setContext('explore', explore);
+
 	// Error toast
 	import { Toast, initializeStores, getToastStore } from '@skeletonlabs/skeleton';
 	initializeStores();
-
 	$: if ($page.error != null) {
 		getToastStore().trigger({
 			message: `Error: ${$page.error.message}`,

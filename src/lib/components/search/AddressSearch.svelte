@@ -1,23 +1,30 @@
 <script lang="ts">
+	import { fetchGeocode } from '$lib/here/geocoding';
 	import { Search } from 'lucide-svelte';
-
-	export let radius: number;
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	const explore: Writable<Explore> = getContext('explore');
 </script>
 
-<label for="address">Postal code/ Zip code</label>
-<form action="?/address" method="post">
+<div>
+	<label for="address">Postal code/ Zip code</label>
 	<div class="input-group input-group-divider grid grid-cols-10">
 		<input
 			class="col-span-8"
 			type="search"
 			name="address"
-			value="M3A 1K9"
+			bind:value={$explore.address}
 			autocomplete="postal-code"
 			minlength="1"
 			maxlength="12"
 			required
 		/>
-		<input type="number" class="hidden" name="radius" bind:value={radius} required />
-		<button type="submit" class="variant-filled-secondary col-span-2"><Search /></button>
+		<button
+			type="button"
+			class="variant-filled-secondary col-span-2"
+			on:click={async () => {
+				$explore.point = await fetchGeocode($explore.address);
+			}}><Search /></button
+		>
 	</div>
-</form>
+</div>

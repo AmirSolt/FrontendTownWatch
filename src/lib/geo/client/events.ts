@@ -1,4 +1,4 @@
-import { cfetch } from "../utils"
+import { cfetch } from "$lib/utils"
 
 export async function scanEvents(params:ScanPointParams):Promise<Event[]>{
 

@@ -15,7 +15,8 @@ interface Customer {
 interface Explore{
     point:Point
     address:string
-    events:Event[]
+    radiuskm:number
+    events:{ [id: string]: Event }
 }
 
 interface Point {

@@ -36,8 +36,8 @@ interface ScanPointParams {
     long: number;
     radius: number;
     region: string;
-    from_date: string; 
-    to_date: string;
-    limit: number;
+    from_date?: string; 
+    to_date?: string;
+    limit?: number;
     address:string;
 }
