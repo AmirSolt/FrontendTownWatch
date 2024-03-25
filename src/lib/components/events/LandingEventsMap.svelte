@@ -20,10 +20,11 @@
 
 	let events: { [id: string]: Event } = {};
 	let timerId: NodeJS.Timeout | null | undefined;
+	const delayDefault = 500;
 
 	onMount(() => {
 		explore.subscribe(async (newExplore) => {
-			let delay = 500;
+			let delay = delayDefault;
 			if (timerId) {
 				clearTimeout(timerId);
 			} else {
@@ -43,6 +44,10 @@
 					address: newExplore.address
 				});
 				events = dictionarizeEvents(events, newEvents);
+
+				if (delay == delayDefault) {
+					timerId = null;
+				}
 			}, delay);
 		});
 	});
