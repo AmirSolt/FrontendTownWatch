@@ -9,8 +9,8 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	const explore = writable<Explore>({
-		point: { lat: 0.0, long: 0.0 },
-		address: '',
+		point: { lat: 43.72474, long: -79.56693 },
+		address: 'M9W 2S9',
 		radiuskm: 2,
 		events: {}
 	} as Explore);

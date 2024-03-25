@@ -5,11 +5,11 @@
 	import { dictionarizeEvents } from '$lib/components/events/scan';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-
+	import { Region } from '$lib/enums';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { scanEvents } from '$lib/geo/client/events';
-	import { Region } from '$lib/enums';
+	import Circle from '../map/Circle.svelte';
 	const explore: Writable<Explore> = getContext('explore');
 
 	function getValues<Type>(dict: { [id: string]: Type }): Type[] {
@@ -44,48 +44,32 @@
 					address: newExplore.address
 				});
 				events = dictionarizeEvents(events, newEvents);
-
-				if (delay == delayDefault) {
-					timerId = null;
-				}
 			}, delay);
 		});
 	});
 </script>
 
-<div class="w-96 h-96">
+{#key $explore.point.lat + $explore.point.long}
 	<Map view={[$explore.point.lat, $explore.point.long]} zoom={14}>
-		<!-- {#if user}
-			<form action="?/create_area" method="post">
-				<button
-					type="submit"
-					class="btn variant-filled-secondary absolute top-2 right-2"
-					style="z-index:500;"
-					disabled={explore.address == ''}>Get Notified</button
-				>
-			</form>
-		{:else}
-			<button
-				type="button"
-				class="btn variant-filled-secondary absolute top-2 right-2"
-				style="z-index:500;"
-				disabled={explore.address == ''}
-				on:click={async () => {
-					// notify to signup
-				}}>Get Notified</button
-			>
-		{/if} -->
-		{#if $explore.address}
-			<Marker pos={[$explore.point.lat, $explore.point.long]} width={40} height={40}>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 24 24">
-					<path
-						d="M2.168,10.555a1,1,0,0,1,.278-1.387l9-6a1,1,0,0,1,1.11,0l9,6A1,1,0,0,1,21,11H19v9a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V11H3l.019-.019A.981.981,0,0,1,2.168,10.555Z"
-					/>
-				</svg>
-			</Marker>
-		{/if}
+		{#key $explore.point.lat + $explore.point.long + $explore.radiuskm}
+			<Circle pos={[$explore.point.lat, $explore.point.long]} radius={$explore.radiuskm * 1000} />
+		{/key}
+		<Marker pos={[$explore.point.lat, $explore.point.long]} width={40} height={40}>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="#4685af" viewBox="0 0 24 24">
+				<path
+					d="M2.168,10.555a1,1,0,0,1,.278-1.387l9-6a1,1,0,0,1,1.11,0l9,6A1,1,0,0,1,21,11H19v9a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V11H3l.019-.019A.981.981,0,0,1,2.168,10.555Z"
+				/>
+			</svg>
+		</Marker>
 
 		{#each getValues(events) as event}
+			<Circle
+				pos={[event.lat, event.long]}
+				radius={100}
+				colorHex={'#ff0000'}
+				fillOpacity={0.2}
+				strokeOpacity={1}
+			/>
 			<Marker pos={[event.lat, event.long]} width={40} height={40}>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 					<circle cx="12" cy="12" r="10" stroke="#ff0000" stroke-width="2" />
@@ -104,4 +88,4 @@
 			</Marker>
 		{/each}
 	</Map>
-</div>
+{/key}

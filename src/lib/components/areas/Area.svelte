@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { deleteUserArea } from './crud';
+	import { deleteUserArea } from '$lib/geo/client/areas';
 
 	export let area: Area;
 </script>
@@ -14,7 +14,9 @@
 			type="button"
 			class="btn variant-filled-error"
 			on:click={async () => {
-				deleteUserArea(area.id);
+				await deleteUserArea({
+					id: area.id
+				});
 			}}>X</button
 		>
 	</div>

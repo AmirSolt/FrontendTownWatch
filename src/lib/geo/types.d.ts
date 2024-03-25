@@ -1,5 +1,5 @@
 interface CreateAreaParams {
-    user_id: string;
+    user_id?: string;
     address: string;
     region: string;
     radius: number;
@@ -9,17 +9,17 @@ interface CreateAreaParams {
 
 interface DeleteAreaParams {
     id: string;
-    user_id: string;
+    user_id?: string;
 }
 
 interface GetAreaParams {
     id: string;
-    user_id: string;
+    user_id?: string;
 }
 
 interface UpdateAreaParams {
     id: string;
-    user_id: string;
+    user_id?: string;
     address: string;
     radius: number;
     lat: number;

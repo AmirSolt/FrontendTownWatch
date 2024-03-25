@@ -36,6 +36,14 @@
 				attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`
 			})
 			.addTo(map);
+
+		if (map) {
+			if (bounds) {
+				map.fitBounds(bounds);
+			} else if (view && zoom) {
+				map.setView(view, zoom);
+			}
+		}
 	});
 
 	onDestroy(() => {
@@ -46,14 +54,6 @@
 	setContext('map', {
 		getMap: () => map
 	});
-
-	$: if (map) {
-		if (bounds) {
-			map.fitBounds(bounds);
-		} else if (view && zoom) {
-			map.setView(view, zoom);
-		}
-	}
 </script>
 
 <svelte:head>

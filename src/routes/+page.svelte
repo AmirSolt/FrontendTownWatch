@@ -1,8 +1,9 @@
 <script lang="ts">
-	// import Area from '$lib/components/areas/Area.svelte';
-
+	import Area from '$lib/components/areas/Area.svelte';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
 	import { page } from '$app/stores';
+	import { Region } from '$lib/enums';
+	import { createUserArea } from '$lib/geo/client/areas';
 
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
@@ -56,6 +57,8 @@
 </div> -->
 <br />
 
+<h1>Events</h1>
+
 <AddressSearch />
 
 <div class="flex justify-center items-center gap-2">
@@ -63,14 +66,36 @@
 	<input name="radiuskm" type="range" max="10" bind:value={$explore.radiuskm} />
 </div>
 
-<LandingEventsMap />
+<div class="w-96 h-96 relative">
+	<button
+		type="button"
+		class="btn variant-filled-secondary absolute top-2 right-2"
+		style="z-index:500;"
+		disabled={$explore.address == ''}
+		on:click={async () => {
+			if ($page.data.user == null) {
+				console.log('Please sign-up');
+			} else {
+				let area = await createUserArea({
+					address: $explore.address,
+					region: Region.TORONTO,
+					radius: $explore.radiuskm * 1000,
+					lat: $explore.point.lat,
+					long: $explore.point.long
+				});
+			}
+		}}>Get Notified</button
+	>
+	<LandingEventsMap />
+</div>
 
 <br />
 <br />
 
-<!-- {#each areas as area}
+<h1>Areas</h1>
+{#each areas as area}
 	<Area {area} />
-{/each} -->
+{/each}
 
 <h1>
 	{JSON.stringify($explore)}
