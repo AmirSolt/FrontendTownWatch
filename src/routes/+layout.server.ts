@@ -2,7 +2,11 @@
 export const load = async ({locals}) => {
 
     if(locals.user!=null){
-        locals.customer = await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`);
+        try{
+            locals.customer = await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`);
+        }catch(_){
+
+        }
     }
 
     return {

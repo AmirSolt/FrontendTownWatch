@@ -72,7 +72,7 @@
 			/>
 			<Marker pos={[event.lat, event.long]} width={40} height={40}>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-					<circle cx="12" cy="12" r="10" stroke="#ff0000" stroke-width="2" />
+					<!-- <circle cx="12" cy="12" r="10" stroke="#ff0000" stroke-width="2" /> -->
 					<path d="M12 7V13M12 16.5V17" stroke="#ff0000" stroke-width="2" stroke-linecap="round" />
 				</svg>
 

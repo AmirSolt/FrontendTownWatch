@@ -8,10 +8,12 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import LandingEventsMap from '$lib/components/events/LandingEventsMap.svelte';
+	import { invalidateAll } from '$app/navigation';
 	const explore: Writable<Explore> = getContext('explore');
 
 	export let data;
-	let { user, areas } = data;
+	let { user } = data;
+	$: areas = data.areas;
 	// let areaActivated = false;
 	// let addressLat = 43.8394267;
 	// let addressLong = -79.511324;
@@ -83,6 +85,7 @@
 					lat: $explore.point.lat,
 					long: $explore.point.long
 				});
+				invalidateAll();
 			}
 		}}>Get Notified</button
 	>
@@ -93,9 +96,11 @@
 <br />
 
 <h1>Areas</h1>
-{#each areas as area}
-	<Area {area} />
-{/each}
+<div class="flex flex-col justify-center items-center gap-2 w-full">
+	{#each areas as area}
+		<Area {area} />
+	{/each}
+</div>
 
 <h1>
 	{JSON.stringify($explore)}

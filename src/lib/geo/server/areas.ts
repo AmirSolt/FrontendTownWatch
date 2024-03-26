@@ -66,16 +66,22 @@ export async function updateUserAreaServer(locals:App.Locals, params:UpdateAreaP
     return area
 }
 
-export async function deleteUserAreaServer(locals:App.Locals, params:DeleteAreaParams){
+export async function deleteUserAreaServer(locals:App.Locals, params:DeleteAreaParams):Promise<Area>{
     if(locals.user==null){
         throw error(401, "")
     }
 
     params.user_id = locals.user.id
 
-    await geofetch<any>({
+    let area = await geofetch<any>({
         relativeURL: "/api/areas/delete",
         method:"DELETE",
         body: params
     })
+
+    if(area==null){
+        throw error(500, "Internal Server Error")
+    }
+
+    return area
 }

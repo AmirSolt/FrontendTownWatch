@@ -1,10 +1,6 @@
 import { fetchUserAreasServer } from '$lib/geo/server/areas.js';
-import { z } from "zod";
 
-
-
-
-export const load = async ({locals}) => {
+export const load = async ({locals, depends}) => {
     let areas = await fetchUserAreasServer(locals)
     return {
         user: locals.user,

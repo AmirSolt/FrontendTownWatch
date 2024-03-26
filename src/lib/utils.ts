@@ -17,20 +17,23 @@ export async function cfetch<T>(options:RequestOptions): Promise<T> {
             headers: options.headers,
             body: options.body==null? null : JSON.stringify(options.body)
         });
-        console.log(`===========\n cfetch Response Data: ${JSON.stringify(response)}\n================`)
+
+        const data: any = await response.json();
+
+        console.log(`===========\n cfetch Response Data: ${JSON.stringify(data)}\n================`)
 
         if (!response.ok) {
             if(response.status == 401){
                 throw error(response.status, `Unauthorized`);
             }
-            const err: ErrorGeoServer = await response.json();
-            throw error(response.status, `error: ${err.message} | error_id: ${err.event_id}`);
+            const dataErr: ErrorGeoServer = data
+            throw error(response.status, `error: ${dataErr.message} | error_id: ${dataErr.event_id}`);
         }
 
 
-        const data: T = await response.json();
+        const dataSucc: T = data
         
-        return data;
+        return dataSucc;
     // } catch (err) {
     //     throw error(400, `Error fetching data: ${err}`);
     // }
