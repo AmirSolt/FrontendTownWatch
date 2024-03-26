@@ -1,14 +1,10 @@
 <script lang="ts">
 	import Area from '$lib/components/areas/Area.svelte';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
-	import { page } from '$app/stores';
-	import { Region } from '$lib/enums';
-	import { createUserArea } from '$lib/geo/client/areas';
-
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import LandingEventsMap from '$lib/components/events/LandingEventsMap.svelte';
-	import { invalidateAll } from '$app/navigation';
+	import AddAreaButton from '$lib/components/areas/AddAreaButton.svelte';
 	const explore: Writable<Explore> = getContext('explore');
 
 	export let data;
@@ -64,31 +60,14 @@
 <AddressSearch />
 
 <div class="flex justify-center items-center gap-2">
-	<label for="radius">Radius(km):</label>
-	<input name="radiuskm" type="range" max="10" bind:value={$explore.radiuskm} />
+	<label for="radius"
+		>Radius(km): <h1>{$explore.radiuskm}/5</h1>
+	</label>
+	<input name="radiuskm" type="range" step="0.5" max="5" bind:value={$explore.radiuskm} />
 </div>
 
 <div class="w-96 h-96 relative">
-	<button
-		type="button"
-		class="btn variant-filled-secondary absolute top-2 right-2"
-		style="z-index:500;"
-		disabled={$explore.address == ''}
-		on:click={async () => {
-			if ($page.data.user == null) {
-				console.log('Please sign-up');
-			} else {
-				let area = await createUserArea({
-					address: $explore.address,
-					region: Region.TORONTO,
-					radius: $explore.radiuskm * 1000,
-					lat: $explore.point.lat,
-					long: $explore.point.long
-				});
-				invalidateAll();
-			}
-		}}>Get Notified</button
-	>
+	<AddAreaButton />
 	<LandingEventsMap />
 </div>
 

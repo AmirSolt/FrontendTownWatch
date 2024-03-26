@@ -10,7 +10,7 @@
 	<label for="address">Postal code/ Zip code</label>
 	<div class="input-group input-group-divider grid grid-cols-10">
 		<input
-			class="col-span-8"
+			class="col-span-9"
 			type="search"
 			name="address"
 			bind:value={$explore.address}
@@ -21,9 +21,10 @@
 		/>
 		<button
 			type="button"
-			class="variant-filled-secondary col-span-2"
+			class="variant-filled-secondary col-span-1"
 			on:click={async () => {
 				$explore.point = await fetchGeocode($explore.address);
+				$explore.firstAddressSearchCompleted = true;
 			}}><Search /></button
 		>
 	</div>

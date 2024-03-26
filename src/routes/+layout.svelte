@@ -12,6 +12,7 @@
 		point: { lat: 43.72474, long: -79.56693 },
 		address: 'M9W 2S9',
 		radiuskm: 2,
+		firstAddressSearchCompleted: false,
 		events: {}
 	} as Explore);
 	setContext('explore', explore);

@@ -17,6 +17,7 @@ interface Explore{
     address:string
     radiuskm:number
     events:{ [id: string]: Event }
+    firstAddressSearchCompleted:bool
 }
 
 interface Point {
