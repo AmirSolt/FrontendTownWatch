@@ -1,7 +1,6 @@
 interface CreateAreaParams {
     user_id?: string;
     address: string;
-    region: string;
     radius: number;
     lat: number;
     long: number;
@@ -35,9 +34,9 @@ interface ScanPointParams {
     lat: number;
     long: number;
     radius: number;
-    region: string;
     from_date?: string; 
     to_date?: string;
     limit?: number;
     address:string;
+    user_id?:string;
 }

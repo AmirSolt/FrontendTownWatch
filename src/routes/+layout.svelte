@@ -103,7 +103,7 @@
 		<hr />
 		<div class="flex flex-col justify-center items-end m-4">
 			<a href="/" class="flex justify-center items-center">
-				<img src="logo.png" alt="Logo" class="w-12" />
+				<img src="/logo.png" alt="Logo" class="w-12" />
 			</a>
 			<p>BasedPocket 2024</p>
 		</div>

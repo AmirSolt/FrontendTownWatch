@@ -8,7 +8,7 @@ export const POST = async ({locals, request}) => {
         censorEvents = false
     }
 
-    const events = await scanEventsServer(params, censorEvents)
+    const events = await scanEventsServer(locals, params, censorEvents)
 
     return Response.json(events)
 };

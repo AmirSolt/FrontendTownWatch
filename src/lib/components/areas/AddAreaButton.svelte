@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Region } from '$lib/enums';
 	import { createUserArea } from '$lib/geo/client/areas';
 	import type { Writable } from 'svelte/store';
 	import { invalidateAll } from '$app/navigation';
@@ -19,12 +18,11 @@
 		} else {
 			let _ = await createUserArea({
 				address: $explore.address,
-				region: Region.TORONTO,
-				radius: $explore.radiuskm * 1000,
+				radius: Math.floor($explore.radiuskm * 1000),
 				lat: $explore.point.lat,
 				long: $explore.point.long
 			});
 			invalidateAll();
 		}
-	}}>Get Notified</button
+	}}>Add Area</button
 >

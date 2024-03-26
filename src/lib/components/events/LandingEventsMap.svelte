@@ -5,7 +5,6 @@
 	import { dictionarizeEvents } from '$lib/components/events/scan';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { Region } from '$lib/enums';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { scanEvents } from '$lib/geo/client/events';
@@ -40,7 +39,6 @@
 					lat: newExplore.point.lat,
 					long: newExplore.point.long,
 					radius: Math.floor(newExplore.radiuskm * 1000),
-					region: Region.TORONTO,
 					address: newExplore.address
 				});
 				events = dictionarizeEvents(events, newEvents);

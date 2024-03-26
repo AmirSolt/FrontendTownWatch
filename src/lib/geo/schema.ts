@@ -1,3 +1,3 @@
 import { z } from 'zod';
 
-export const radiusSchema = z.number().positive().max(5000);
+export const radiusSchema = z.number().int().positive().max(5000);

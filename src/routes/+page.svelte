@@ -24,7 +24,7 @@
 	// };
 	// let radius = 1000;
 	// let events: { [id: string]: Event } = {};
-
+	('error: error: Internal Server Error | error_id: 2fcfbc50f98043e9aa19bc11eeeccf92 | error_id: undefined');
 	// console.log('page data:', $page.data);
 	// console.log('page form:', $page.form);
 	// console.log('page events:', getValues(events).length);
@@ -55,36 +55,39 @@
 </div> -->
 <br />
 
-<h1>Events</h1>
+<h1 class="text-3xl font-bold">Events</h1>
+<div class="flex flex-col justify-center items-center gap-4 w-full p-4">
+	<AddressSearch />
+	<div class="flex justify-center items-center gap-2 w-full">
+		<label for="radius"
+			>Radius(km): <h1>{$explore.radiuskm}/5</h1>
+		</label>
+		<input name="radiuskm" type="range" step="0.5" max="5" bind:value={$explore.radiuskm} />
+	</div>
 
-<AddressSearch />
-
-<div class="flex justify-center items-center gap-2">
-	<label for="radius"
-		>Radius(km): <h1>{$explore.radiuskm}/5</h1>
-	</label>
-	<input name="radiuskm" type="range" step="0.5" max="5" bind:value={$explore.radiuskm} />
-</div>
-
-<div class="w-96 h-96 relative">
-	<AddAreaButton />
-	<LandingEventsMap />
+	<div class="w-full h-96 relative">
+		<AddAreaButton />
+		<LandingEventsMap />
+	</div>
 </div>
 
 <br />
 <br />
 
-<h1>Areas</h1>
-<div class="flex flex-col justify-center items-center gap-2 w-full">
-	{#each areas as area}
-		<Area {area} />
-	{/each}
+<h1 class="text-3xl font-bold">Areas</h1>
+<div class="flex flex-col justify-center items-center gap-4 w-full p-4">
+	{#if areas.length == 0}
+		<div class="card gap-2 p-4 w-full">
+			<p>Try adding an area</p>
+		</div>
+	{:else}
+		{#each areas as area}
+			<Area {area} />
+		{/each}
+	{/if}
 </div>
 
-<h1>
-	{JSON.stringify($explore)}
-</h1>
-
+<br />
 <br />
 <br />
 <br />

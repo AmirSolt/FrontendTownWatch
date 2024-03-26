@@ -7,7 +7,7 @@
 	export let area: Area;
 </script>
 
-<div class="card flex flex-row justify-between items-center gap-2 p-2 w-full">
+<div class="card flex flex-row justify-between items-center gap-2 p-4 w-full">
 	<button
 		type="button"
 		class="flex flex-row justify-between items-center gap-8"
@@ -20,9 +20,24 @@
 	>
 		<h1>Address: {area.address}</h1>
 		<h1>Radius: {area.radius / 1000}km</h1>
-		<h1>Active: {area.radius / 1000}km</h1>
 	</button>
 
+	<div class="flex items-center space-x-2">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="#3bc672"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="lucide lucide-circle-dot"
+			><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" fill="#3bc672" /></svg
+		>
+		<p class="text-green-500">{area.is_active ? 'online' : 'offline'}</p>
+	</div>
 	<div>
 		<button
 			type="button"
