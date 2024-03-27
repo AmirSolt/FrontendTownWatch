@@ -107,5 +107,11 @@
 			</a>
 			<p>BasedPocket 2024</p>
 		</div>
+
+		<!-- ===== Test -->
+		<form action="/api/reports/test" method="get">
+			<button type="submit" class="btn variant-filled-primary">Generate Reports</button>
+		</form>
+		<!-- ===== -->
 	</svelte:fragment>
 </AppShell>

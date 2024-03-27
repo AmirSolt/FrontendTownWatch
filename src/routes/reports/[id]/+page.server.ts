@@ -13,7 +13,9 @@ export const load = async ({locals, params}) => {
 
     let reportCustomer:Customer|undefined
     if(reportDetails.report.user_id){
-        reportCustomer = await locals.pb.collection('customers').getFirstListItem(`user.id="${reportDetails.report.user_id}"`);
+        try{
+            reportCustomer = await locals.pb.collection('customers').getFirstListItem(`user.id="${reportDetails.report.user_id}"`);
+        } catch(_){}
     }
 
     let censorEvents = true
