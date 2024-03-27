@@ -1,5 +1,5 @@
 import { error } from "@sveltejs/kit";
-import { geofetch } from "../utils"
+import { censorEventsQuery, geofetch } from "../utils"
 import { radiusSchema } from "../schema";
 
 
@@ -25,6 +25,3 @@ export async function scanEventsServer(locals:App.Locals, params:ScanPointParams
     return events!=null? events : []
 }
 
-export function censorEventsQuery(censorEvents:boolean):string{
-    return `censor_events=${String(censorEvents)}`
-}

@@ -8,7 +8,7 @@ import { cfetch } from "$lib/utils";
 interface GeoRequestOptions {
     relativeURL:string
     method:string
-    body:any
+    body?:any
 }
 
 export async function geofetch<T>(options:GeoRequestOptions): Promise<T> {
@@ -27,3 +27,6 @@ export async function geofetch<T>(options:GeoRequestOptions): Promise<T> {
 
 }
 
+export function censorEventsQuery(censorEvents:boolean):string{
+    return `censor_events=${String(censorEvents)}`
+}
