@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Area from '$lib/components/areas/Area.svelte';
+	import AreaCard from '$lib/components/areas/AreaCard.svelte';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
@@ -82,7 +82,7 @@
 		</div>
 	{:else}
 		{#each areas as area}
-			<Area {area} />
+			<AreaCard {area} />
 		{/each}
 	{/if}
 </div>

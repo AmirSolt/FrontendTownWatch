@@ -29,6 +29,15 @@ interface GetAreasByUserParams {
     user_id: string;
 }
 
+interface GetReportsByUserParams {
+    user_id: string;
+}
+
+interface GetReportsByAreaParams {
+    user_id: string;
+    area_id: string;
+}
+
 
 interface ScanPointParams {
     lat: number;
@@ -91,7 +100,6 @@ interface Report {
     id: string;
     created_at: string;
     user_id: string;
-    is_reported: boolean;
     area_id: string;
 }
 

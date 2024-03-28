@@ -7,7 +7,9 @@
 	export let area: Area;
 </script>
 
-<div class="card flex flex-row justify-between items-center gap-2 p-4 w-full">
+<div class="card flex flex-row justify-between items-center gap-4 p-4 w-full">
+	<!-- =============================== -->
+
 	<button
 		type="button"
 		class="flex flex-row justify-between items-center gap-8"
@@ -22,6 +24,7 @@
 		<h1>Radius: {area.radius / 1000}km</h1>
 	</button>
 
+	<!-- =============================== -->
 	<div class="flex items-center space-x-2">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -38,6 +41,14 @@
 		>
 		<p class="text-green-500">{area.is_active ? 'online' : 'offline'}</p>
 	</div>
+
+	<!-- =============================== -->
+
+	<a href="/reports/area/{area.id}" class="btn variant-filled-primary">
+		<h1>Report History</h1>
+	</a>
+
+	<!-- =============================== -->
 	<div>
 		<button
 			type="button"

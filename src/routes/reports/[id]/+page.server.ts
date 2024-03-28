@@ -7,7 +7,7 @@ const reportIDSchema = z.string().min(1)
 export const load = async ({locals, params}) => {
     const reportID:string = params.id
     if(!reportIDSchema.safeParse(reportID).success){
-        throw error(400, "Radius input is wrong")
+        throw error(400, "Url is broken")
     }
     const reportDetails = await fetchReportDetails(reportID)
 
