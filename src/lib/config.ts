@@ -1,0 +1,1 @@
+export const MaxRadiusKm = 5

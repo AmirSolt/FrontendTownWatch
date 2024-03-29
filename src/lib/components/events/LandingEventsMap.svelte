@@ -6,50 +6,52 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { scanEvents } from '$lib/geo/client/events';
+	import { MaxRadiusKm } from '$lib/config.js';
 	import EventMarker from './EventMarker.svelte';
 	import HomeMarker from './HomeMarker.svelte';
+	import { calculateDistance } from '$lib/utils';
 	const explore: Writable<Explore> = getContext('explore');
+	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
 
-	function getValues<Type>(dict: { [id: string]: Type }): Type[] {
-		return Object.keys(dict).map(function (key) {
-			return dict[key];
-		});
-	}
-
-	let events: { [id: string]: Event } = {};
-	let timerId: NodeJS.Timeout | null | undefined;
-	const delayDefault = 500;
-
+	let events: Event[] = [];
 	onMount(() => {
-		explore.subscribe(async (newExplore) => {
-			let delay = delayDefault;
-			if (timerId) {
-				clearTimeout(timerId);
-			} else {
-				delay = 0;
-			}
-			timerId = setTimeout(async () => {
-				console.log('==================');
-				console.log(newExplore.point.lat);
-				console.log(newExplore.point.long);
-				console.log('==================');
+		exploreSubmission.subscribe(async (newExploreSubmission) => {
+			const newExplore = newExploreSubmission.explores[-1];
 
-				let newEvents = await scanEvents({
-					lat: newExplore.point.lat,
-					long: newExplore.point.long,
-					radius: Math.floor(newExplore.radiuskm * 1000),
-					address: newExplore.address
-				});
-				events = dictionarizeEvents(events, newEvents);
-			}, delay);
+			console.log('==================');
+			console.log(newExplore.point.lat);
+			console.log(newExplore.point.long);
+			console.log('==================');
+
+			events = await scanEvents({
+				lat: newExplore.point.lat,
+				long: newExplore.point.long,
+				radius: Math.floor(MaxRadiusKm * 1000),
+				address: newExplore.address
+			});
 		});
 	});
+
+	function updateVisibleEvents(events: Event[]): Event[] {
+		let newEvents: Event[] = [];
+		events.forEach((event) => {
+			const eventPoint = {
+				lat: event.lat,
+				long: event.long
+			};
+
+			if (calculateDistance(eventPoint, $explore.point) <= $explore.radiuskm * 1000) {
+				newEvents.push(event);
+			}
+		});
+		return newEvents;
+	}
 </script>
 
 {#key $explore.point.lat + $explore.point.long}
 	<Map view={[$explore.point.lat, $explore.point.long]} zoom={13}>
 		<HomeMarker />
-		{#each getValues(events) as event}
+		{#each updateVisibleEvents(events) as event}
 			<EventMarker
 				{event}
 				showDetails={$page.data.customer != null && $page.data.customer?.tier > 0}

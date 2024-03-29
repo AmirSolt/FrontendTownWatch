@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AreaCard from '$lib/components/areas/AreaCard.svelte';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
+	import { MaxRadiusKm } from '$lib/config.js';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import LandingEventsMap from '$lib/components/events/LandingEventsMap.svelte';
@@ -62,7 +63,13 @@
 		<label for="radius"
 			>Radius(km): <h1>{$explore.radiuskm}/5</h1>
 		</label>
-		<input name="radiuskm" type="range" step="0.5" max="5" bind:value={$explore.radiuskm} />
+		<input
+			name="radiuskm"
+			type="range"
+			step="0.5"
+			max={MaxRadiusKm}
+			bind:value={$explore.radiuskm}
+		/>
 	</div>
 
 	<div class="w-full h-96 relative">

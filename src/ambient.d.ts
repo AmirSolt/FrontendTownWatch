@@ -16,8 +16,9 @@ interface Explore{
     point:Point
     address:string
     radiuskm:number
-    events:{ [id: string]: Event }
-    firstAddressSearchCompleted:bool
+}
+interface ExploreSubmission {
+    explores:Explore[]
 }
 
 interface Point {

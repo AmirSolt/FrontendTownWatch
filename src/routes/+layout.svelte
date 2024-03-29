@@ -11,11 +11,14 @@
 	const explore = writable<Explore>({
 		point: { lat: 43.72474, long: -79.56693 },
 		address: 'M9W 2S9',
-		radiuskm: 2,
-		firstAddressSearchCompleted: false,
-		events: {}
+		radiuskm: 2
 	} as Explore);
+	const exploreSubmission = writable<ExploreSubmission>({
+		explores: []
+	} as ExploreSubmission);
 	setContext('explore', explore);
+	setContext('exploreSubmission', exploreSubmission);
+	// ========================
 
 	// Error toast
 	import { Toast, initializeStores, getToastStore } from '@skeletonlabs/skeleton';

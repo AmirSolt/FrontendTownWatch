@@ -39,3 +39,30 @@ export async function cfetch<T>(options:RequestOptions): Promise<T> {
     // }
 }
 
+
+
+
+export function calculateDistance(point1: Point, point2: Point): number {
+    const EARTH_RADIUS = 6371000; // Earth's radius in meters
+
+    function degreesToRadians(degrees: number): number {
+        return degrees * (Math.PI / 180);
+    }
+
+    const lat1 = degreesToRadians(point1.lat);
+    const lat2 = degreesToRadians(point2.lat);
+    const long1 = degreesToRadians(point1.long);
+    const long2 = degreesToRadians(point2.long);
+
+    const dLat = lat2 - lat1;
+    const dLong = long2 - long1;
+
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1) * Math.cos(lat2) *
+              Math.sin(dLong / 2) * Math.sin(dLong / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = EARTH_RADIUS * c;
+    return distance;
+}

@@ -4,6 +4,7 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	const explore: Writable<Explore> = getContext('explore');
+	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
 </script>
 
 <div class="w-full">
@@ -24,7 +25,7 @@
 			class="variant-filled-secondary col-span-2 md:col-span-1"
 			on:click={async () => {
 				$explore.point = await fetchGeocode($explore.address);
-				$explore.firstAddressSearchCompleted = true;
+				$exploreSubmission.explores.push($explore);
 			}}><Search /></button
 		>
 	</div>
