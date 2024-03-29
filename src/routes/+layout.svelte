@@ -18,6 +18,8 @@
 	} as ExploreSubmission);
 	setContext('explore', explore);
 	setContext('exploreSubmission', exploreSubmission);
+
+	$exploreSubmission.explores.push($explore);
 	// ========================
 
 	// Error toast

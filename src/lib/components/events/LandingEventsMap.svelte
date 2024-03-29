@@ -16,7 +16,10 @@
 	let events: Event[] = [];
 	onMount(() => {
 		exploreSubmission.subscribe(async (newExploreSubmission) => {
-			const newExplore = newExploreSubmission.explores[-1];
+			const newExplore = newExploreSubmission.explores.at(-1);
+			if (newExplore == null) {
+				return;
+			}
 
 			console.log('==================');
 			console.log(newExplore.point.lat);
@@ -32,7 +35,7 @@
 		});
 	});
 
-	function updateVisibleEvents(events: Event[]): Event[] {
+	function updateVisibleEvents(events: Event[], radius: number): Event[] {
 		let newEvents: Event[] = [];
 		events.forEach((event) => {
 			const eventPoint = {
@@ -40,10 +43,11 @@
 				long: event.long
 			};
 
-			if (calculateDistance(eventPoint, $explore.point) <= $explore.radiuskm * 1000) {
+			if (calculateDistance(eventPoint, $explore.point) <= radius) {
 				newEvents.push(event);
 			}
 		});
+
 		return newEvents;
 	}
 </script>
@@ -51,7 +55,7 @@
 {#key $explore.point.lat + $explore.point.long}
 	<Map view={[$explore.point.lat, $explore.point.long]} zoom={13}>
 		<HomeMarker />
-		{#each updateVisibleEvents(events) as event}
+		{#each updateVisibleEvents(events, $explore.radiuskm * 1000) as event (event.id)}
 			<EventMarker
 				{event}
 				showDetails={$page.data.customer != null && $page.data.customer?.tier > 0}

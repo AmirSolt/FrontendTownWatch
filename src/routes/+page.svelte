@@ -61,12 +61,12 @@
 	<AddressSearch />
 	<div class="flex justify-center items-center gap-2 w-full">
 		<label for="radius"
-			>Radius(km): <h1>{$explore.radiuskm}/5</h1>
+			>Radius(km): <h1>{$explore.radiuskm}/{MaxRadiusKm}</h1>
 		</label>
 		<input
 			name="radiuskm"
 			type="range"
-			step="0.5"
+			step="0.3"
 			max={MaxRadiusKm}
 			bind:value={$explore.radiuskm}
 		/>

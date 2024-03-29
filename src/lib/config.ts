@@ -1,1 +1,1 @@
-export const MaxRadiusKm = 5
+export const MaxRadiusKm = 3
