@@ -89,8 +89,7 @@ interface Event {
     external_id: string;
     neighborhood: string;
     location_type: string;
-    crime_type: string; // You need to define CrimeType separately or use a string type
-    region: string;
+    crime_type: string;
     point: string | null;
     lat: number;
     long: number;

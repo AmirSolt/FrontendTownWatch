@@ -56,6 +56,8 @@
 </div> -->
 <br />
 
+<p>Note: Information found on this page maybe not %100 accurate please do not rely on this info</p>
+
 <h1 class="text-3xl font-bold">Events</h1>
 <div class="flex flex-col justify-center items-center gap-4 w-full p-4">
 	<AddressSearch />
@@ -85,7 +87,8 @@
 <div class="flex flex-col justify-center items-center gap-4 w-full p-4">
 	{#if areas.length == 0}
 		<div class="card gap-2 p-4 w-full">
-			<p>Try adding an area</p>
+			<p>(Empty)</p>
+			<p>Add an area to get automatic notifications</p>
 		</div>
 	{:else}
 		{#each areas as area}
@@ -95,6 +98,7 @@
 </div>
 
 <br />
+
 <br />
 <br />
 <br />

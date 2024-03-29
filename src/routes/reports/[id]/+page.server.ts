@@ -18,16 +18,17 @@ export const load = async ({locals, params}) => {
         } catch(_){}
     }
 
-    let censorEvents = true
+    let showEventDetails = true
     if(reportCustomer!=null && reportCustomer.tier > 0){
-        censorEvents = false
+        showEventDetails = false
     }
 
-    const events = await fetchEventsByReport(reportID, censorEvents)
+    const events = await fetchEventsByReport(reportID, showEventDetails)
     
     return {
         reportDetails,
-        events
+        events,
+        showEventDetails
     }
 
 };
