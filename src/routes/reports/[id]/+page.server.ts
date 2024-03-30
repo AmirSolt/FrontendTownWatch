@@ -18,9 +18,9 @@ export const load = async ({locals, params}) => {
         } catch(_){}
     }
 
-    let showEventDetails = true
+    let showEventDetails = false
     if(reportCustomer!=null && reportCustomer.tier > 0){
-        showEventDetails = false
+        showEventDetails = true
     }
 
     const events = await fetchEventsByReport(reportID, showEventDetails)

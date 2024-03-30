@@ -3,7 +3,7 @@
 	import ReportEventsMap from '$lib/components/events/ReportEventsMap.svelte';
 
 	export let data;
-	let { reportDetails, events } = data;
+	let { reportDetails, events, showEventDetails } = data;
 </script>
 
 <p>Note: Please, only share this page with people you trust.</p>
@@ -11,7 +11,7 @@
 <h1>Report</h1>
 
 <p>
-	Date: {reportDetails.report.createdAt}
+	Date: {reportDetails.report.created_at}
 </p>
 
 <p>
@@ -21,9 +21,12 @@
 <p>
 	Address: {reportDetails.area.address}
 </p>
+<div class="w-full h-96 relative">
+	<ReportEventsMap />
+</div>
 
-<ReportEventsMap />
+<h1>Events</h1>
 
 {#each events as event, index}
-	<EventCard {event} {index} />
+	<EventCard {event} {index} showDetails={showEventDetails} />
 {/each}

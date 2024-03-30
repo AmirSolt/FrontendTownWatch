@@ -56,7 +56,7 @@ export async function fetchReportDetails(reportID:string):Promise<ReportDetails>
 
 export async function fetchEventsByReport(reportID:string, censorEvents:boolean):Promise<Event[]>{
     let events = await geofetch<Event[]>({
-        relativeURL: `/api/reports/${reportID}?${censorEventsQuery(censorEvents)}`,
+        relativeURL: `/api/reports/${reportID}/events?${censorEventsQuery(censorEvents)}`,
         method:"GET",
     })
 

@@ -3,9 +3,6 @@
 	import 'leaflet/dist/leaflet.css';
 	import type L from 'leaflet';
 
-	export let w: number = 0.0;
-	export let h: number = 0.0;
-
 	export let bounds: L.LatLngBoundsExpression | undefined = undefined;
 	export let view: L.LatLngExpression | undefined = undefined;
 	export let zoom: number | undefined = undefined;
