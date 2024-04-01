@@ -2,10 +2,27 @@
 	import { page } from '$app/stores';
 	import { createUserArea } from '$lib/geo/client/areas';
 	import type { Writable } from 'svelte/store';
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { getContext } from 'svelte';
 	const explore: Writable<Explore> = getContext('explore');
 	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
+
+	import { getModalStore } from '@skeletonlabs/skeleton';
+
+	const modalStore = getModalStore();
+	import type { ModalSettings } from '@skeletonlabs/skeleton';
+	const modal: ModalSettings = {
+		type: 'confirm',
+		// Data
+		title: 'Need an Account',
+		body: 'To create an Area, you need an account.',
+		buttonTextConfirm: 'Register',
+		response: (r: boolean) => {
+			if (r) {
+				goto('/auth/signup');
+			}
+		}
+	};
 </script>
 
 <button
@@ -15,7 +32,7 @@
 	disabled={$exploreSubmission.explores.length == 0}
 	on:click={async () => {
 		if ($page.data.user == null) {
-			console.log('Please sign-up');
+			modalStore.trigger(modal);
 		} else {
 			let _ = await createUserArea({
 				address: $explore.address,

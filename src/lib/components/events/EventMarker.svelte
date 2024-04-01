@@ -22,7 +22,21 @@
 
 	<Popup>
 		{#if showDetails}
-			show details
+			<p>
+				Crime Type: {event.crime_type}
+			</p>
+
+			<p>
+				Occurrence Date: {event.occur_at}
+			</p>
+
+			<p>
+				Neighborhood: {event.neighborhood}
+			</p>
+
+			<p>
+				Location Type: {event.location_type}
+			</p>
 		{:else}
 			<p>
 				<a href="/payment/pricing">Subscribe to see event details</a>

@@ -3,7 +3,9 @@
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	export let data;
-	let { user } = data;
+	let { user, customer } = data;
+
+	import { Modal } from '@skeletonlabs/skeleton';
 
 	// Explore store
 	import { setContext } from 'svelte';
@@ -54,7 +56,7 @@
 </script>
 
 <Toast position="t" />
-
+<Modal />
 <!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="header">
@@ -66,10 +68,12 @@
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Pricing </a>
-
 				{#if user}
-					<a class="btn btn-sm variant-ghost-surface" href="/payment/wallet"> Wallet </a>
+					{#if customer != null && customer.tier > 0}
+						<a class="btn btn-sm variant-ghost-surface" href="/payment/wallet"> Wallet </a>
+					{:else}
+						<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Premium </a>
+					{/if}
 
 					<form action="/auth/logout" method="post">
 						<button type="submit" class="btn btn-sm variant-ghost-surface"> Logout </button>
@@ -81,6 +85,8 @@
 						Logout
 					</a> -->
 				{:else}
+					<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Premium </a>
+
 					<a
 						class="btn btn-sm variant-ghost-surface"
 						href={`/auth/login?dest=${$page.url.searchParams.get('dest')}`}

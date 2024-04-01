@@ -19,6 +19,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   event.locals.user = event.locals.pb.authStore.model
 
+
+  if(event.locals.user!=null){
+    try{
+        event.locals.customer = await event.locals.pb.collection('customers').getFirstListItem(`user.id="${event.locals.user.id}"`);
+    }catch(_){
+
+    }
+  }
+
   const response = await resolve(event)
   response.headers.set(
     'set-cookie',

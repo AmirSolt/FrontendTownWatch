@@ -1,5 +1,5 @@
 
-import { stripe } from "$lib/server/stripe/stripe";
+import { stripe } from "$lib/stripe/stripe.server";
 import type Stripe from "stripe";
 import {PUBLIC_DOMAIN} from '$env/static/public';
 import { redirect } from "@sveltejs/kit";

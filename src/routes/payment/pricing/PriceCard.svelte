@@ -52,7 +52,14 @@
 				<div class="flex justify-center items-baseline" />
 
 				{#if user == null}
-					<a href={`/auth/signup?dest=${encodeURIComponent('/payment/pricing')}`}> Next </a>
+					<a
+						class="btn text-lg md:text-2x w-24 {specialColor
+							? `variant-filled-${specialColor}`
+							: 'variant-filled'}"
+						href={`/auth/signup?dest=${encodeURIComponent('/payment/pricing')}`}
+					>
+						Next
+					</a>
 				{:else}
 					<form action="?/subscribe" method="post">
 						<input type="hidden" name="priceID" value={price?.id} />
