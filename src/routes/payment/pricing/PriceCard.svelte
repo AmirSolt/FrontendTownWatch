@@ -61,17 +61,15 @@
 						Next
 					</a>
 				{:else}
-					<form action="?/subscribe" method="post">
-						<input type="hidden" name="priceID" value={price?.id} />
-						<button
-							class="btn text-lg md:text-2x w-24 {specialColor
-								? `variant-filled-${specialColor}`
-								: 'variant-filled'}"
-							type="submit"
-						>
-							Next
-						</button>
-					</form>
+					<a
+						class="btn text-lg md:text-2x w-24 {specialColor
+							? `variant-filled-${specialColor}`
+							: 'variant-filled'}"
+						href={`/payment/pricing/${price?.id}`}
+						target="_blank"
+					>
+						Next
+					</a>
 				{/if}
 			</div>
 		</div>

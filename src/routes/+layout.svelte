@@ -70,7 +70,9 @@
 			<svelte:fragment slot="trail">
 				{#if user}
 					{#if customer != null && customer.tier > 0}
-						<a class="btn btn-sm variant-ghost-surface" href="/payment/wallet"> Wallet </a>
+						<a class="btn btn-sm variant-ghost-surface" href="/payment/wallet" target="_blank">
+							Wallet
+						</a>
 					{:else}
 						<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Premium </a>
 					{/if}
