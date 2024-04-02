@@ -2,7 +2,7 @@
 
 <p>
 	These Terms of Service ("Terms") govern your access to and use of the Polytube website located at <a
-		href="https://polytube.io/">https://polytube.io/</a
+		href="https://civilwatch.net/">https://civilwatch.net/</a
 	> (the "Website"), owned and operated by Polytube, an individual business entity registered in Canada,
 	Ontario ("Polytube," "we," "us," or "our"). By accessing or using the Website, you agree to be bound
 	by these Terms.
@@ -44,7 +44,7 @@
 <p>
 	We respect the intellectual property rights of others and expect our users to do the same. If you
 	believe that your copyright has been infringed, please contact us at <a
-		href="mailto:support@polytube.io">support@polytube.io</a
+		href="mailto:support@civilwatch.net">support@civilwatch.net</a
 	>.
 </p>
 
@@ -83,7 +83,7 @@
 <h2>11. Contact Us</h2>
 <p>
 	If you have any questions or concerns about these Terms, please contact us at <a
-		href="mailto:support@polytube.io">support@polytube.io</a
+		href="mailto:support@civilwatch.net">support@civilwatch.net</a
 	>.
 </p>
 

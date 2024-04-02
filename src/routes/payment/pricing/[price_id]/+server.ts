@@ -72,6 +72,7 @@ async function checkout(priceID:string, customer:Customer|null|undefined, user:U
       customer:customerID,
       customer_email:email,
   });
+
   if (checkoutSession.url==null) {
       throw error(400, {
           message: "Error: Could not create checkout",

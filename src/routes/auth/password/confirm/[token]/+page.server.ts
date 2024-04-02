@@ -34,15 +34,14 @@ export const actions = {
 				message: validationResponse.error.message
 			})
 		}
-
+		try {
 		const response = await locals.pb.collection('users').confirmPasswordReset(token, password1, password2);
-		console.log("===== confirmPasswordReset =====")
-        console.log(response)
-
+	
 
 		const responseLogout = locals.pb.authStore.clear();
-		console.log("===== log out =====")
-		console.log(responseLogout)
+	} catch (e){
+			throw error(500, "Internal Server Error")
+		}
 	
 
 		throw redirect(302, "/auth/login")

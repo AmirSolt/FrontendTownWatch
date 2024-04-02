@@ -35,12 +35,11 @@ export const actions = {
 				message: validationResponse.error.message
 			})
 		}
-
+		try {
         const response = await locals.pb.collection("users").authWithPassword(email, password) 
-
-		console.log("===== Login =====")
-        console.log(response)
-
+	} catch (e){
+			throw error(500, "Internal Server Error")
+		}
 
 		const dest = data.get('dest');
 		if (dest!=null && dest!="null" && dest.toString().length > 0){

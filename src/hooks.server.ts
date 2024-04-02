@@ -31,19 +31,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   const response = await resolve(event)
   response.headers.set(
     'set-cookie',
-    event.locals.pb.authStore.exportToCookie({ httpOnly: true })
+    event.locals.pb.authStore.exportToCookie({ httpOnly: true, sameSite:false })
   )
 
   return response
 }
-
-// export async function handleError({ error, event, status, message }) {
-	// const eventID = Sentry.captureException(error, {
-	// 	extra: { event, status }
-	// });
-
-
-// 	return {
-// 		message,
-// 	};
-// }

@@ -5,9 +5,11 @@ export const POST = async ({locals}) => {
     if(locals.user==null){
         throw error(400, {message:"Unauthorized!"})
     }
+		try {
     const response = locals.pb.authStore.clear();
-    console.log("===== log out =====")
-    console.log(response)
+	} catch (e){
+			throw error(500, "Internal Server Error")
+		}
 
     throw redirect(302, "/");
 };

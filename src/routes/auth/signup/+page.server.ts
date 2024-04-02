@@ -35,18 +35,19 @@ export const actions = {
 			})
 		}
 
-		const responseRegister = await locals.pb.collection("users").create({
-			email: email,
-			password: password,
-			passwordConfirm: password,
-		});
-		console.log("===== register =====")
-        console.log(responseRegister)
+		try {
+			const responseRegister = await locals.pb.collection("users").create({
+				email: email,
+				password: password,
+				passwordConfirm: password,
+			});
 
 
-		const responseLogin = await locals.pb.collection("users").authWithPassword(email, password) 
-		console.log("===== Login =====")
-        console.log(responseLogin)
+			const responseLogin = await locals.pb.collection("users").authWithPassword(email, password) 
+
+		} catch (e){
+			throw error(500, "Internal Server Error")
+		}
 
 		const dest = data.get('dest');
 		if (dest!=null && dest!="null" && dest.toString().length > 0){

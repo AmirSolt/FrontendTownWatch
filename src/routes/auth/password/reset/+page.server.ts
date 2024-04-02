@@ -20,10 +20,12 @@ export const actions = {
 				message: validationResponse.error.message
 			})
 		}
+		try {
+			const response = await locals.pb.collection('users').requestPasswordReset(email);
+		} catch (e){
+			throw error(500, "Internal Server Error")
+		}
 
-		const response = await locals.pb.collection('users').requestPasswordReset(email);
-		console.log("===== requestPasswordReset =====")
-        console.log(response)
 
 
 		throw redirect(302, `/auth/password/sent`)
