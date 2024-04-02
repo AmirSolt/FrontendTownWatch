@@ -2,6 +2,7 @@
 	import Marker from '$lib/components/map/Marker.svelte';
 	import Popup from '$lib/components/map/Popup.svelte';
 	import Circle from '$lib/components/map/Circle.svelte';
+	import { formatDateToLocale, stringToDate } from './utils';
 
 	export let event: Event;
 	export let showDetails: boolean;
@@ -27,7 +28,7 @@
 			</p>
 
 			<p>
-				Occurrence Date: {event.occur_at}
+				Occurrence Date: {formatDateToLocale(stringToDate(event.occur_at))}
 			</p>
 
 			<p>

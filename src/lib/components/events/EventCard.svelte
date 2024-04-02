@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { formatDateToLocale, stringToDate } from './utils';
+
 	export let event: Event;
 	export let index: number;
 	export let showDetails: boolean = false;
@@ -17,7 +19,7 @@
 		</p>
 
 		<p>
-			Occurrence Date: {event.occur_at}
+			Occurrence Date: {formatDateToLocale(stringToDate(event.occur_at))}
 		</p>
 
 		<p>

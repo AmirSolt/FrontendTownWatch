@@ -34,6 +34,18 @@
 			/>
 		</label>
 
+		<div class="space-y-2">
+			<label class="flex items-center space-x-2">
+				<input class="checkbox" type="checkbox" required />
+				<p>
+					I agree to the terms and conditions of the <a href="/info/terms-of-service"
+						>Terms of Service</a
+					>
+					and <a href="/info/privacy-policy">Privacy Policy</a>
+				</p>
+			</label>
+		</div>
+
 		<button class="btn variant-filled" type="submit">Submit</button>
 	</form>
 </div>
