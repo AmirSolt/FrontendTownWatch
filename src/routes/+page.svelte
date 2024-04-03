@@ -11,64 +11,22 @@
 	export let data;
 	let { user } = data;
 	$: areas = data.areas;
-	// let areaActivated = false;
-	// let addressLat = 43.8394267;
-	// let addressLong = -79.511324;
-	// let address = '';
-	// let explore: Explore = {
-	// 	point: {
-	// 		lat: 43.8394267,
-	// 		long: -79.511324
-	// 	},
-	// 	events: [],
-	// 	address: ''
-	// };
-	// let radius = 1000;
-	// let events: { [id: string]: Event } = {};
-	('error: error: Internal Server Error | error_id: 2fcfbc50f98043e9aa19bc11eeeccf92 | error_id: undefined');
-	// console.log('page data:', $page.data);
-	// console.log('page form:', $page.form);
-	// console.log('page events:', getValues(events).length);
-	// if ($page.form?.explore != null) {
-	// 	explore = $page.form.explore;
-	// 	events = dictionarizeEvents(events, $page.form.explore.events);
-	// 	console.log('page events:', getValues(events).length);
-	// }
-
-	// events = dictionarizeEvents(events, newEvents);
 </script>
 
 <br />
-<!-- <div class="max-w-6xl flex flex-col gap-4">
-	<div class="flex flex-col justify-center items-center text-center gap-3">
-		<h1>
-			<strong
-				class="text-6xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 from-10% via-purple-500 via-30% to-pink-500 to-90%"
-			>
-				BASEDPOCKET
-			</strong>
-		</h1>
-		<h1 class="text-4xl">(Early Access)</h1>
-		<p class="text-2xl">Translate Your Videos for Worldwide Audience using AI.</p>
-		<p>Translate audio, subtitles, description, metadata</p>
-		<a href="/auth/signup" class="btn variant-filled-primary"> Action Button </a>
-	</div>
-</div> -->
-<br />
-
-<p>Note: Information found on this page maybe not %100 accurate please do not rely on this info</p>
 
 <h1 class="text-3xl font-bold">Events</h1>
-<div class="flex flex-col justify-center items-center gap-4 w-full p-4">
+<div class="flex flex-col justify-center items-center gap-4 w-full p-2">
 	<AddressSearch />
-	<div class="flex justify-center items-center gap-2 w-full">
-		<label for="radius"
-			>Radius(km): <h1>{$explore.radiuskm}/{MaxRadiusKm}</h1>
+	<div class="grid grid-cols-5 w-full">
+		<label class="col-span-1" for="radius"
+			>Radius <p>{$explore.radiuskm}/{MaxRadiusKm} km</p>
 		</label>
 		<input
 			name="radiuskm"
 			type="range"
 			step="0.3"
+			class="col-span-4"
 			max={MaxRadiusKm}
 			bind:value={$explore.radiuskm}
 		/>
@@ -84,7 +42,7 @@
 <br />
 
 <h1 class="text-3xl font-bold">Areas</h1>
-<div class="flex flex-col justify-center items-center gap-4 w-full p-4">
+<div class="flex flex-col justify-center items-center gap-4 w-full p-2">
 	{#if areas.length == 0}
 		<div class="card gap-2 p-4 w-full">
 			<p>(Empty)</p>
@@ -98,7 +56,10 @@
 </div>
 
 <br />
-
 <br />
+
+<h1 class="text-3xl font-bold">Guide</h1>
+<p></p>
+
 <br />
 <br />

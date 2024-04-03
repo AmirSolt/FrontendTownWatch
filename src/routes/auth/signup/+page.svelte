@@ -2,8 +2,8 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class="card">
-	<h1>Sign up</h1>
+<div class="card p-4 w-full">
+	<h1 class="text-3xl font-bold">Sign up</h1>
 	<form
 		method="POST"
 		action="?/signup"
@@ -11,11 +11,11 @@
 	>
 		<input type="hidden" name="dest" value={$page.url.searchParams.get('dest')} />
 
-		<label class="label" for="email">
+		<label class="label w-full" for="email">
 			<span>Email</span>
 			<input
 				id="email"
-				class="input"
+				class="input w-full"
 				type="email"
 				placeholder="example@email.com"
 				name="email"
@@ -23,11 +23,11 @@
 			/>
 		</label>
 
-		<label class="label" for="password">
+		<label class="label w-full" for="password">
 			<span>Password</span>
 			<input
 				id="password"
-				class="input"
+				class="input w-full"
 				type="password"
 				name="password"
 				autocomplete="new-password"
@@ -38,10 +38,11 @@
 			<label class="flex items-center space-x-2">
 				<input class="checkbox" type="checkbox" required />
 				<p>
-					I agree to the terms and conditions of the <a href="/info/terms-of-service"
-						>Terms of Service</a
+					I agree to the terms and conditions of the <a
+						class="underline"
+						href="/info/terms-of-service">Terms of Service</a
 					>
-					and <a href="/info/privacy-policy">Privacy Policy</a>
+					and <a class="underline" href="/info/privacy-policy">Privacy Policy</a>
 				</p>
 			</label>
 		</div>

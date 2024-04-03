@@ -7,7 +7,7 @@
 	export let area: Area;
 </script>
 
-<div class="card flex flex-row justify-between items-center gap-4 p-4 w-full">
+<div class="card flex flex-wrap flex-row justify-between items-center gap-4 p-4 w-full">
 	<!-- =============================== -->
 
 	<button
@@ -20,8 +20,8 @@
 			$explore.radiuskm = area.radius / 1000;
 		}}
 	>
-		<h1>Address: {area.address}</h1>
-		<h1>Radius: {area.radius / 1000}km</h1>
+		<h1><b>Address:</b> {area.address}</h1>
+		<h1><b>Radius:</b> {area.radius / 1000}km</h1>
 	</button>
 
 	<!-- =============================== -->
@@ -44,7 +44,7 @@
 
 	<!-- =============================== -->
 
-	<a href="/reports/area/{area.id}" class="btn variant-filled-primary">
+	<a href="/reports/area/{area.id}" class="btn variant-ringed-primary">
 		<h1>Report History</h1>
 	</a>
 
@@ -52,7 +52,7 @@
 	<div>
 		<button
 			type="button"
-			class="btn variant-filled-error"
+			class="btn variant-filled-error rounded-full"
 			on:click={async () => {
 				await deleteUserArea({
 					id: area.id

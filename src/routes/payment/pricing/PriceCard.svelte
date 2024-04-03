@@ -8,7 +8,7 @@
 
 	export let featureList: string[] = [];
 	export let specialText: string | null = null;
-	export let specialColor: string | null = null;
+	export let isSpecialColor: boolean = false;
 	// let price: Stripe.Price | undefined =
 	// 	typeof product?.default_price === 'string' || product?.default_price === null
 	// 		? undefined
@@ -16,17 +16,12 @@
 	let currencySymbol: string = '$';
 </script>
 
-<div
-	class="card text-center border-2 {specialColor
-		? `border-${specialColor}-500`
-		: 'border-slate-400'}"
->
-	<div class="border-primary-500 border-secondary-500 border-slate-400 hidden" />
+<div class="card text-center border-2 {isSpecialColor ? `border-primary-500` : 'border-slate-400'}">
 	<div class="relative w-full h-full p-2">
 		{#if specialText != null}
 			<span
-				class="badge absolute -top-4 -right-0 z-10 text-md p-2 {specialColor
-					? `variant-filled-${specialColor}`
+				class="badge absolute -top-4 right-3 z-10 text-md p-2 {isSpecialColor
+					? `variant-filled-tertiary`
 					: 'variant-filled'}"
 			>
 				{specialText}
@@ -53,18 +48,14 @@
 
 				{#if user == null}
 					<a
-						class="btn text-lg md:text-2x w-24 {specialColor
-							? `variant-filled-${specialColor}`
-							: 'variant-filled'}"
+						class="btn text-lg md:text-2x w-24 variant-filled"
 						href={`/auth/signup?dest=${encodeURIComponent('/payment/pricing')}`}
 					>
 						Next
 					</a>
 				{:else}
 					<a
-						class="btn text-lg md:text-2x w-24 {specialColor
-							? `variant-filled-${specialColor}`
-							: 'variant-filled'}"
+						class="btn text-lg md:text-2x w-24 variant-filled"
 						href={`/payment/pricing/${price?.id}`}
 						target="_blank"
 					>

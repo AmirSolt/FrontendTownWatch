@@ -11,8 +11,8 @@
 	<label for="address">Postal code/ Zip code</label>
 	<div class="input-group input-group-divider grid grid-cols-10">
 		<input
-			class="col-span-8 md:col-span-9"
-			type="search"
+			class="input col-span-8 md:col-span-9"
+			type="text"
 			name="address"
 			bind:value={$explore.address}
 			autocomplete="postal-code"

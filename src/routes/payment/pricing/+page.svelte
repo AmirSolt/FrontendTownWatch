@@ -31,7 +31,7 @@
 			{user}
 			price={prices[1]}
 			specialText="Most Popular"
-			specialColor="primary"
+			isSpecialColor={true}
 		/>
 	</div>
 
@@ -42,9 +42,11 @@
 				<svelte:fragment slot="lead"><HelpCircle /></svelte:fragment>
 				<svelte:fragment slot="summary">What is your refund policy?</svelte:fragment>
 				<svelte:fragment slot="content">
-					You can request a refund within 30 days of purchase. Email our support: <span
-						class="badge variant-ghost">support@svupa.com</span
-					>
+					<div class="p-2">
+						You can request a refund within 30 days of purchase. Email our support: <span
+							class="badge variant-ghost">support@civilwatch.net</span
+						>
+					</div>
 				</svelte:fragment>
 			</AccordionItem>
 		</Accordion>
