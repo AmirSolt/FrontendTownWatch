@@ -55,10 +55,8 @@
 	// storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
-<div style="z-index: 10000;">
-	<Toast position="t" />
-	<Modal />
-</div>
+<Toast position="t" />
+<Modal />
 <!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="pageHeader">
@@ -76,7 +74,7 @@
 							Wallet
 						</a>
 					{:else}
-						<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Premium </a>
+						<a class="btn btn-sm variant-filled-tertiary" href="/payment/pricing"> Premium </a>
 					{/if}
 
 					<form action="/auth/logout" method="post">

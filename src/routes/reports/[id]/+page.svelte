@@ -1,32 +1,52 @@
 <script lang="ts">
 	import EventCard from '$lib/components/events/EventCard.svelte';
 	import ReportEventsMap from '$lib/components/events/ReportEventsMap.svelte';
-
+	import ShareReport from '$lib/components/reports/ShareReport.svelte';
+	import TriangleAlert from 'lucide-svelte/icons/alert-triangle';
 	export let data;
 	let { reportDetails, events, showEventDetails } = data;
 </script>
 
-<p>Note: Please, only share this page with people you trust.</p>
+<aside class=" alert variant-ghost-warning">
+	<!-- Icon -->
+	<TriangleAlert color="#ecbc55" size="36" />
+	<!-- Message -->
+	<div class="alert-message">
+		<p>Note: Please, only share this page with people you trust.</p>
+	</div>
+</aside>
 
-<h1>Report</h1>
+<br />
 
-<p>
-	Date: {reportDetails.report.created_at}
-</p>
+<h1 class="text-3xl font-bold">Report <ShareReport /></h1>
 
-<p>
-	Found {events.length} events
-</p>
+<br />
 
-<p>
-	Address: {reportDetails.area.address}
-</p>
+<div class="card flex flex-col justify-center items-start gap-2 p-2">
+	<p>
+		Date: {reportDetails.report.created_at}
+	</p>
+
+	<p>
+		Found {events.length} events
+	</p>
+
+	<p>
+		Address: {reportDetails.area.address}
+	</p>
+</div>
+<br />
+
 <div class="w-full h-96 relative">
 	<ReportEventsMap />
 </div>
 
-<h1>Events</h1>
+<br />
 
-{#each events as event, index}
-	<EventCard {event} {index} showDetails={showEventDetails} />
-{/each}
+<h1 class="text-3xl font-bold">Events</h1>
+
+<div class="flex flex-col justify-center items-center gap-2 p-4">
+	{#each events as event, index}
+		<EventCard {event} {index} showDetails={showEventDetails} />
+	{/each}
+</div>

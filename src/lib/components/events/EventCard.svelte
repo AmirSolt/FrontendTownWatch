@@ -6,7 +6,7 @@
 	export let showDetails: boolean = false;
 </script>
 
-<button type="button" class="card flex flex-row justify-between items-center gap-4 p-4 w-full">
+<div class="card flex flex-col justify-between items-start gap-4 p-4 w-full">
 	<!-- =============================== -->
 
 	<h1>
@@ -34,4 +34,4 @@
 			<a href="/payment/pricing">Subscribe to see event details</a>
 		</p>
 	{/if}
-</button>
+</div>

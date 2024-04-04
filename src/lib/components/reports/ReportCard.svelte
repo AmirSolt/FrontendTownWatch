@@ -5,7 +5,7 @@
 
 <a
 	href="/reports/{report.id}"
-	class="card flex flex-row justify-between items-center gap-4 p-4 w-full"
+	class="card flex flex-row flex-wrap justify-between items-center gap-4 p-4 w-full"
 >
 	<!-- =============================== -->
 

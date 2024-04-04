@@ -5,8 +5,10 @@
 	let { reports } = data;
 </script>
 
-<h1>Reports</h1>
+<h1 class="text-3xl font-bold">Reports</h1>
 
-{#each reports as report, i}
-	<ReportCard {report} index={i} />
-{/each}
+<div class="flex flex-col justify-center items-center gap-2 p-4">
+	{#each reports as report, i}
+		<ReportCard {report} index={i} />
+	{/each}
+</div>
