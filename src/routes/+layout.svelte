@@ -107,6 +107,10 @@
 		</div>
 	</div>
 	<svelte:fragment slot="pageFooter">
+		<br />
+		<br />
+		<br />
+
 		<hr />
 		<br />
 		<div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">

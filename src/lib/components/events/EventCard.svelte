@@ -3,7 +3,7 @@
 
 	export let event: Event;
 	export let index: number;
-	export let showDetails: boolean = false;
+	export let censorEvents: boolean = true;
 </script>
 
 <div class="card flex flex-col justify-between items-start gap-4 p-4 w-full">
@@ -13,7 +13,7 @@
 		Event #{index + 1}
 	</h1>
 
-	{#if showDetails}
+	{#if !censorEvents}
 		<p>
 			Crime Type: {event.crime_type}
 		</p>

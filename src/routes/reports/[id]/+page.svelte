@@ -4,15 +4,15 @@
 	import ShareReport from '$lib/components/reports/ShareReport.svelte';
 	import TriangleAlert from 'lucide-svelte/icons/alert-triangle';
 	export let data;
-	let { reportDetails, events, showEventDetails } = data;
+	let { reportDetails, events, censorEvents } = data;
 </script>
 
 <aside class=" alert variant-ghost-warning">
-	<!-- Icon -->
 	<TriangleAlert color="#ecbc55" size="36" />
-	<!-- Message -->
 	<div class="alert-message">
-		<p>Note: Please, only share this page with people you trust.</p>
+		<p>
+			This page includes your approximate location. Please, share it only with people you trust.
+		</p>
 	</div>
 </aside>
 
@@ -47,6 +47,6 @@
 
 <div class="flex flex-col justify-center items-center gap-2 p-4">
 	{#each events as event, index}
-		<EventCard {event} {index} showDetails={showEventDetails} />
+		<EventCard {event} {index} {censorEvents} />
 	{/each}
 </div>

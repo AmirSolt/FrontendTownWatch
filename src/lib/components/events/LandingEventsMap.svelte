@@ -36,5 +36,5 @@
 	{events}
 	radius={$explore.radiuskm * 1000}
 	home={$explore.point}
-	showEventDetails={$page.data.customer != null && $page.data.customer?.tier > 0}
+	censorEvents={!($page.data.customer != null && $page.data.customer?.tier > 0)}
 />

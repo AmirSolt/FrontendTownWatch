@@ -10,5 +10,5 @@
 		lat: $page.data.reportDetails.area.lat,
 		long: $page.data.reportDetails.area.long
 	}}
-	showEventDetails={$page.data.showEventDetails}
+	censorEvents={$page.data.censorEvents}
 />

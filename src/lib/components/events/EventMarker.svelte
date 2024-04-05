@@ -5,7 +5,7 @@
 	import { formatDateToLocale, stringToDate } from './utils';
 
 	export let event: Event;
-	export let showDetails: boolean;
+	export let censorEvents: boolean;
 </script>
 
 <Circle
@@ -22,7 +22,7 @@
 	</svg>
 
 	<Popup>
-		{#if showDetails}
+		{#if !censorEvents}
 			<p>
 				Crime Type: {event.crime_type}
 			</p>
