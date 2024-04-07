@@ -40,8 +40,16 @@
 			</p>
 		{:else}
 			<p>
-				<a href="/payment/pricing">Subscribe to see event details</a>
+				<a href="/payment/pricing">Upgrade to premium to see event details</a>
 			</p>
+
+			<p>Crime Type: ******</p>
+
+			<p>Occurrence Date: ******</p>
+
+			<p>Neighborhood: ******</p>
+
+			<p>Location Type: ******</p>
 		{/if}
 	</Popup>
 </Marker>

@@ -18,6 +18,7 @@
 			}
 
 			console.log('==================');
+			console.log('new explore');
 			console.log(newExplore.point.lat);
 			console.log(newExplore.point.long);
 			console.log('==================');

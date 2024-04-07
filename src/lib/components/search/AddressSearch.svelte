@@ -26,6 +26,7 @@
 			on:click={async () => {
 				$explore.point = await fetchGeocode($explore.address);
 				$exploreSubmission.explores.push($explore);
+				$exploreSubmission.explores = $exploreSubmission.explores;
 			}}><Search /></button
 		>
 	</div>

@@ -11,8 +11,8 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	const explore = writable<Explore>({
-		point: { lat: 43.72474, long: -79.56693 },
-		address: 'M9W 2S9',
+		point: { lat: 43.64222, long: -79.38529 },
+		address: 'M5V 3L9',
 		radiuskm: 2
 	} as Explore);
 	const exploreSubmission = writable<ExploreSubmission>({

@@ -9,13 +9,14 @@
 	import LandingEventsMap from '$lib/components/events/LandingEventsMap.svelte';
 	import AddAreaButton from '$lib/components/areas/AddAreaButton.svelte';
 	const explore: Writable<Explore> = getContext('explore');
+	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
 
 	export let data;
 	let { user } = data;
 	$: areas = data.areas;
 </script>
 
-<aside class="alert variant-ghost-secondary">
+<aside class="alert variant-glass-surface">
 	<Accordion>
 		<AccordionItem>
 			<svelte:fragment slot="lead"><HelpCircle /></svelte:fragment>

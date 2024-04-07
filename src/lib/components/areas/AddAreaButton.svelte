@@ -3,6 +3,7 @@
 	import { createUserArea } from '$lib/geo/client/areas';
 	import type { Writable } from 'svelte/store';
 	import { goto, invalidateAll } from '$app/navigation';
+	import { BellRing } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	const explore: Writable<Explore> = getContext('explore');
 	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
@@ -29,7 +30,7 @@
 	type="button"
 	class="btn variant-filled-secondary absolute top-2 right-2"
 	style="z-index:500;"
-	disabled={$exploreSubmission.explores.length == 0}
+	disabled={$exploreSubmission.explores.length < 2}
 	on:click={async () => {
 		if ($page.data.user == null) {
 			modalStore.trigger(modal);
@@ -42,5 +43,7 @@
 			});
 			invalidateAll();
 		}
-	}}>Add Area</button
+	}}
+>
+	<span class="pe-2"><BellRing /></span> Get Notified</button
 >
