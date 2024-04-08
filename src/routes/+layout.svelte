@@ -70,27 +70,27 @@
 			<svelte:fragment slot="trail">
 				{#if user}
 					{#if customer != null && customer.tier > 0}
-						<a class="btn btn-sm variant-ghost-surface" href="/payment/wallet" target="_blank">
+						<a class="btn btn-sm variant-glass-surface" href="/payment/wallet" target="_blank">
 							Wallet
 						</a>
 					{:else}
-						<a class="btn btn-sm variant-filled-tertiary" href="/payment/pricing"> Premium </a>
+						<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Donate </a>
 					{/if}
 
 					<form action="/auth/logout" method="post">
-						<button type="submit" class="btn btn-sm variant-ghost-surface"> Logout </button>
+						<button type="submit" class="btn btn-sm variant-glass-surface"> Logout </button>
 					</form>
 				{:else}
-					<a class="btn btn-sm variant-filled-tertiary" href="/payment/pricing"> Premium </a>
+					<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Donate </a>
 
 					<a
-						class="btn btn-sm variant-ghost-surface"
+						class="btn btn-sm variant-glass-surface"
 						href={`/auth/login?dest=${$page.url.searchParams.get('dest')}`}
 					>
 						Login
 					</a>
 					<a
-						class="btn btn-sm variant-ghost-surface"
+						class="btn btn-sm variant-glass-surface"
 						href={`/auth/signup?dest=${$page.url.searchParams.get('dest')}`}
 					>
 						Signup

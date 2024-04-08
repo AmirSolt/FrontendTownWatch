@@ -45,5 +45,5 @@
 		}
 	}}
 >
-	<span class="pe-2"><BellRing /></span> Get Notified</button
+	<span class="pe-2"><BellRing /></span> Get Alerts</button
 >
