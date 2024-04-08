@@ -27,7 +27,9 @@
 				$explore.point = await fetchGeocode($explore.address);
 				$exploreSubmission.explores.push($explore);
 				$exploreSubmission.explores = $exploreSubmission.explores;
-			}}><Search /></button
+			}}
+		>
+			<span class="m-auto"> <Search /></span></button
 		>
 	</div>
 </div>

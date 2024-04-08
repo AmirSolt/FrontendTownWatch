@@ -1,5 +1,5 @@
 <div class="card-mod">
-	<h1>Update Password</h1>
+	<h1 class="text-xl font-bold">Update Password</h1>
 
 	<form
 		method="POST"

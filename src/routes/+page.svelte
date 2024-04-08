@@ -15,8 +15,8 @@
 	$: areas = data.areas;
 </script>
 
-<aside class=" alert variant-ghost-surface">
-	<HelpCircle color="#ecbc55" size="36" />
+<aside class=" alert bg-surface-100">
+	<HelpCircle color="#414d75" size="36" />
 	<div class="alert-message">
 		<p>
 			Click the "Get Alerts" button to receive notifications if/when a police report is detected

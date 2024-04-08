@@ -40,7 +40,8 @@ export const actions = {
 
 		const responseLogout = locals.pb.authStore.clear();
 	} catch (e){
-			throw error(500, "Internal Server Error")
+		const err = e as UserServerClientResponseError
+		throw error(err.status, err.response.message)
 		}
 	
 

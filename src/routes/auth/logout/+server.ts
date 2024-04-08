@@ -8,7 +8,8 @@ export const POST = async ({locals}) => {
 		try {
     const response = locals.pb.authStore.clear();
 	} catch (e){
-			throw error(500, "Internal Server Error")
+    const err = e as UserServerClientResponseError
+    throw error(err.status, err.response.message)
 		}
 
     throw redirect(302, "/");

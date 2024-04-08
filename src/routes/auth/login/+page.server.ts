@@ -36,9 +36,10 @@ export const actions = {
 			})
 		}
 		try {
-        const response = await locals.pb.collection("users").authWithPassword(email, password) 
-	} catch (e){
-			throw error(500, "Internal Server Error")
+			const response = await locals.pb.collection("users").authWithPassword(email, password) 
+		} catch (e){
+			const err = e as UserServerClientResponseError
+			throw error(err.status, err.response.message)
 		}
 
 		const dest = data.get('dest');

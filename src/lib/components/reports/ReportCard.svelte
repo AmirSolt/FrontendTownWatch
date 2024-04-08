@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { formatDateToLocale, stringToDate } from '$lib/utils';
+
 	export let index: number;
 	export let report: Report;
 </script>
@@ -14,6 +16,6 @@
 	</h1>
 
 	<p>
-		Date: {report.created_at}
+		Date: {formatDateToLocale(stringToDate(report.created_at))}
 	</p>
 </a>

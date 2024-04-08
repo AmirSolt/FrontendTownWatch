@@ -42,11 +42,11 @@ export const actions = {
 				passwordConfirm: password,
 			});
 
-
 			const responseLogin = await locals.pb.collection("users").authWithPassword(email, password) 
 
 		} catch (e){
-			throw error(500, "Internal Server Error")
+			const err = e as UserServerClientResponseError
+			throw error(err.status, err.response.message)
 		}
 
 		const dest = data.get('dest');

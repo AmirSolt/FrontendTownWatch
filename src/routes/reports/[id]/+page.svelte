@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { formatDateToLocale, stringToDate } from '$lib/utils';
+
 	import EventCard from '$lib/components/events/EventCard.svelte';
 	import ReportEventsMap from '$lib/components/events/ReportEventsMap.svelte';
 	import ShareReport from '$lib/components/reports/ShareReport.svelte';
@@ -7,7 +9,7 @@
 	let { reportDetails, events, censorEvents } = data;
 </script>
 
-<aside class=" alert variant-ghost-warning">
+<aside class=" alert variant-glass-warning">
 	<TriangleAlert color="#ecbc55" size="36" />
 	<div class="alert-message">
 		<p>
@@ -24,7 +26,7 @@
 
 <div class="card flex flex-col justify-center items-start gap-2 p-2">
 	<p>
-		Date: {reportDetails.report.created_at}
+		Date: {formatDateToLocale(stringToDate(reportDetails.report.created_at))}
 	</p>
 
 	<p>

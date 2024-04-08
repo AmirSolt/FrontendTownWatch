@@ -27,3 +27,12 @@ interface Point {
 }
 
 
+
+
+interface UserServerClientResponseError {
+    url:           string,     
+    status:        number,    
+    response:      {code: string, message:string, data:any},    
+    isAbort:       boolean,    
+    originalError: Error|null, 
+}

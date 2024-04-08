@@ -23,7 +23,8 @@ export const actions = {
 		try {
 			const response = await locals.pb.collection('users').requestPasswordReset(email);
 		} catch (e){
-			throw error(500, "Internal Server Error")
+			const err = e as UserServerClientResponseError
+			throw error(err.status, err.response.message)
 		}
 
 
