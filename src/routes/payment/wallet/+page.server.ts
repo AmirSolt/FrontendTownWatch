@@ -16,7 +16,6 @@ export const load = async ({locals}) => {
   try{
     customer = await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`);
   } catch(e){
-    console.log("customer error: ",e)
   }
 
 

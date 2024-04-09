@@ -16,7 +16,6 @@
 
 	onMount(async () => {
 		const leaf = await import('leaflet');
-		console.log('circle');
 		if (map) {
 			circle = leaf
 				.circle(pos as L.LatLngTuple, {

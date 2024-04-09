@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { formatDateToLocale, stringToDate } from '$lib/utils';
-
-	export let index: number;
+	import { formatDateWithTimeToLocale } from '$lib/utils';
+	import { Book } from 'lucide-svelte';
 	export let report: Report;
 </script>
 
@@ -11,11 +10,11 @@
 >
 	<!-- =============================== -->
 
-	<h1>
-		Report #{index + 1}
-	</h1>
+	<span class="badge variant-filled-secondary">
+		<Book />
+	</span>
 
 	<p>
-		Date: {formatDateToLocale(stringToDate(report.created_at))}
+		Date: {formatDateWithTimeToLocale(report.created_at)}
 	</p>
 </a>

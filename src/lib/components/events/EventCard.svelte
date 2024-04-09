@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDateToLocale, stringToDate } from '$lib/utils';
+	import { formatDateToLocale } from '$lib/utils';
 
 	export let event: Event;
 	export let index: number;
@@ -10,24 +10,24 @@
 	<!-- =============================== -->
 
 	<div class="leading-normal">
-		<h1>
-			Event #{index + 1}
-		</h1>
 		{#if !censorEvents}
 			<p>
-				Crime Type: {event.crime_type}
+				<b> Crime Type: </b>
+				{event.crime_type}
 			</p>
 
 			<p>
-				Occurrence Date: {formatDateToLocale(stringToDate(event.occur_at))}
+				<b> Occurrence Date: </b>
+				{formatDateToLocale(event.occur_at)}
 			</p>
 
 			<p>
-				Neighborhood: {event.neighborhood}
+				<b> Neighborhood: </b>{event.neighborhood}
 			</p>
 
 			<p>
-				Location Type: {event.location_type}
+				<b> Location Type: </b>
+				{event.location_type}
 			</p>
 		{:else}
 			<p>

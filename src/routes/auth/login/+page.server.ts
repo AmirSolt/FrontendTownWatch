@@ -44,7 +44,6 @@ export const actions = {
 
 		const dest = data.get('dest');
 		if (dest!=null && dest!="null" && dest.toString().length > 0){
-			console.log(" >>>>> ",decodeURIComponent(dest.toString()))
 			throw redirect(302, decodeURIComponent(dest.toString()))
 		}
 

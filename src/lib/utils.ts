@@ -1,4 +1,5 @@
 import { error } from "@sveltejs/kit";
+import _ from 'lodash';
 
 
 interface RequestOptions {
@@ -10,8 +11,6 @@ interface RequestOptions {
 
 export async function cfetch<T>(options:RequestOptions): Promise<T> {
 
-    // try {
-        console.log(`===========\n cfetch Req URL: ${options.url} || Body: ${JSON.stringify(options.body)}\n================`)
         const response = await fetch(options.url, {
             method: options.method,
             headers: options.headers,
@@ -20,7 +19,6 @@ export async function cfetch<T>(options:RequestOptions): Promise<T> {
 
         const data: any = await response.json();
 
-        console.log(`===========\n cfetch Response Data: ${JSON.stringify(data)}\n================`)
 
         if (!response.ok) {
             if(response.status == 401){
@@ -30,17 +28,46 @@ export async function cfetch<T>(options:RequestOptions): Promise<T> {
             throw error(response.status, `error: ${dataErr.message} | error_id: ${dataErr.event_id}`);
         }
 
+        const convertedData = parseInterface(data)
 
-        const dataSucc: T = data
+        const dataSucc: T = convertedData
         
         return dataSucc;
-    // } catch (err) {
-    //     throw error(400, `Error fetching data: ${err}`);
-    // }
 }
 
 
+function parseInterface(json: any) {
+    
 
+
+    if(Array.isArray(json)){
+        return json.map(el=>convertDateField(el))
+    }
+
+    if(Object.keys(json).length==0){
+        return json
+    }
+    
+    return convertDateField(json)
+}
+
+
+function convertDateField(obj: any): any {
+    return _.transform(obj, (result: any, value: any, key: string | number) => {
+        if (_.isString(value)) {
+            const date = new Date(value);
+            if (!isNaN(date.getTime())) {
+                result[key] = date;
+            } else {
+                result[key] = value;
+            }
+        } else if (_.isObject(value)) {
+            result[key] = convertDateField(value);
+        } else {
+            result[key] = value;
+        }
+    });
+}
 
 export function calculateDistance(point1: Point, point2: Point): number {
     const EARTH_RADIUS = 6371000; // Earth's radius in meters
@@ -85,3 +112,25 @@ export function formatDateToLocale(date: Date): string {
 
     return `${day} ${month} ${year}`;
 }
+
+export function formatDateWithTimeToLocale(date: Date): string {
+    const baseFormattedDate = formatDateToLocale(date);
+
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+
+    return `${baseFormattedDate} ${hours}:${minutes}:${seconds}`;
+}
+
+export function orderByFieldDesc<T>(arr: T[], fieldName: keyof T): T[] {
+    return arr.slice().sort((a, b) => {
+        const dateA = a[fieldName] as Date
+        const dateB = b[fieldName] as Date
+        return dateB.getTime() - dateA.getTime() ;
+    });
+}
+
+
+
+  

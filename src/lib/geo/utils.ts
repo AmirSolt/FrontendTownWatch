@@ -24,8 +24,10 @@ export async function geofetch<T>(options:GeoRequestOptions): Promise<T> {
         method: options.method,
         body: options.body
     })
-
 }
+
+
+
 
 export function censorEventsQuery(censorEvents:boolean):string{
     return `censor_events=${String(censorEvents)}`

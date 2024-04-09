@@ -71,7 +71,7 @@ interface ErrorGeoServer{
 
 interface Area {
     id: string;
-    created_at: string;
+    created_at: Date;
     user_id: string;
     is_active: boolean;
     address: string;
@@ -84,8 +84,8 @@ interface Area {
 
 interface Event {
     id: number;
-    created_at: string;
-    occur_at: string;
+    created_at: Date;
+    occur_at: Date;
     external_id: string;
     neighborhood: string;
     location_type: string;
@@ -97,7 +97,7 @@ interface Event {
 
 interface Report {
     id: string;
-    created_at: string;
+    created_at: Date;
     user_id: string;
     area_id: string;
 }

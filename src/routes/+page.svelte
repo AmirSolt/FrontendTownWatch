@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AreaCard from '$lib/components/areas/AreaCard.svelte';
 	import { HelpCircle } from 'lucide-svelte';
+	import { orderByFieldDesc } from '$lib/utils';
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
 	import { MaxRadiusKm } from '$lib/config.js';
 	import { getContext } from 'svelte';
@@ -61,7 +62,7 @@
 			<p>Add an area to get automatic notifications</p>
 		</div>
 	{:else}
-		{#each areas as area}
+		{#each orderByFieldDesc(areas, 'created_at') as area}
 			<AreaCard {area} />
 		{/each}
 	{/if}

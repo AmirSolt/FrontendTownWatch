@@ -17,12 +17,6 @@
 				return;
 			}
 
-			console.log('==================');
-			console.log('new explore');
-			console.log(newExplore.point.lat);
-			console.log(newExplore.point.long);
-			console.log('==================');
-
 			events = await scanEvents({
 				lat: newExplore.point.lat,
 				long: newExplore.point.long,

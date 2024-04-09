@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDateToLocale, stringToDate } from '$lib/utils';
+	import { formatDateWithTimeToLocale, orderByFieldDesc } from '$lib/utils';
 
 	import EventCard from '$lib/components/events/EventCard.svelte';
 	import ReportEventsMap from '$lib/components/events/ReportEventsMap.svelte';
@@ -26,7 +26,7 @@
 
 <div class="card flex flex-col justify-center items-start gap-2 p-2">
 	<p>
-		Date: {formatDateToLocale(stringToDate(reportDetails.report.created_at))}
+		Date: {formatDateWithTimeToLocale(reportDetails.report.created_at)}
 	</p>
 
 	<p>
@@ -48,7 +48,7 @@
 <h1 class="text-3xl font-bold">Events</h1>
 
 <div class="flex flex-col justify-center items-center gap-2 p-4">
-	{#each events as event, index}
+	{#each orderByFieldDesc(events, 'occur_at') as event, index}
 		<EventCard {event} {index} {censorEvents} />
 	{/each}
 </div>

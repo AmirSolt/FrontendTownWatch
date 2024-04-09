@@ -32,15 +32,12 @@ export const GET = async ({locals, params}) => {
       try{
         customer = await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`);
       } catch(e){
-        console.log("customer error: ",e)
       }
     
   
     if(customer==null || customer.stripe_subscription_id==null || customer.stripe_subscription_id==""){
-      console.log(">>> checkout")
       await checkout(priceID, customer, locals.user)
     } else {
-      console.log(">>> subsc update")
       await updatePrice(priceID, customer, locals.user)
     }
 };

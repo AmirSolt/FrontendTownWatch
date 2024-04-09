@@ -19,7 +19,6 @@
 
 	onMount(async () => {
 		const leaf = await import('leaflet');
-		console.log('marker');
 		if (map) {
 			let icon = leaf.divIcon({
 				html: markerElement,
