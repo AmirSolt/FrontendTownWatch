@@ -20,20 +20,24 @@
 <div class="space-y-24">
 	<div class="flex flex-col justify-center gap-8">
 		<div class="flex flex-col justify-center text-center gap-4">
-			<h2 class="text-4xl md:text-5xl font-extrabold">Premium Tier</h2>
-			<p class="text-lg">We strive to make the world a safer place and we need your support</p>
+			<h2 class="text-4xl font-bold">
+				We Need <span class="underline">Your</span> Support
+			</h2>
+			<p class="text-lg">We strive to make the world a safer place. Help us get there.</p>
 		</div>
 
-		<PriceCard name="Tier 1" {user} featureList={['Unlocks all events']} price={prices[0]} />
+		<div class="flex flex-wrap justify-center items-center gap-8">
+			<PriceCard name="Monthly" {user} featureList={['Unlocks all events']} price={prices[0]} />
 
-		<PriceCard
-			name="Tier 2"
-			{user}
-			price={prices[1]}
-			featureList={['Unlocks all events']}
-			specialText="Best Value"
-			isSpecialColor={true}
-		/>
+			<PriceCard
+				name="Yearly"
+				{user}
+				price={prices[1]}
+				featureList={['Unlocks all events']}
+				specialText="Best Value"
+				isSpecialColor={true}
+			/>
+		</div>
 	</div>
 
 	<div class="space-y-4">
@@ -41,7 +45,7 @@
 		<Accordion>
 			<AccordionItem>
 				<svelte:fragment slot="lead"><HelpCircle /></svelte:fragment>
-				<svelte:fragment slot="summary">What is Premium Tier?</svelte:fragment>
+				<svelte:fragment slot="summary">What are the benefits of being a donor ?</svelte:fragment>
 				<svelte:fragment slot="content">
 					<div class="p-2">Unlock access to more detailed event information.</div>
 				</svelte:fragment>
@@ -51,7 +55,7 @@
 				<svelte:fragment slot="summary">What is your refund policy?</svelte:fragment>
 				<svelte:fragment slot="content">
 					<div class="p-2">
-						You can request a refund within 30 days of purchase. Email our support: <span
+						You can request a refund within 30 days of payment. Email our support: <span
 							class="badge variant-ghost">support@civilwatch.net</span
 						>
 					</div>

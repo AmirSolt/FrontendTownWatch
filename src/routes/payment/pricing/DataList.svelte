@@ -13,7 +13,7 @@
             </svg>`;
 </script>
 
-<ul role="list" class="mb-8 space-y-2 text-left">
+<ul role="list" class="mb-4 space-y-2 text-left">
 	{#each list as item}
 		<li class="flex items-center space-x-3">
 			{@html icon}

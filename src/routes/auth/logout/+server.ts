@@ -9,6 +9,7 @@ export const POST = async ({locals}) => {
     const response = locals.pb.authStore.clear();
 	} catch (e){
     const err = e as UserServerClientResponseError
+ 
     throw error(err.status, err.response.message)
 		}
 

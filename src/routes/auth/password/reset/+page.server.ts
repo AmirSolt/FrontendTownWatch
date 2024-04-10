@@ -1,4 +1,4 @@
-import { redirect, error } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import { z } from "zod";
 
 
@@ -16,15 +16,17 @@ export const actions = {
 			email,
 		})
 		if ( !validationResponse.success){
-			throw error(400, {
-				message: validationResponse.error.message
+			return fail(400, {
+				errorMessage: validationResponse.error.message
 			})
 		}
 		try {
 			const response = await locals.pb.collection('users').requestPasswordReset(email);
 		} catch (e){
 			const err = e as UserServerClientResponseError
-			throw error(err.status, err.response.message)
+			return fail(err.status, {
+				errorMessage: err.response.message
+			})
 		}
 
 

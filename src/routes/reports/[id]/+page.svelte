@@ -48,7 +48,13 @@
 <h1 class="text-3xl font-bold">Events</h1>
 
 <div class="flex flex-col justify-center items-center gap-2 p-4">
-	{#each orderByFieldDesc(events, 'occur_at') as event, index}
-		<EventCard {event} {index} {censorEvents} />
-	{/each}
+	{#if censorEvents}
+		{#each events as event, index}
+			<EventCard {event} {index} {censorEvents} />
+		{/each}
+	{:else}
+		{#each orderByFieldDesc(events, 'occur_at') as event, index}
+			<EventCard {event} {index} {censorEvents} />
+		{/each}
+	{/if}
 </div>

@@ -27,9 +27,9 @@
 	// Error toast
 	import { Toast, initializeStores, getToastStore } from '@skeletonlabs/skeleton';
 	initializeStores();
-	$: if ($page.error != null) {
+	$: if ($page.form?.errorMessage != null) {
 		getToastStore().trigger({
-			message: `Error: ${$page.error.message}`,
+			message: `Error: ${$page.form.errorMessage}`,
 			background: 'variant-filled-error'
 		});
 	}

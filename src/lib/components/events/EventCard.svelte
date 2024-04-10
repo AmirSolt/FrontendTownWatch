@@ -18,7 +18,7 @@
 
 			<p>
 				<b> Occurrence Date: </b>
-				{formatDateToLocale(event.occur_at)}
+				{event.occur_at ? formatDateToLocale(event.occur_at) : '<date null>'}
 			</p>
 
 			<p>
@@ -32,7 +32,7 @@
 		{:else}
 			<p>
 				<a href="/payment/pricing" class="underline text-secondary-500"
-					>Upgrade to premium to see event details</a
+					>Become a donor to see event details</a
 				>
 			</p>
 			<div class="leading-tight">

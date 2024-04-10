@@ -1,4 +1,4 @@
-<h1 class="text-3xl font-bold">Our Data</h1>
+<h1 class="text-3xl font-bold">Summary of How We Gather and Process Our Data</h1>
 
 <div class="p-4">
 	<p>
@@ -10,8 +10,8 @@
 	</p>
 	<p>
 		After obtaining the data, we collect the user's location and periodically scan our database for
-		recent police reports, typically on an hourly basis. If any police reports are detected near the
-		user's location, we promptly notify them. This proactive approach ensures that users stay
-		informed about any relevant incidents occurring in their vicinity in a timely manner.
+		recent police reports. If any police reports are detected near the user's location, we promptly
+		notify them. This proactive approach ensures that users stay informed about any relevant
+		incidents occurring in their vicinity in a timely manner.
 	</p>
 </div>

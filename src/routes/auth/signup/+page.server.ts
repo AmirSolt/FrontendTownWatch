@@ -1,4 +1,4 @@
-import { redirect, error } from '@sveltejs/kit';
+import { redirect, error, fail } from '@sveltejs/kit';
 import { z } from "zod";
 
 const SignupSchema = z.object({
@@ -30,8 +30,8 @@ export const actions = {
 			password,
 		})
 		if ( !validationResponse.success){
-			throw error(400, {
-				message: validationResponse.error.message
+			return fail(400, {
+				errorMessage: validationResponse.error.message
 			})
 		}
 
@@ -46,7 +46,9 @@ export const actions = {
 
 		} catch (e){
 			const err = e as UserServerClientResponseError
-			throw error(err.status, err.response.message)
+			return fail(err.status, {
+				errorMessage: err.response.message
+			})
 		}
 
 		const dest = data.get('dest');

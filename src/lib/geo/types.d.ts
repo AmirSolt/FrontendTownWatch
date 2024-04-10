@@ -84,11 +84,11 @@ interface Area {
 
 interface Event {
     id: number;
-    created_at: Date;
-    occur_at: Date;
+    created_at: Date | null;
+    occur_at: Date | null;
     external_id: string;
-    neighborhood: string;
-    location_type: string;
+    neighborhood: string | null;
+    location_type: string | null;
     crime_type: string;
     point: string | null;
     lat: number;

@@ -11,34 +11,39 @@ interface RequestOptions {
 
 export async function cfetch<T>(options:RequestOptions): Promise<T> {
 
-        const response = await fetch(options.url, {
-            method: options.method,
-            headers: options.headers,
-            body: options.body==null? null : JSON.stringify(options.body)
-        });
+    const reqOptions = {
+        method: options.method,
+        headers: options.headers,
+        body: options.body==null? null : JSON.stringify(options.body)
+    }
 
-        const data: any = await response.json();
+    console.log(`>> CFETCH REQUEST >> url: ${options.url} |||| Body: ${JSON.stringify(options)}`);
+
+    const response = await fetch(options.url, reqOptions);
+    
+    const data: any = await response.json();
+    
+    console.log(`>> CFETCH RESPONSE >> url: ${options.url} |||| Body: ${JSON.stringify(data)}`);
 
 
-        if (!response.ok) {
-            if(response.status == 401){
-                throw error(response.status, `Unauthorized`);
-            }
-            const dataErr: ErrorGeoServer = data
-            throw error(response.status, `error: ${dataErr.message} | error_id: ${dataErr.event_id}`);
+
+    if (!response.ok) {
+        if(response.status == 401){
+            throw error(response.status, `Unauthorized`);
         }
+        const dataErr: ErrorGeoServer = data
+        throw error(response.status, `error: ${dataErr.message} | error_id: ${dataErr.event_id}`);
+    }
 
-        const convertedData = parseInterface(data)
+    const convertedData = parseInterface(data)
 
-        const dataSucc: T = convertedData
-        
-        return dataSucc;
+    const dataSucc: T = convertedData
+    
+    return dataSucc;
 }
 
 
 function parseInterface(json: any) {
-    
-
 
     if(Array.isArray(json)){
         return json.map(el=>convertDateField(el))

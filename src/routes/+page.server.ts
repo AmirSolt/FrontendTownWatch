@@ -1,4 +1,5 @@
 import { fetchUserAreasServer } from '$lib/geo/server/areas.js';
+import { error } from '@sveltejs/kit';
 
 export const load = async ({locals}) => {
 

@@ -29,7 +29,7 @@
 				</p>
 
 				<p>
-					Occurrence Date: {formatDateToLocale(stringToDate(event.occur_at))}
+					Occurrence Date: {event.occur_at ? formatDateToLocale(event.occur_at) : '<date null>'}
 				</p>
 
 				<p>
@@ -51,7 +51,7 @@
 				</div>
 
 				<p>
-					<a href="/payment/pricing">Upgrade to premium to see event details</a>
+					<a href="/payment/pricing">Become a donor to see event details</a>
 				</p>
 			{/if}
 		</div>

@@ -13,6 +13,9 @@ declare global {
     interface Error {
 			message: string;
 		}
+    interface Form {
+      errorMessage: string|null|undefined;
+    }
     // interface Platform {}
   }
 }

@@ -28,8 +28,8 @@
 			</span>
 		{/if}
 
-		<div class="flex flex-col justify-between items-start w-full h-full pt-4">
-			<div class="flex flex-col justify-start items-start w-full h-full gap-4 p-2">
+		<div class="flex flex-col justify-between items-start w-full h-full p-2">
+			<div class="flex flex-col justify-start items-start w-full h-full gap-2 p-2">
 				<div class="flex flex-col justify-center items-start p-2 gap-2">
 					<h3 class="text-3xl font-semibold">
 						{name}

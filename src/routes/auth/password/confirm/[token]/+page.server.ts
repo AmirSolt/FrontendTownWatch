@@ -1,4 +1,4 @@
-import { redirect, error } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import { z } from "zod";
 
 
@@ -30,8 +30,8 @@ export const actions = {
 			password2,
 		})
 		if ( !validationResponse.success){
-			throw error(400, {
-				message: validationResponse.error.message
+			return fail(400, {
+				errorMessage: validationResponse.error.message
 			})
 		}
 		try {
@@ -41,7 +41,9 @@ export const actions = {
 		const responseLogout = locals.pb.authStore.clear();
 	} catch (e){
 		const err = e as UserServerClientResponseError
-		throw error(err.status, err.response.message)
+		return fail(err.status, {
+			errorMessage: err.response.message
+		})
 		}
 	
 
