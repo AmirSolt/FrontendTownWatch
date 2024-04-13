@@ -173,6 +173,10 @@
 
 
 /* zoom and fade animations */
+/* IMPORTANT: popup is not supported with this css */
+.leaflet-popup {
+	opacity: 0 !important;
+}
 
 .leaflet-fade-anim .leaflet-popup {
 	opacity: 0;

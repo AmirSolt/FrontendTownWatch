@@ -8,6 +8,7 @@
 
 	let marker: L.Marker | undefined;
 	let markerElement: HTMLElement;
+	let isSelected: boolean = false;
 
 	const { getMap }: { getMap: () => L.Map | undefined } = getContext('map');
 	const map = getMap();
@@ -19,6 +20,7 @@
 
 	onMount(async () => {
 		const leaf = await import('leaflet');
+
 		if (map) {
 			let icon = leaf.divIcon({
 				html: markerElement,
@@ -27,6 +29,17 @@
 			});
 
 			marker = leaf.marker(pos as L.LatLngTuple, { icon }).addTo(map);
+
+			// Setting icon-selected by using tooltip event system
+			let popup = leaf.popup();
+			marker.bindPopup(popup);
+			marker
+				.on('popupopen', () => {
+					isSelected = true;
+				})
+				.on('popupclose', () => {
+					isSelected = false;
+				});
 		}
 	});
 
@@ -38,6 +51,10 @@
 
 <div id="marker" bind:this={markerElement}>
 	{#if marker}
-		<slot />
+		{#if isSelected}
+			<slot name="selected-icon" />
+		{:else}
+			<slot name="icon" />
+		{/if}
 	{/if}
 </div>

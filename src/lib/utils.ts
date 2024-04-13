@@ -110,7 +110,6 @@ export function formatDateToLocale(date: Date): string {
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
-
     const year = date.getFullYear();
     const month = months[date.getMonth()];
     const day = date.getDate();
@@ -118,14 +117,10 @@ export function formatDateToLocale(date: Date): string {
     return `${day} ${month} ${year}`;
 }
 
-export function formatDateWithTimeToLocale(date: Date): string {
+export function formatDateWithHourToLocale(date: Date): string {
     const baseFormattedDate = formatDateToLocale(date);
-
     const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
-
-    return `${baseFormattedDate} ${hours}:${minutes}:${seconds}`;
+    return `${baseFormattedDate} ${hours}hr`;
 }
 
 export function orderByFieldDesc<T>(arr: T[], fieldName: keyof T): T[] {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDateWithTimeToLocale } from '$lib/utils';
+	import { formatDateWithHourToLocale } from '$lib/utils';
 	import { Book } from 'lucide-svelte';
 	export let report: Report;
 </script>
@@ -15,6 +15,6 @@
 	</span>
 
 	<p>
-		Date: {formatDateWithTimeToLocale(report.created_at)}
+		Date: {formatDateWithHourToLocale(report.created_at)}
 	</p>
 </a>

@@ -6,22 +6,34 @@
 	let { user, customer } = data;
 
 	import { Modal } from '@skeletonlabs/skeleton';
-
+	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
+	import EventDrawer from '$lib/components/events/EventDrawer.svelte';
+	import AreaDrawer from '$lib/components/areas/AreaDrawer.svelte';
 	// Explore store
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	const explore = writable<Explore>({
+	const inputMapData = writable<InputMapData>({
+		submissions: []
+	});
+	const outputMapData = writable<OutputMapData>({
+		events: [],
+		area: undefined,
+		home: { lat: 0.0, long: 0.0 },
+		radius: 0,
+		censorEvents: true
+	});
+
+	setContext('inputMapData', inputMapData);
+	setContext('outputMapData', outputMapData);
+
+	// initial address
+	$inputMapData.submissions.push({
 		point: { lat: 43.64222, long: -79.38529 },
 		address: 'M5V 3L9',
+		area: undefined,
 		radiuskm: 2
-	} as Explore);
-	const exploreSubmission = writable<ExploreSubmission>({
-		explores: []
-	} as ExploreSubmission);
-	setContext('explore', explore);
-	setContext('exploreSubmission', exploreSubmission);
+	} as InputMapDataSubmission);
 
-	$exploreSubmission.explores.push($explore);
 	// ========================
 
 	// Error toast
@@ -33,6 +45,11 @@
 			background: 'variant-filled-error'
 		});
 	}
+	// ========================
+
+	const drawerStore = getDrawerStore();
+
+	// ========================
 
 	// // Highlight JS
 	// import hljs from 'highlight.js/lib/core';
@@ -57,6 +74,13 @@
 
 <Toast position="t" />
 <Modal />
+<Drawer zIndex="widget-layer-map-z-2">
+	{#if $drawerStore.id === 'event'}
+		<EventDrawer />
+	{:else if $drawerStore.id === 'area'}
+		<AreaDrawer />
+	{/if}
+</Drawer>
 <!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="pageHeader">

@@ -3,8 +3,10 @@
 	import { Search } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	const explore: Writable<Explore> = getContext('explore');
-	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
+
+	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
+	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
+	export let currentSubmission: InputMapDataSubmission;
 </script>
 
 <div class="w-full">
@@ -14,7 +16,7 @@
 			class="input col-span-8 md:col-span-9"
 			type="text"
 			name="address"
-			bind:value={$explore.address}
+			bind:value={currentSubmission.address}
 			autocomplete="postal-code"
 			minlength="1"
 			maxlength="12"
@@ -22,11 +24,11 @@
 		/>
 		<button
 			type="button"
-			class="variant-filled-secondary col-span-2 md:col-span-1"
+			class="variant-filled-primary col-span-2 md:col-span-1"
 			on:click={async () => {
-				$explore.point = await fetchGeocode($explore.address);
-				$exploreSubmission.explores.push($explore);
-				$exploreSubmission.explores = $exploreSubmission.explores;
+				currentSubmission.point = await fetchGeocode(currentSubmission.address);
+				$inputMapData.submissions.push(currentSubmission);
+				$inputMapData.submissions = $inputMapData.submissions;
 			}}
 		>
 			<span class="m-auto"> <Search /></span></button

@@ -11,14 +11,21 @@ interface Customer {
 }
 
 
-// the data needed for the interactive map on the landing page
-interface Explore{
+interface InputMapData {
+    submissions:InputMapDataSubmission[]
+}
+interface InputMapDataSubmission {
     point:Point
     address:string
     radiuskm:number
+    area:Area|undefined
 }
-interface ExploreSubmission {
-    explores:Explore[]
+interface OutputMapData {
+    events:Event[]
+    area:Area|undefined
+    home:Point
+    radius:number
+    censorEvents:boolean
 }
 
 interface Point {

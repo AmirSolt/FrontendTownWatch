@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDateWithTimeToLocale, orderByFieldDesc } from '$lib/utils';
+	import { formatDateWithHourToLocale, orderByFieldDesc } from '$lib/utils';
 
 	import EventCard from '$lib/components/events/EventCard.svelte';
 	import ReportEventsMap from '$lib/components/events/ReportEventsMap.svelte';
@@ -26,7 +26,7 @@
 
 <div class="card flex flex-col justify-center items-start gap-2 p-2">
 	<p>
-		Date: {formatDateWithTimeToLocale(reportDetails.report.created_at)}
+		Date: {formatDateWithHourToLocale(reportDetails.report.created_at)}
 	</p>
 
 	<p>

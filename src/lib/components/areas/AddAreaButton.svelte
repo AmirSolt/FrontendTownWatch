@@ -5,8 +5,9 @@
 	import { goto, invalidateAll } from '$app/navigation';
 	import { BellRing } from 'lucide-svelte';
 	import { getContext } from 'svelte';
-	const explore: Writable<Explore> = getContext('explore');
-	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
+	// const explore: Writable<Explore> = getContext('explore');
+	// const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
+	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
 
 	import { getModalStore } from '@skeletonlabs/skeleton';
 
@@ -28,20 +29,22 @@
 
 <button
 	type="button"
-	class="btn variant-filled-secondary absolute top-2 right-2"
-	style="z-index:500;"
-	disabled={$exploreSubmission.explores.length < 2}
+	class="btn variant-filled-secondary"
+	disabled={$inputMapData.submissions.length < 2}
 	on:click={async () => {
 		if ($page.data.user == null) {
 			modalStore.trigger(modal);
 		} else {
-			let _ = await createUserArea({
-				address: $explore.address,
-				radius: Math.floor($explore.radiuskm * 1000),
-				lat: $explore.point.lat,
-				long: $explore.point.long
-			});
-			invalidateAll();
+			if ($inputMapData.submissions.length > 2) {
+				let submission = $inputMapData.submissions[-1];
+				let _ = await createUserArea({
+					address: submission.address,
+					radius: Math.floor(submission.radiuskm * 1000),
+					lat: submission.point.lat,
+					long: submission.point.long
+				});
+				invalidateAll();
+			}
 		}
 	}}
 >

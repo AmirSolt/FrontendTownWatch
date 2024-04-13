@@ -20,7 +20,7 @@
 		}
 
 		map = leaf
-			.map(mapElement)
+			.map(mapElement, { zoomControl: false })
 			// example to expose map events to parent components:
 			.on('zoom', (e) => dispatch('zoom', e))
 			.on('popupopen', async (e) => {

@@ -5,9 +5,9 @@
 	import { calculateDistance } from '$lib/utils';
 
 	export let events: Event[] = [];
-	export let censorEvents: boolean = true;
 	export let home: Point;
 	export let radius: number;
+	export let area: Area | undefined;
 
 	function getInRangeEvents(events: Event[], home: Point, radius: number): Event[] {
 		let newEvents: Event[] = [];
@@ -28,9 +28,9 @@
 
 {#key home.lat + home.long}
 	<Map view={[home.lat, home.long]} zoom={13}>
-		<HomeMarker />
+		<HomeMarker {area} />
 		{#each getInRangeEvents(events, home, radius) as event (event.id)}
-			<EventMarker {event} {censorEvents} />
+			<EventMarker {event} />
 		{/each}
 	</Map>
 {/key}

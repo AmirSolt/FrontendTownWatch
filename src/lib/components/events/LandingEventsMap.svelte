@@ -6,30 +6,36 @@
 	import { scanEvents } from '$lib/geo/client/events';
 	import { MaxRadiusKm } from '$lib/config.js';
 	import EventsMap from './EventsMap.svelte';
-	const explore: Writable<Explore> = getContext('explore');
-	const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
 
-	let events: Event[] = [];
+	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
+	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
+
 	onMount(() => {
-		exploreSubmission.subscribe(async (newExploreSubmission) => {
-			const newExplore = newExploreSubmission.explores.at(-1);
-			if (newExplore == null) {
+		inputMapData.subscribe(async (newInputMapData) => {
+			const newSubmission = newInputMapData.submissions.at(-1);
+			if (newSubmission == null) {
 				return;
 			}
 
-			events = await scanEvents({
-				lat: newExplore.point.lat,
-				long: newExplore.point.long,
+			let events = await scanEvents({
+				lat: newSubmission.point.lat,
+				long: newSubmission.point.long,
 				radius: Math.floor(MaxRadiusKm * 1000),
-				address: newExplore.address
+				address: newSubmission.address
 			});
+
+			$outputMapData.radius = newSubmission.radiuskm * 1000;
+			$outputMapData.home = newSubmission.point;
+			$outputMapData.events = events;
+			$outputMapData.area = newSubmission.area;
+			$outputMapData.censorEvents = !($page.data.customer != null && $page.data.customer?.tier > 0);
 		});
 	});
 </script>
 
 <EventsMap
-	{events}
-	radius={$explore.radiuskm * 1000}
-	home={$explore.point}
-	censorEvents={!($page.data.customer != null && $page.data.customer?.tier > 0)}
+	events={$outputMapData.events}
+	radius={$outputMapData.radius}
+	home={$outputMapData.home}
+	area={$outputMapData.area}
 />

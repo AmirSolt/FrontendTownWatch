@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDateToLocale } from '$lib/utils';
+	import { formatDateWithHourToLocale } from '$lib/utils';
 
 	export let event: Event;
 	export let index: number;
@@ -12,38 +12,26 @@
 	<div class="leading-normal">
 		{#if !censorEvents}
 			<p>
-				<b> Crime Type: </b>
-				{event.crime_type}
+				<b> Date: </b>
+				{event.occur_at ? formatDateWithHourToLocale(event.occur_at) : '<date null>'}
 			</p>
 
-			<p>
-				<b> Occurrence Date: </b>
-				{event.occur_at ? formatDateToLocale(event.occur_at) : '<date null>'}
-			</p>
-
-			<p>
-				<b> Neighborhood: </b>{event.neighborhood}
-			</p>
-
-			<p>
-				<b> Location Type: </b>
-				{event.location_type}
-			</p>
+			{#each Object.keys(event.details) as k}
+				<p><b>{k}</b>: {event.details[k]}</p>
+			{/each}
 		{:else}
 			<p>
-				<a href="/payment/pricing" class="underline text-secondary-500"
-					>Become a donor to see event details</a
-				>
+				<b> Date: </b>
+				{event.occur_at ? formatDateWithHourToLocale(event.occur_at) : '<date null>'}
 			</p>
-			<div class="leading-tight">
-				<p>Crime Type: ******</p>
-
-				<p>Occurrence Date: ******</p>
-
-				<p>Neighborhood: ******</p>
-
-				<p>Location Type: ******</p>
-			</div>
+			{#each Object.keys(event.details) as k}
+				<p>
+					<b>{k}</b>:
+					<a href="/payment/pricing" class="underline text-secondary-500"
+						>Only Premium members can see this</a
+					>
+				</p>
+			{/each}
 		{/if}
 	</div>
 </div>
