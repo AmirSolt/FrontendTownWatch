@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Marker from '$lib/components/map/Marker.svelte';
-	import Popup from '$lib/components/map/Popup.svelte';
 	import Circle from '$lib/components/map/Circle.svelte';
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	import type { DrawerSettings } from '@skeletonlabs/skeleton';

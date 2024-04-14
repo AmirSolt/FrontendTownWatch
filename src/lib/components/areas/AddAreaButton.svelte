@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { createUserArea } from '$lib/geo/client/areas';
 	import type { Writable } from 'svelte/store';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { invalidateAll, goto } from '$app/navigation';
 	import { BellRing } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	// const explore: Writable<Explore> = getContext('explore');
@@ -35,8 +35,11 @@
 		if ($page.data.user == null) {
 			modalStore.trigger(modal);
 		} else {
-			if ($inputMapData.submissions.length > 2) {
-				let submission = $inputMapData.submissions[-1];
+			if ($inputMapData.submissions.length > 1) {
+				let submission = $inputMapData.submissions.at(-1);
+				if (submission == null) {
+					return;
+				}
 				let _ = await createUserArea({
 					address: submission.address,
 					radius: Math.floor(submission.radiuskm * 1000),

@@ -17,14 +17,16 @@
 	onMount(async () => {
 		const leaf = await import('leaflet');
 		if (map) {
-			circle = leaf
-				.circle(pos as L.LatLngTuple, {
-					radius,
-					fillOpacity,
-					opacity: strokeOpacity,
-					color: colorHex
-				})
-				.addTo(map);
+			try {
+				circle = leaf
+					.circle(pos as L.LatLngTuple, {
+						radius,
+						fillOpacity,
+						opacity: strokeOpacity,
+						color: colorHex
+					})
+					.addTo(map);
+			} catch (_) {}
 		}
 	});
 

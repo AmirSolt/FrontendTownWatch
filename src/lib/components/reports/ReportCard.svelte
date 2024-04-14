@@ -10,7 +10,7 @@
 >
 	<!-- =============================== -->
 
-	<span class="badge variant-filled-secondary">
+	<span class="badge">
 		<Book />
 	</span>
 

@@ -7,6 +7,10 @@
 	import { MaxRadiusKm } from '$lib/config.js';
 	import EventsMap from './EventsMap.svelte';
 
+	export let radiusKm: number;
+
+	$: $outputMapData.radius = radiusKm * 1000;
+
 	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
 	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
 
@@ -23,6 +27,8 @@
 				radius: Math.floor(MaxRadiusKm * 1000),
 				address: newSubmission.address
 			});
+
+			console.log($inputMapData);
 
 			$outputMapData.radius = newSubmission.radiuskm * 1000;
 			$outputMapData.home = newSubmission.point;

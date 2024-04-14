@@ -5,9 +5,11 @@
 
 	import { invalidateAll } from '$app/navigation';
 	import { deleteUserArea } from '$lib/geo/client/areas';
-	import { X, History, Radio } from 'lucide-svelte';
+	import { Trash2, History } from 'lucide-svelte';
 	import { getModalStore } from '@skeletonlabs/skeleton';
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
+	import { getDrawerStore } from '@skeletonlabs/skeleton';
+	const drawerStore = getDrawerStore();
 
 	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
 
@@ -37,14 +39,7 @@
 {#if area != null}
 	<div class="card flex flex-col justify-center items-start gap-2 p-4 w-full">
 		<!-- =============================== -->
-		<div class="w-full flex flex-row justify-between items-center">
-			<button
-				type="button"
-				class="btn-icon rounded-full w-8"
-				on:click={() => {
-					modalStore.trigger(modal);
-				}}><X color="#ff0000" /></button
-			>
+		<div class="w-full flex flex-row justify-end items-center">
 			<a href="/reports/area/{area.id}" class="btn-icon variant-filled-primary w-8">
 				<History />
 			</a>
@@ -52,6 +47,15 @@
 
 		<h1><b>Address:</b> {area.address}</h1>
 		<h1><b>Radius:</b> {area.radius / 1000}km</h1>
+
+		<button
+			type="button"
+			class="btn variant-filled-error"
+			on:click={() => {
+				modalStore.trigger(modal);
+				drawerStore.close();
+			}}><Trash2 /> Delete Area</button
+		>
 
 		<!-- =============================== -->
 	</div>

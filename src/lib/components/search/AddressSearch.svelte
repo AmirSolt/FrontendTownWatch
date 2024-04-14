@@ -5,7 +5,6 @@
 	import type { Writable } from 'svelte/store';
 
 	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
-	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
 	export let currentSubmission: InputMapDataSubmission;
 </script>
 

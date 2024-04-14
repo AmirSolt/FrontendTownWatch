@@ -3,6 +3,7 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
+	import { goto } from '$app/navigation';
 	const drawerStore = getDrawerStore();
 
 	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
@@ -28,16 +29,39 @@
 					<p><b>{k}</b>: {event.details[k]}</p>
 				{/each}
 			{:else}
+				<aside class="alert flex justify-center items-center variant-filled-secondary">
+					<div class="alert-message">
+						<p>Only <b class="font-bold">Premium</b> members can see event details.</p>
+					</div>
+					<!-- Actions -->
+					<div class="flex justify-end items-center w-full">
+						<div class="flex justify-center items-center gap-4">
+							<button
+								type="button"
+								class="btn bg-surface-200 text-surface-900"
+								on:click={() => drawerStore.close()}>No</button
+							>
+							<button
+								type="button"
+								class="btn variant-filled-tertiary"
+								on:click={() => {
+									goto('/payment/pricing');
+									drawerStore.close();
+								}}>Premium</button
+							>
+							<!-- <a href="/payment/pricing" class="btn variant-filled-tertiary">Premium</a> -->
+						</div>
+					</div>
+				</aside>
+				<br />
 				<p>
 					<b> Date: </b>
 					{event.occur_at ? formatDateWithHourToLocale(event.occur_at) : '<date null>'}
 				</p>
+
 				{#each Object.keys(event.details) as k}
 					<p>
-						<b>{k}</b>:
-						<a href="/payment/pricing" class="underline text-secondary-500"
-							>Only Premium members can see this</a
-						>
+						<b>{k}</b>: ###
 					</p>
 				{/each}
 			{/if}
