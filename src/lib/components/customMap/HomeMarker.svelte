@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Marker from '$lib/components/map/Marker.svelte';
-	import Circle from '$lib/components/map/Circle.svelte';
+	import Marker from '$lib/components/leafletMap/Marker.svelte';
+	import Circle from '$lib/components/leafletMap/Circle.svelte';
 	import { Radio } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';

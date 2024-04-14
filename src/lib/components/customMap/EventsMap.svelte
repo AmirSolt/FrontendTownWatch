@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Map from '$lib/components/map/Map.svelte';
+	import Map from '$lib/components/leafletMap/Map.svelte';
 	import EventMarker from './EventMarker.svelte';
 	import HomeMarker from './HomeMarker.svelte';
 	import { calculateDistance } from '$lib/utils';

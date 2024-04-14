@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { formatDateWithHourToLocale, orderByFieldDesc } from '$lib/utils';
 
-	import ReportEventsMap from '$lib/components/events/ReportEventsMap.svelte';
+	import ReportEventsMap from '$lib/components/customMap/ReportEventsMap.svelte';
 	import ShareReport from '$lib/components/reports/ShareReport.svelte';
 	import TriangleAlert from 'lucide-svelte/icons/alert-triangle';
 	export let data;

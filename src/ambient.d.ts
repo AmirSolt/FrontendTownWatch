@@ -20,6 +20,10 @@ interface InputMapDataSubmission {
     radiuskm:number
     area:Area|undefined
 }
+interface MapControls{
+    address:string
+    radiuskm:number
+}
 interface OutputMapData {
     events:Event[]
     area:Area|undefined

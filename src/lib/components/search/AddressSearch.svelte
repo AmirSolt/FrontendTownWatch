@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { radiusSchema } from '$lib/geo/schema';
 	import { fetchGeocode } from '$lib/here/geocoding';
 	import { Search } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
 	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
-	export let currentSubmission: InputMapDataSubmission;
+	export let mapControls: MapControls;
 </script>
 
 <div class="w-full">
@@ -15,7 +16,7 @@
 			class="input col-span-8 md:col-span-9"
 			type="text"
 			name="address"
-			bind:value={currentSubmission.address}
+			bind:value={mapControls.address}
 			autocomplete="postal-code"
 			minlength="1"
 			maxlength="12"
@@ -25,8 +26,18 @@
 			type="button"
 			class="variant-filled-primary col-span-2 md:col-span-1"
 			on:click={async () => {
-				currentSubmission.point = await fetchGeocode(currentSubmission.address);
-				$inputMapData.submissions.push(currentSubmission);
+				if (mapControls.address == '') {
+					return;
+				}
+				let point = await fetchGeocode(mapControls.address);
+				let newSub = {
+					point: point,
+					address: mapControls.address,
+					radiuskm: mapControls.radiuskm,
+					area: undefined
+				};
+
+				$inputMapData.submissions.push(newSub);
 				$inputMapData.submissions = $inputMapData.submissions;
 			}}
 		>

@@ -13,7 +13,6 @@
 	let event: Event | undefined = $outputMapData.events.find(
 		(event) => event.id === $drawerStore.meta.event_id
 	);
-	let censorEvents: boolean = $outputMapData.censorEvents;
 </script>
 
 {#if event != null}
