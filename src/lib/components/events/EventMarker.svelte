@@ -20,7 +20,7 @@
 
 <Circle
 	pos={[event.lat, event.long]}
-	radius={150}
+	radius={200}
 	colorHex={'#ff0000'}
 	fillOpacity={0.2}
 	strokeOpacity={0.7}

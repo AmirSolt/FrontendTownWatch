@@ -17,13 +17,13 @@ export async function cfetch<T>(options:RequestOptions): Promise<T> {
         body: options.body==null? null : JSON.stringify(options.body)
     }
 
-    console.log(`>> CFETCH REQUEST >> url: ${options.url} |||| Body: ${JSON.stringify(options)}`);
+    console.log(`>> CFETCH REQUEST >> url: ${options.url} |||| Options: ${JSON.stringify(options)}`);
 
     const response = await fetch(options.url, reqOptions);
     
     const data: any = await response.json();
     
-    console.log(`>> CFETCH RESPONSE >> url: ${options.url} |||| Body: ${JSON.stringify(data)}`);
+    console.log(`>> CFETCH RESPONSE >> url: ${options.url} |||| Status: ${response.status} Body: ${JSON.stringify(data)}`);
 
 
 
@@ -45,6 +45,10 @@ export async function cfetch<T>(options:RequestOptions): Promise<T> {
 
 function parseInterface(json: any) {
 
+    if(json==null){
+        return json
+    }
+
     if(Array.isArray(json)){
         return json.map(el=>convertDateField(el))
     }
@@ -56,10 +60,10 @@ function parseInterface(json: any) {
     return convertDateField(json)
 }
 
-
+const dateFieldNames = ["occur_at", "created_at"]
 function convertDateField(obj: any): any {
     return _.transform(obj, (result: any, value: any, key: string | number) => {
-        if (_.isString(value)) {
+        if (_.isString(value) && dateFieldNames.includes(key.toString()) ) {
             const date = new Date(value);
             if (!isNaN(date.getTime())) {
                 result[key] = date;
@@ -73,6 +77,8 @@ function convertDateField(obj: any): any {
         }
     });
 }
+
+
 
 export function calculateDistance(point1: Point, point2: Point): number {
     const EARTH_RADIUS = 6371000; // Earth's radius in meters

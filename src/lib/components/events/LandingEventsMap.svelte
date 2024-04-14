@@ -21,6 +21,10 @@
 				return;
 			}
 
+			$outputMapData.radius = newSubmission.radiuskm * 1000;
+			$outputMapData.home = newSubmission.point;
+			$outputMapData.area = newSubmission.area;
+			$outputMapData.censorEvents = !($page.data.customer != null && $page.data.customer?.tier > 0);
 			let events = await scanEvents({
 				lat: newSubmission.point.lat,
 				long: newSubmission.point.long,
@@ -28,13 +32,7 @@
 				address: newSubmission.address
 			});
 
-			console.log($inputMapData);
-
-			$outputMapData.radius = newSubmission.radiuskm * 1000;
-			$outputMapData.home = newSubmission.point;
 			$outputMapData.events = events;
-			$outputMapData.area = newSubmission.area;
-			$outputMapData.censorEvents = !($page.data.customer != null && $page.data.customer?.tier > 0);
 		});
 	});
 </script>

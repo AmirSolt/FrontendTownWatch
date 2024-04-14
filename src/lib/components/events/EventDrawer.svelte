@@ -4,6 +4,8 @@
 	import type { Writable } from 'svelte/store';
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { isCustomerFreeTrial, isCustomerPremium } from '$lib/stripe/utils';
 	const drawerStore = getDrawerStore();
 
 	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
@@ -19,7 +21,27 @@
 		<!-- =============================== -->
 
 		<div class="leading-normal">
-			{#if !censorEvents}
+			{#if isCustomerPremium($page.data.customer)}
+				{#if isCustomerFreeTrial($page.data.customer)}
+					<aside class="alert flex justify-center items-center variant-filled-secondary">
+						<div class="flex justify-between items-center w-full">
+							<div class="alert-message">
+								<h1 class="text-xl font-bold">Free Trial</h1>
+							</div>
+							<!-- Actions -->
+							<button
+								type="button"
+								class="btn variant-filled-tertiary"
+								on:click={() => {
+									goto('/payment/pricing');
+									drawerStore.close();
+								}}>Upgrade</button
+							>
+						</div>
+					</aside>
+					<br />
+				{/if}
+
 				<p>
 					<b> Date: </b>
 					{event.occur_at ? formatDateWithHourToLocale(event.occur_at) : '<date null>'}

@@ -1,4 +1,5 @@
 import { fetchEventsByReport, fetchReportDetails } from '$lib/geo/server/reports.js';
+import { isCustomerPremium } from '$lib/stripe/utils.js';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -19,7 +20,7 @@ export const load = async ({locals, params}) => {
     }
 
     let censorEvents = true
-    if(reportCustomer!=null && reportCustomer.tier > 0){
+    if(isCustomerPremium(reportCustomer)){
         censorEvents = false
     }
 

@@ -15,6 +15,7 @@
 				placeholder="example@email.com"
 				name="email"
 				autocomplete="email"
+				required
 			/>
 		</label>
 

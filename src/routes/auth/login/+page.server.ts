@@ -31,8 +31,9 @@ export const actions = {
 			password,
 		})
 		if ( !validationResponse.success){
+			let issues = validationResponse.error.issues
 			return fail(400, {
-				errorMessage: validationResponse.error.message
+				errorMessage: issues.length == 0 ? "Unkown issue" : issues[0].message
 			})
 		}
 		try {

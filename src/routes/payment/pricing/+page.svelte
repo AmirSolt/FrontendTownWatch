@@ -21,19 +21,19 @@
 	<div class="flex flex-col justify-center gap-8">
 		<div class="flex flex-col justify-center text-center gap-4">
 			<h2 class="text-4xl font-bold">
-				We Need <span class="underline">Your</span> Support
+				Upgrade to <span class="underline">Premium</span>
 			</h2>
 			<p class="text-lg">We strive to make the world a safer place. Help us get there.</p>
 		</div>
 
 		<div class="flex flex-wrap justify-center items-center gap-8">
-			<PriceCard name="Monthly" {user} featureList={['Unlocks all events']} price={prices[0]} />
+			<PriceCard name="Monthly" {user} featureList={['Unlocks event details']} price={prices[0]} />
 
 			<PriceCard
 				name="Yearly"
 				{user}
 				price={prices[1]}
-				featureList={['Unlocks all events']}
+				featureList={['Unlocks event details']}
 				specialText="Best Value"
 				isSpecialColor={true}
 			/>
@@ -45,7 +45,9 @@
 		<Accordion>
 			<AccordionItem>
 				<svelte:fragment slot="lead"><HelpCircle /></svelte:fragment>
-				<svelte:fragment slot="summary">What are the benefits of being a donor ?</svelte:fragment>
+				<svelte:fragment slot="summary"
+					>What are the benefits of being a premium member ?</svelte:fragment
+				>
 				<svelte:fragment slot="content">
 					<div class="p-2">Unlock access to more detailed event information.</div>
 				</svelte:fragment>

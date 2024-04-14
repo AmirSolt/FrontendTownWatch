@@ -10,5 +10,5 @@
 		<p>We are processing your transaction.</p>
 	</div>
 
-	<a href="/profile/settings" class="btn variant-ringed"> ← Settings </a>
+	<a href="/" class="btn variant-ringed"> ← Home </a>
 </div>

@@ -38,6 +38,7 @@
 
 	// Error toast
 	import { Toast, initializeStores, getToastStore } from '@skeletonlabs/skeleton';
+	import { isCustomerPremium } from '$lib/stripe/utils';
 	initializeStores();
 	$: if ($page.form?.errorMessage != null) {
 		getToastStore().trigger({
@@ -93,12 +94,11 @@
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				{#if user}
-					{#if customer != null && customer.tier > 0}
+					<a class="btn btn-sm bg-surface-200 border border-surface-500" href="/payment/pricing">
+						Premium
+					</a>
+					{#if isCustomerPremium(customer)}
 						<a class="btn btn-sm bg-surface-200" href="/payment/wallet" target="_blank"> Wallet </a>
-					{:else}
-						<a class="btn btn-sm bg-surface-200 border border-surface-500" href="/payment/pricing">
-							Donate
-						</a>
 					{/if}
 
 					<form action="/auth/logout" method="post">
@@ -106,7 +106,7 @@
 					</form>
 				{:else}
 					<a class="btn btn-sm bg-surface-200 border border-surface-500" href="/payment/pricing">
-						Donate
+						Premium
 					</a>
 
 					<a

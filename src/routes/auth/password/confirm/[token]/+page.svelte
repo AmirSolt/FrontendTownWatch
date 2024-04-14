@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	export let data;
 	let { token } = data;
 </script>
@@ -20,6 +19,7 @@
 				type="password"
 				name="password1"
 				autocomplete="new-password"
+				required
 			/>
 		</label>
 		<label class="label" for="password2">
@@ -30,6 +30,7 @@
 				type="password"
 				name="password2"
 				autocomplete="new-password"
+				required
 			/>
 		</label>
 

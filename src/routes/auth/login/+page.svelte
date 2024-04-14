@@ -20,6 +20,7 @@
 				placeholder="example@email.com"
 				name="email"
 				autocomplete="email"
+				required
 			/>
 		</label>
 
@@ -31,6 +32,7 @@
 				type="password"
 				name="password"
 				autocomplete="current-password"
+				required
 			/>
 		</label>
 
