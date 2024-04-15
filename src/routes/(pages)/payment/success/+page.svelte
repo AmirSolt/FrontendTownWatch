@@ -1,5 +1,11 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import { CheckCircle } from 'lucide-svelte';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		invalidateAll();
+	});
 </script>
 
 <div class="card-mod flex flex-col justify-center items-center gap-4">

@@ -91,3 +91,8 @@
 {:else}
 	<h1 class="text-xl font-bold">Error: Can't find the event.</h1>
 {/if}
+
+<br />
+<br />
+<br />
+<br />
