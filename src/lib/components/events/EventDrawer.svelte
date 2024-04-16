@@ -5,7 +5,7 @@
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { isCustomerFreeTrial, isCustomerPremium } from '$lib/stripe/utils';
+	import { isUserFreeTrial, isUserPremium } from '$lib/stripe/utils';
 	const drawerStore = getDrawerStore();
 
 	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
@@ -20,8 +20,8 @@
 		<!-- =============================== -->
 
 		<div class="leading-normal">
-			{#if isCustomerPremium($page.data.customer)}
-				{#if isCustomerFreeTrial($page.data.customer)}
+			{#if isUserPremium($page.data.customer) || isUserFreeTrial($page.data.user)}
+				{#if isUserFreeTrial($page.data.user)}
 					<aside class="alert flex justify-center items-center variant-filled-secondary">
 						<div class="flex justify-between items-center w-full">
 							<div class="alert-message">
