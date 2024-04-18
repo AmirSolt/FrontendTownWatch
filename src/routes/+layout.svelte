@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { Modal } from '@skeletonlabs/skeleton';
 	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
-	import EventDrawer from '$lib/components/events/EventDrawer.svelte';
+	import EventsDrawer from '$lib/components/events/EventsDrawer.svelte';
 	import AreaDrawer from '$lib/components/areas/AreaDrawer.svelte';
 	// Explore store
 	import { onDestroy, onMount, setContext } from 'svelte';
@@ -64,15 +64,16 @@
 			window.localStorage.getItem('seenEventIDs') ?? '[]'
 		);
 		seenEventIDs.set(storedSeenEventIds);
-	});
-	onDestroy(() => {
-		let toStoreEventIDs = [];
-		if ($seenEventIDs.length > 40) {
-			toStoreEventIDs = $seenEventIDs.slice(-40);
-		} else {
-			toStoreEventIDs = $seenEventIDs;
-		}
-		window.localStorage.setItem('seenEventIDs', JSON.stringify(toStoreEventIDs));
+
+		seenEventIDs.subscribe((newSeenEventIDs) => {
+			let toStoreEventIDs = [];
+			if (newSeenEventIDs.length > 40) {
+				toStoreEventIDs = newSeenEventIDs.slice(-40);
+			} else {
+				toStoreEventIDs = newSeenEventIDs;
+			}
+			window.localStorage.setItem('seenEventIDs', JSON.stringify(toStoreEventIDs));
+		});
 	});
 </script>
 
@@ -80,7 +81,7 @@
 <Modal />
 <Drawer zIndex="widget-layer-map-z-2">
 	{#if $drawerStore.id === 'event'}
-		<EventDrawer />
+		<EventsDrawer />
 	{:else if $drawerStore.id === 'area'}
 		<AreaDrawer />
 	{/if}

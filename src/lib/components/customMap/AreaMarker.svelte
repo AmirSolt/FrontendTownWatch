@@ -20,7 +20,7 @@
 		const drawerSettings: DrawerSettings = {
 			id: 'area',
 			position: 'bottom',
-			meta: { area_id: area.id }
+			meta: { area: area }
 		};
 		drawerStore.open(drawerSettings);
 	}

@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Map from '$lib/components/leafletMap/Map.svelte';
-	import EventMarker from './EventMarker.svelte';
-	import HomeMarker from './HomeMarker.svelte';
+	import EventMarkers from './EventsMarker.svelte';
+	import AreaMarker from './AreaMarker.svelte';
 	import { calculateDistance } from '$lib/utils';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-
 	export let events: Event[] = [];
 	export let home: Point;
 	export let radius: number;
@@ -13,7 +12,12 @@
 
 	const seenEventIDs: Writable<number[]> = getContext('seenEventIDs');
 
-	function getInRangeEvents(events: Event[], home: Point, radius: number): Event[] {
+	function cleanEventsForMap(events: Event[]): Event[][] {
+		let newEvents: Event[] = getInRangeEvents(events);
+		return aggregateEventsByPos(newEvents);
+	}
+
+	function getInRangeEvents(events: Event[]): Event[] {
 		let newEvents: Event[] = [];
 		events.forEach((event) => {
 			const eventPoint = {
@@ -28,13 +32,29 @@
 
 		return newEvents;
 	}
+
+	function aggregateEventsByPos(events: Event[]): Event[][] {
+		const eventsObject: { [key: string]: Event[] } = {};
+
+		events.forEach((event) => {
+			const key = `${event.lat},${event.long}`;
+			const eventsWithSameCoordinates = eventsObject[key] || [];
+			eventsWithSameCoordinates.push(event);
+			eventsObject[key] = eventsWithSameCoordinates;
+		});
+		const eventsArray: Event[][] = Object.values(eventsObject);
+		return eventsArray;
+	}
 </script>
 
 {#key home.lat + home.long}
 	<Map view={[home.lat, home.long]} zoom={13}>
-		<HomeMarker {area} />
-		{#each getInRangeEvents(events, home, radius) as event (event.id)}
-			<EventMarker {event} isSeen={$seenEventIDs.find((id) => id == event.id) != null} />
+		<AreaMarker {area} />
+		{#each cleanEventsForMap(events) as groupEvents}
+			<EventMarkers
+				{groupEvents}
+				isSeen={$seenEventIDs.find((id) => id == groupEvents[0].id) != null}
+			/>
 		{/each}
 	</Map>
 {/key}

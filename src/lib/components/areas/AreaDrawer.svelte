@@ -11,9 +11,7 @@
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	const drawerStore = getDrawerStore();
 
-	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
-
-	let area: Area | undefined = $outputMapData.area;
+	let area: Area | undefined = $drawerStore.meta.area;
 
 	const modalStore = getModalStore();
 	const modal: ModalSettings = {
@@ -38,8 +36,8 @@
 
 {#if area != null}
 	<div class="flex flex-col justify-center items-start gap-2 p-4 w-full">
-		<h1 class="text-lg"><b>Address:</b> {area.address}</h1>
-		<h1 class="text-lg"><b>Radius:</b> {area.radius / 1000}km</h1>
+		<h1 class="text-3xl font-bold">Area {area.address}</h1>
+		<h1 class="text-lg">Radius: {area.radius / 1000}km</h1>
 
 		<!-- =============================== -->
 		<hr />

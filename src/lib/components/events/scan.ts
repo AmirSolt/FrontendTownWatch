@@ -7,3 +7,4 @@ export function dictionarizeEvents(eventsDict: { [id: string]: Event }, events:E
     })
     return eventsDict
 }
+
