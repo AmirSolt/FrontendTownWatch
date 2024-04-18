@@ -5,6 +5,7 @@
 	export let width: number;
 	export let height: number;
 	export let pos: number[];
+	export let isSeen: boolean = false;
 
 	let marker: L.Marker | undefined;
 	let markerElement: HTMLElement;
@@ -53,6 +54,8 @@
 	{#if marker}
 		{#if isSelected}
 			<slot name="selected-icon" />
+		{:else if isSeen}
+			<slot name="seen-icon" />
 		{:else}
 			<slot name="icon" />
 		{/if}

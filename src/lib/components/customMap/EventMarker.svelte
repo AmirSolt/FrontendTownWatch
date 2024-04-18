@@ -18,28 +18,51 @@
 	}
 </script>
 
-<Circle
-	pos={[event.lat, event.long]}
-	radius={200}
-	colorHex={'#ff0000'}
-	fillOpacity={0.2}
-	strokeOpacity={0.7}
-/>
 <Marker pos={[event.lat, event.long]} width={40} height={40}>
 	<div slot="icon">
+		<Circle
+			pos={[event.lat, event.long]}
+			radius={200}
+			colorHex={'#d41919'}
+			fillOpacity={0.2}
+			strokeOpacity={0.7}
+		/>
 		<button type="button" class="btn-icon" on:click={openEventDrawer}>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 				<!-- <circle cx="12" cy="12" r="10" stroke="#ff0000" stroke-width="2" /> -->
-				<path d="M12 7V13M12 16.5V17" stroke="#ff0000" stroke-width="2" stroke-linecap="round" />
+				<path d="M12 7V13M12 16.5V17" stroke="#d41919" stroke-width="2" stroke-linecap="round" />
 			</svg>
 		</button>
 	</div>
 
 	<div slot="selected-icon">
+		<Circle
+			pos={[event.lat, event.long]}
+			radius={200}
+			colorHex={'#dbb807'}
+			fillOpacity={0.2}
+			strokeOpacity={0.7}
+		/>
 		<button type="button" class="btn-icon" on:click={openEventDrawer}>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ff0000">
-				<circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" />
-				<path d="M12 7V13M12 16.5V17" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+				<!-- <circle cx="12" cy="12" r="10" stroke="#ff0000" stroke-width="2" /> -->
+				<path d="M12 7V13M12 16.5V17" stroke="#dbb807" stroke-width="2" stroke-linecap="round" />
+			</svg>
+		</button>
+	</div>
+
+	<div slot="seen-icon">
+		<Circle
+			pos={[event.lat, event.long]}
+			radius={200}
+			colorHex={'#495a8f'}
+			fillOpacity={0.1}
+			strokeOpacity={0.4}
+		/>
+		<button type="button" class="btn-icon" on:click={openEventDrawer}>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+				<!-- <circle cx="12" cy="12" r="10" stroke="#ff0000" stroke-width="2" /> -->
+				<path d="M12 7V13M12 16.5V17" stroke="#495a8f" stroke-width="2" stroke-linecap="round" />
 			</svg>
 		</button>
 	</div>

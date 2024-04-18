@@ -11,10 +11,10 @@
 </script>
 
 <MapShell>
-	<svelte:fragment slot="header">
+	<svelte:fragment slot="row1">
 		<MapHeader />
 	</svelte:fragment>
-	<svelte:fragment slot="control">
+	<svelte:fragment slot="row2">
 		<MapControl bind:mapControls />
 	</svelte:fragment>
 	<svelte:fragment slot="map">

@@ -5,7 +5,7 @@
 	let { reports } = data;
 </script>
 
-<h1 class="text-3xl font-bold">Reports</h1>
+<h1 class="text-3xl font-bold">Notification History</h1>
 
 <div class="flex flex-col justify-center items-center gap-2 p-4">
 	{#if reports.length > 0}
@@ -14,7 +14,7 @@
 		{/each}
 	{:else}
 		<div class="card p-4">
-			<h1 class="text-md">You do not have any reports</h1>
+			<h1 class="text-md">You do not have any notifications.</h1>
 		</div>
 	{/if}
 </div>

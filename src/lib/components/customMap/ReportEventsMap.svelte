@@ -7,6 +7,12 @@
 	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
 	$outputMapData.events = $page.data.events;
 	$outputMapData.censorEvents = $page.data.censorEvents;
+	$outputMapData.home = {
+		lat: $page.data.reportDetails.area.lat,
+		long: $page.data.reportDetails.area.long
+	};
+	$outputMapData.area = $page.data.reportDetails.area;
+	$outputMapData.radius = $page.data.reportDetails.area.radius;
 </script>
 
 <EventsMap

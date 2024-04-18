@@ -1,5 +1,5 @@
 import { fetchEventsByReport, fetchReportDetails } from '$lib/geo/server/reports.js';
-import { isUserPremium, isUserFreeTrial } from '$lib/stripe/utils.js';
+import { isUserPremium, userFreeTrialDaysRemain } from '$lib/stripe/utils.js';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -20,7 +20,7 @@ export const load = async ({locals, params}) => {
     }
 
     let censorEvents = true
-    if(isUserPremium(reportCustomer) || isUserFreeTrial(locals.user)){
+    if(isUserPremium(reportCustomer) || userFreeTrialDaysRemain(locals.user) > 0){
         censorEvents = false
     }
 
@@ -29,7 +29,6 @@ export const load = async ({locals, params}) => {
     return {
         reportDetails,
         events,
-        censorEvents
     }
 
 };

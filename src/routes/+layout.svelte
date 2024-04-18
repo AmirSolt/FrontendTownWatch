@@ -23,12 +23,22 @@
 	setContext('outputMapData', outputMapData);
 
 	// initial address
-	$inputMapData.submissions.push({
-		point: { lat: 43.64222, long: -79.38529 },
-		address: '',
-		area: undefined,
-		radiuskm: 2
-	} as InputMapDataSubmission);
+	if ($page.data.areas && $page.data.areas.length > 0) {
+		let area = $page.data.areas[0];
+		$inputMapData.submissions.push({
+			point: { lat: area.lat, long: area.long },
+			address: area.address,
+			area: area,
+			radiuskm: area.radius / 1000
+		} as InputMapDataSubmission);
+	} else {
+		$inputMapData.submissions.push({
+			point: { lat: 43.64222, long: -79.38529 },
+			address: '',
+			area: undefined,
+			radiuskm: 2
+		} as InputMapDataSubmission);
+	}
 
 	// ========================
 

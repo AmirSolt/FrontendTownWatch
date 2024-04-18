@@ -4,9 +4,7 @@
 </script>
 
 {#if $page.data.user}
-	<a class="btn btn-sm bg-surface-200 border border-surface-500" href="/payment/pricing">
-		Premium
-	</a>
+	<a class="btn btn-sm bg-surface-200" href="/payment/pricing"> Premium </a>
 	{#if isUserPremium($page.data.customer)}
 		<a class="btn btn-sm bg-surface-200" href="/payment/wallet" target="_blank"> Wallet </a>
 	{/if}
@@ -15,9 +13,7 @@
 		<button type="submit" class="btn btn-sm bg-surface-200"> Logout </button>
 	</form>
 {:else}
-	<a class="btn btn-sm bg-surface-200 border border-surface-500" href="/payment/pricing">
-		Premium
-	</a>
+	<a class="btn btn-sm bg-surface-200" href="/payment/pricing"> Premium </a>
 
 	<a
 		class="btn btn-sm bg-surface-200"

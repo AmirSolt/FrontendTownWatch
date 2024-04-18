@@ -37,24 +37,25 @@
 </script>
 
 {#if area != null}
-	<div class="card flex flex-col justify-center items-start gap-2 p-4 w-full">
+	<div class="flex flex-col justify-center items-start gap-2 p-4 w-full">
+		<h1 class="text-lg"><b>Address:</b> {area.address}</h1>
+		<h1 class="text-lg"><b>Radius:</b> {area.radius / 1000}km</h1>
+
 		<!-- =============================== -->
-		<div class="w-full flex flex-row justify-end items-center">
-			<a href="/reports/area/{area.id}" class="btn-icon variant-filled-primary w-8">
-				<History />
-			</a>
-		</div>
-
-		<h1><b>Address:</b> {area.address}</h1>
-		<h1><b>Radius:</b> {area.radius / 1000}km</h1>
-
+		<hr />
+		<h1 class="text-lg">You will get notified of incidients reported within this area.</h1>
+		<a class="btn variant-filled-primary" href="/reports/area/{area.id}"
+			><span class="pe-2"><History /></span> Notification History</a
+		>
+		<hr />
+		<br />
 		<button
 			type="button"
 			class="btn variant-filled-error"
 			on:click={() => {
 				modalStore.trigger(modal);
 				drawerStore.close();
-			}}><Trash2 /> Delete Area</button
+			}}><span class="pe-2"><Trash2 /></span> Delete Area</button
 		>
 
 		<!-- =============================== -->
