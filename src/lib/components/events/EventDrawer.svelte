@@ -9,10 +9,13 @@
 	const drawerStore = getDrawerStore();
 
 	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
+	const seenEventIDs: Writable<number[]> = getContext('seenEventIDs');
 
 	let event: Event | undefined = $outputMapData.events.find(
 		(event) => event.id === $drawerStore.meta.event_id
 	);
+
+	if (event != null) $seenEventIDs.push(event.id);
 
 	const isPremium = isUserPremium($page.data.customer);
 	const remainFreeTrial = userFreeTrialDaysRemain($page.data.user);

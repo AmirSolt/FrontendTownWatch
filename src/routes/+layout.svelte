@@ -6,7 +6,7 @@
 	import EventDrawer from '$lib/components/events/EventDrawer.svelte';
 	import AreaDrawer from '$lib/components/areas/AreaDrawer.svelte';
 	// Explore store
-	import { setContext } from 'svelte';
+	import { onDestroy, onMount, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	const inputMapData = writable<InputMapData>({
 		submissions: []
@@ -52,8 +52,28 @@
 		});
 	}
 	// ========================
-
 	const drawerStore = getDrawerStore();
+
+	// ========================
+
+	const seenEventIDs = writable<number[]>([]);
+	setContext('seenEventIDs', seenEventIDs);
+
+	onMount(async () => {
+		const storedSeenEventIds = await JSON.parse(
+			window.localStorage.getItem('seenEventIDs') ?? '[]'
+		);
+		seenEventIDs.set(storedSeenEventIds);
+	});
+	onDestroy(() => {
+		let toStoreEventIDs = [];
+		if ($seenEventIDs.length > 40) {
+			toStoreEventIDs = $seenEventIDs.slice(-40);
+		} else {
+			toStoreEventIDs = $seenEventIDs;
+		}
+		window.localStorage.setItem('seenEventIDs', JSON.stringify(toStoreEventIDs));
+	});
 </script>
 
 <Toast position="t" />

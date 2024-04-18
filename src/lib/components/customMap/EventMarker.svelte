@@ -7,6 +7,7 @@
 	const drawerStore = getDrawerStore();
 
 	export let event: Event;
+	export let isSeen: boolean;
 
 	function openEventDrawer() {
 		const drawerSettings: DrawerSettings = {
@@ -18,7 +19,7 @@
 	}
 </script>
 
-<Marker pos={[event.lat, event.long]} width={40} height={40}>
+<Marker pos={[event.lat, event.long]} width={40} height={40} {isSeen}>
 	<div slot="icon">
 		<Circle
 			pos={[event.lat, event.long]}

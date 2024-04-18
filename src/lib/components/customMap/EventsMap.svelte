@@ -3,11 +3,15 @@
 	import EventMarker from './EventMarker.svelte';
 	import HomeMarker from './HomeMarker.svelte';
 	import { calculateDistance } from '$lib/utils';
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
 
 	export let events: Event[] = [];
 	export let home: Point;
 	export let radius: number;
 	export let area: Area | undefined;
+
+	const seenEventIDs: Writable<number[]> = getContext('seenEventIDs');
 
 	function getInRangeEvents(events: Event[], home: Point, radius: number): Event[] {
 		let newEvents: Event[] = [];
@@ -30,7 +34,7 @@
 	<Map view={[home.lat, home.long]} zoom={13}>
 		<HomeMarker {area} />
 		{#each getInRangeEvents(events, home, radius) as event (event.id)}
-			<EventMarker {event} />
+			<EventMarker {event} isSeen={$seenEventIDs.find((id) => id == event.id) != null} />
 		{/each}
 	</Map>
 {/key}
