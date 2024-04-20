@@ -23,15 +23,15 @@
 </script>
 
 {#if events.length > 0}
-	<div class="flex flex-col justify-between items-start gap-4 p-4 w-full">
+	<div class="flex flex-col justify-center items-start gap-4 p-4 w-full">
 		<!-- =============================== -->
 		<!-- Just loop this -->
-		<h1 class="text-3xl font-bold">Events List ({events.length})</h1>
+		<h1 class="text-3xl font-bold">Events {events.length > 1 ? `(${events.length})` : ``}</h1>
 
 		<UserDrawerBanner />
 
 		{#each events as event}
-			<div class="card m-2 p-2 variant-form-material">
+			<div class="card p-2 variant-form-material w-full">
 				<div class="leading-normal">
 					<p>
 						<b> Date: </b>

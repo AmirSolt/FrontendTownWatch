@@ -26,7 +26,6 @@
 			>
 		</div>
 	</aside>
-	<br />
 {:else if isPremium || remainFreeTrial > 0}
 	{#if remainFreeTrial > 0 && !isPremium}
 		<aside class="alert flex justify-center items-center variant-filled-secondary w-full gap-4">
@@ -48,7 +47,6 @@
 				>
 			</div>
 		</aside>
-		<br />
 	{/if}
 {:else}
 	<aside class="alert flex justify-center items-center variant-filled-secondary">
@@ -69,5 +67,4 @@
 			>
 		</div>
 	</aside>
-	<br />
 {/if}

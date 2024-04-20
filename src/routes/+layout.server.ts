@@ -3,17 +3,13 @@ import { fetchUserAreasServer } from '$lib/geo/server/areas.js';
 export const load = async ({locals}) => {
 
     locals.customer = null
-    if(locals.user!=null){
-      try{
-        locals.customer = await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`);
-      }catch(_){
-  
-      }
-    }
-  
+    let [customerR, areasR] = await Promise.allSettled([
+      fetchCustomer(locals),
+      fetchUserAreasServer(locals)
+    ])
 
-    let areas = await fetchUserAreasServer(locals)
-
+    locals.customer = customerR.status === 'fulfilled'? customerR.value : null
+    let areas = areasR.status === 'fulfilled'? areasR.value : []
 
     return {
         user: locals.user,
@@ -21,3 +17,11 @@ export const load = async ({locals}) => {
         areas
     }
 };
+
+
+async function fetchCustomer(locals:App.Locals):Promise<Customer|null>{
+  if(locals.user==null){
+    return null
+  }
+  return await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`)
+}
