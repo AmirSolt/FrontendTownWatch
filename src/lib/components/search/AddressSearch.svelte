@@ -5,8 +5,8 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
-	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
 	export let mapControls: MapControls;
+	const queueMapData: Writable<QueueMapData> = getContext('queueMapData');
 </script>
 
 <div class="w-full">
@@ -31,14 +31,14 @@
 				}
 				let point = await fetchGeocode(mapControls.address);
 				let newSub = {
-					point: point,
+					home: point,
 					address: mapControls.address,
-					radiuskm: mapControls.radiuskm,
-					area: undefined
+					radius: mapControls.radiuskm * 1000,
+					canBeAddedToAreas: true
 				};
 
-				$inputMapData.submissions.push(newSub);
-				$inputMapData.submissions = $inputMapData.submissions;
+				$queueMapData.queue.push(newSub);
+				$queueMapData.queue = $queueMapData.queue;
 			}}
 		>
 			<span class="m-auto"> <Search /></span></button

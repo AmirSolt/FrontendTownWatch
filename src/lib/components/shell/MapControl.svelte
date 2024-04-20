@@ -1,12 +1,7 @@
 <script lang="ts">
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
 	import { MaxRadiusKm } from '$lib/config.js';
-
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import MapAreas from './MapAreas.svelte';
-	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
-
 	export let mapControls: MapControls;
 </script>
 

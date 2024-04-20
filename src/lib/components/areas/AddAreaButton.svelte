@@ -5,11 +5,8 @@
 	import { invalidateAll, goto } from '$app/navigation';
 	import { BellRing } from 'lucide-svelte';
 	import { getContext } from 'svelte';
-	// const explore: Writable<Explore> = getContext('explore');
-	// const exploreSubmission: Writable<ExploreSubmission> = getContext('exploreSubmission');
-	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
-
 	import { getModalStore } from '@skeletonlabs/skeleton';
+	const queueMapData: Writable<QueueMapData> = getContext('queueMapData');
 
 	const modalStore = getModalStore();
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
@@ -30,21 +27,21 @@
 <button
 	type="button"
 	class="btn variant-filled-secondary"
-	disabled={$inputMapData.submissions.length < 2}
+	disabled={$queueMapData.queue.at(-1)?.canBeAddedToAreas == false}
 	on:click={async () => {
 		if ($page.data.user == null) {
 			modalStore.trigger(modal);
 		} else {
-			if ($inputMapData.submissions.length > 1) {
-				let submission = $inputMapData.submissions.at(-1);
-				if (submission == null) {
+			if ($queueMapData.queue.length > 0) {
+				let submission = $queueMapData.queue.at(-1);
+				if (submission == null || submission.canBeAddedToAreas == false) {
 					return;
 				}
 				let _ = await createUserArea({
 					address: submission.address,
-					radius: Math.floor(submission.radiuskm * 1000),
-					lat: submission.point.lat,
-					long: submission.point.long
+					radius: Math.floor(submission.radius),
+					lat: submission.home.lat,
+					long: submission.home.long
 				});
 				invalidateAll();
 			}

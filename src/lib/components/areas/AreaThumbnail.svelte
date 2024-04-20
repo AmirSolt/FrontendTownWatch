@@ -2,10 +2,11 @@
 	import { Radio } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	const inputMapData: Writable<InputMapData> = getContext('inputMapData');
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	import type { DrawerSettings } from '@skeletonlabs/skeleton';
+	export let area: Area;
 
+	const queueMapData: Writable<QueueMapData> = getContext('queueMapData');
 	const drawerStore = getDrawerStore();
 
 	function openAreaDrawer() {
@@ -15,24 +16,24 @@
 		const drawerSettings: DrawerSettings = {
 			id: 'area',
 			position: 'bottom',
-			meta: { area_id: area.id }
+			meta: { area: area }
 		};
 		drawerStore.open(drawerSettings);
 	}
-	export let area: Area;
 </script>
 
 <button
 	type="button"
 	class="btn-icon variant-filled-primary"
 	on:click={() => {
-		$inputMapData.submissions.push({
-			point: { lat: area.lat, long: area.long },
+		$queueMapData.queue.push({
+			home: { lat: area.lat, long: area.long },
 			address: area.address,
-			radiuskm: area.radius / 1000,
-			area: area
+			radius: area.radius,
+			area: area,
+			canBeAddedToAreas: false
 		});
-		$inputMapData.submissions = $inputMapData.submissions;
+		$queueMapData.queue = $queueMapData.queue;
 
 		openAreaDrawer();
 	}}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LandingEventsMap from '$lib/components/customMap/LandingEventsMap.svelte';
+	import LandingPageMap from '$lib/components/customMap/LandingPageMap.svelte';
 	import MapHeader from '$lib/components/shell/MapHeader.svelte';
 	import MapControl from '$lib/components/shell/MapControl.svelte';
 	import MapShell from '$lib/components/shell/MapShell.svelte';
@@ -18,6 +18,6 @@
 		<MapControl bind:mapControls />
 	</svelte:fragment>
 	<svelte:fragment slot="map">
-		<LandingEventsMap {mapControls} />
+		<LandingPageMap {mapControls} />
 	</svelte:fragment>
 </MapShell>

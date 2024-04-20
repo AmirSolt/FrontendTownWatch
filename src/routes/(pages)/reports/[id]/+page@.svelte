@@ -3,13 +3,14 @@
 	import MapShell from '$lib/components/shell/MapShell.svelte';
 	import { formatDateWithHourToLocale } from '$lib/utils';
 
-	import ReportEventsMap from '$lib/components/customMap/ReportEventsMap.svelte';
+	import ReportPageMap from '$lib/components/customMap/ReportPageMap.svelte';
 	import ShareReport from '$lib/components/reports/ShareReport.svelte';
-	import TriangleAlert from 'lucide-svelte/icons/alert-triangle';
 	export let data;
 	let { reportDetails, events } = data;
 
-	console.log(events);
+	let area = reportDetails.area;
+	let home = { lat: reportDetails.area.lat, long: reportDetails.area.long };
+	let radius = reportDetails.area.radius;
 </script>
 
 <MapShell>
@@ -17,27 +18,29 @@
 		<MapHeader />
 	</svelte:fragment>
 	<svelte:fragment slot="row2">
-		<div class="card flex flex-col justify-center items-start gap-2 w-full p-2">
-			<div class="flex justify-between items-center w-full">
-				<h1 class="text-3xl font-bold">Report</h1>
-				<ShareReport />
+		<div class="flex flex-col justify-center items-center w-full gap-2 md:max-w-6xl">
+			<div class="card flex flex-col justify-center items-start gap-2 w-full p-2">
+				<div class="flex justify-between items-center w-full">
+					<h1 class="text-3xl font-bold">Report</h1>
+					<ShareReport />
+				</div>
+
+				<p>
+					Date: {formatDateWithHourToLocale(reportDetails.report.created_at)}
+				</p>
+
+				<p>
+					Found {events.length} events
+				</p>
+
+				<p>
+					Address: {reportDetails.area.address}
+				</p>
 			</div>
-
-			<p>
-				Date: {formatDateWithHourToLocale(reportDetails.report.created_at)}
-			</p>
-
-			<p>
-				Found {events.length} events
-			</p>
-
-			<p>
-				Address: {reportDetails.area.address}
-			</p>
 		</div>
 	</svelte:fragment>
 
 	<svelte:fragment slot="map">
-		<ReportEventsMap />
+		<ReportPageMap {events} {area} {home} {radius} />
 	</svelte:fragment>
 </MapShell>

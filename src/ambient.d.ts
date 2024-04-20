@@ -12,25 +12,20 @@ interface Customer {
 }
 
 
-interface InputMapData {
-    submissions:InputMapDataSubmission[]
-}
-interface InputMapDataSubmission {
-    point:Point
-    address:string
-    radiuskm:number
-    area:Area|undefined
+interface QueueMapData {
+    queue:LandingPageMapData[]
 }
 interface MapControls{
     address:string
     radiuskm:number
 }
-interface OutputMapData {
-    events:Event[]
-    area:Area|undefined
+interface LandingPageMapData {
+    events?:Event[]|undefined
+    area?:Area|undefined
     home:Point
     radius:number
-    censorEvents:boolean
+    address:string
+    canBeAddedToAreas:boolean
 }
 
 interface Point {

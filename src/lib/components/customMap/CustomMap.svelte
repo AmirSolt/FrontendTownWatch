@@ -1,14 +1,15 @@
 <script lang="ts">
 	import Map from '$lib/components/leafletMap/Map.svelte';
 	import EventMarkers from './EventsMarker.svelte';
-	import AreaMarker from './AreaMarker.svelte';
+	import HomeMarker from './HomeMarker.svelte';
 	import { calculateDistance } from '$lib/utils';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	export let events: Event[] = [];
+
+	export let events: Event[] | undefined;
+	export let area: Area | undefined;
 	export let home: Point;
 	export let radius: number;
-	export let area: Area | undefined;
 
 	const seenEventIDs: Writable<number[]> = getContext('seenEventIDs');
 
@@ -49,12 +50,14 @@
 
 {#key home.lat + home.long}
 	<Map view={[home.lat, home.long]} zoom={13}>
-		<AreaMarker {area} />
-		{#each cleanEventsForMap(events) as groupEvents}
-			<EventMarkers
-				{groupEvents}
-				isSeen={$seenEventIDs.find((id) => id == groupEvents[0].id) != null}
-			/>
-		{/each}
+		<HomeMarker {area} {home} {radius} />
+		{#key radius}
+			{#each cleanEventsForMap(events ?? []) as groupEvents}
+				<EventMarkers
+					{groupEvents}
+					isSeen={$seenEventIDs.find((id) => id == groupEvents[0].id) != null}
+				/>
+			{/each}
+		{/key}
 	</Map>
 {/key}

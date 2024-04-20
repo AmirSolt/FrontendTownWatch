@@ -1,18 +1,14 @@
 <script lang="ts">
 	import Marker from '$lib/components/leafletMap/Marker.svelte';
 	import Circle from '$lib/components/leafletMap/Circle.svelte';
-	import { Radio } from 'lucide-svelte';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
-	const drawerStore = getDrawerStore();
-
-	const outputMapData: Writable<OutputMapData> = getContext('outputMapData');
-
 	export let area: Area | undefined;
+	export let home: Point;
+	export let radius: number;
 
+	const drawerStore = getDrawerStore();
 	function openAreaDrawer() {
 		if (area == null) {
 			return;
@@ -26,13 +22,10 @@
 	}
 </script>
 
-{#key $outputMapData.home.lat + $outputMapData.home.long + $outputMapData.radius}
-	<Circle
-		pos={[$outputMapData.home.lat, $outputMapData.home.long]}
-		radius={$outputMapData.radius}
-	/>
+{#key home.lat + home.long + radius}
+	<Circle pos={[home.lat, home.long]} {radius} />
 {/key}
-<Marker pos={[$outputMapData.home.lat, $outputMapData.home.long]} width={40} height={40}>
+<Marker pos={[home.lat, home.long]} width={40} height={40}>
 	<div slot="icon">
 		<button type="button" class="btn-icon" on:click={openAreaDrawer}>
 			<svg xmlns="http://www.w3.org/2000/svg" fill="#4685af" viewBox="0 0 24 24">
