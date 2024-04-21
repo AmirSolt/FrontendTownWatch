@@ -16,7 +16,7 @@ export const load = async ({locals}) => {
 export const actions = {
     signup: async ({ locals, request, url }) => {
 		if ( locals.user != null ) {
-			throw error(403, {message:"You can not be logged in to use this route."})
+			throw redirect(302, "/")
 		}
 
 

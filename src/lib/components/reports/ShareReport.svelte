@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Share } from 'lucide-svelte';
+	import { page } from '$app/stores';
 </script>
 
 <button
@@ -7,9 +8,9 @@
 	class="btn-icon variant-filled-secondary"
 	on:click={() => {
 		navigator.share({
-			title: 'MDN',
-			text: 'Learn web development on MDN!',
-			url: 'https://developer.mozilla.org'
+			title: 'Civil Watch',
+			text: 'Find Local Police Reports on Civil Watch!',
+			url: $page.url.toString()
 		});
 	}}
 >
