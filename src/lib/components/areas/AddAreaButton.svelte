@@ -3,7 +3,7 @@
 	import { createUserArea } from '$lib/geo/client/areas';
 	import type { Writable } from 'svelte/store';
 	import { invalidateAll, goto } from '$app/navigation';
-	import { BellRing } from 'lucide-svelte';
+	import { BellRing, Hourglass } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	import { getModalStore } from '@skeletonlabs/skeleton';
 	const queueMapData: Writable<QueueMapData> = getContext('queueMapData');
@@ -22,6 +22,8 @@
 			}
 		}
 	};
+
+	let isButtonBusy = false;
 </script>
 
 <button
@@ -29,6 +31,7 @@
 	class="btn variant-filled-secondary"
 	disabled={$queueMapData.queue.at(-1)?.canBeAddedToAreas == false}
 	on:click={async () => {
+		isButtonBusy = true;
 		if ($page.data.user == null) {
 			modalStore.trigger(modal);
 		} else {
@@ -46,7 +49,12 @@
 				invalidateAll();
 			}
 		}
+		isButtonBusy = false;
 	}}
 >
-	<span class="pe-2"><BellRing /></span> Get Alerts</button
->
+	{#if !isButtonBusy}
+		<span class="pe-2"><BellRing /></span> Get Alerts
+	{:else}
+		<span class="pe-2"> <Hourglass /></span>
+	{/if}
+</button>

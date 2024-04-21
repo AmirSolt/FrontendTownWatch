@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { radiusSchema } from '$lib/geo/schema';
 	import { fetchGeocode } from '$lib/here/geocoding';
-	import { Search } from 'lucide-svelte';
+	import { Search, Hourglass } from 'lucide-svelte';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
 	export let mapControls: MapControls;
 	const queueMapData: Writable<QueueMapData> = getContext('queueMapData');
+
+	let isButtonBusy: boolean = false;
 </script>
 
 <div class="w-full">
@@ -25,7 +27,9 @@
 		<button
 			type="button"
 			class="variant-filled-primary col-span-2 md:col-span-1"
+			disabled={isButtonBusy}
 			on:click={async () => {
+				isButtonBusy = true;
 				if (mapControls.address == '') {
 					return;
 				}
@@ -39,9 +43,15 @@
 
 				$queueMapData.queue.push(newSub);
 				$queueMapData.queue = $queueMapData.queue;
+
+				isButtonBusy = false;
 			}}
 		>
-			<span class="m-auto"> <Search /></span></button
-		>
+			{#if !isButtonBusy}
+				<span class="m-auto"> <Search /></span>
+			{:else}
+				<span class="m-auto"> <Hourglass /></span>
+			{/if}
+		</button>
 	</div>
 </div>
