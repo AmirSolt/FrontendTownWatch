@@ -55,6 +55,6 @@
 	{#if !isButtonBusy}
 		<span class="pe-2"><BellRing /></span> Get Alerts
 	{:else}
-		<span class="pe-2"> <Hourglass /></span>
+		<span class="w-24 flex justify-center"> <Hourglass /></span>
 	{/if}
 </button>
