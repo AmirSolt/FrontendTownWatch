@@ -133,10 +133,16 @@ export function orderByFieldDesc<T>(arr: T[], fieldName: keyof T): T[] {
     return arr.slice().sort((a, b) => {
         const dateA = a[fieldName] as Date
         const dateB = b[fieldName] as Date
-        return dateB.getTime() - dateA.getTime() ;
+        return dateB.getTime() - dateA.getTime();
     });
 }
-
+export function orderByFieldAsc<T>(arr: T[], fieldName: keyof T): T[] {
+    return arr.slice().sort((a, b) => {
+        const dateA = a[fieldName] as Date
+        const dateB = b[fieldName] as Date
+        return dateA.getTime() - dateB.getTime();
+    });
+}
 
 
   
