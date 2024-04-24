@@ -64,8 +64,8 @@ async function checkout(priceID:string, customer:Customer|null|undefined, user:U
         },
       ],
       mode: 'subscription',
-      success_url: `${PUBLIC_DOMAIN}/payment/success`,
-      cancel_url: `${PUBLIC_DOMAIN}/payment/pricing`,
+      success_url: `https://${PUBLIC_DOMAIN}/payment/success`,
+      cancel_url: `https://${PUBLIC_DOMAIN}/payment/pricing`,
       customer:customerID,
       customer_email:email,
   });

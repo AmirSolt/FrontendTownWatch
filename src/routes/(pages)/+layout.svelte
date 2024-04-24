@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import HeaderTailContent from '$lib/components/shell/HeaderTailContent.svelte';
+	import { PUBLIC_DOMAIN } from '$env/static/public';
 </script>
 
 <AppShell>
@@ -50,8 +51,8 @@
 						<a href="/info/privacy-policy" class="hover:underline me-4 md:me-6">Privacy Policy</a>
 					</li>
 					<li>
-						<a href="mailto:support@civilwatch.net" class="hover:underline"
-							>support@civilwatch.net</a
+						<a href="mailto:support@{PUBLIC_DOMAIN}" class="hover:underline"
+							>support@{PUBLIC_DOMAIN}</a
 						>
 					</li>
 				</ul>

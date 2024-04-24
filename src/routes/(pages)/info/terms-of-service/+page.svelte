@@ -1,9 +1,13 @@
+<script>
+	import { PUBLIC_DOMAIN } from '$env/static/public';
+</script>
+
 <div class="p2">
 	<h1>Civilwatch Terms of Service</h1>
 
 	<p>
 		These Terms of Service ("Terms") govern your access to and use of the Civilwatch website located
-		at <a href="https://civilwatch.net/">https://civilwatch.net/</a> (the "Website"), owned and operated
+		at <a href="https://{PUBLIC_DOMAIN}/">https://{PUBLIC_DOMAIN}/</a> (the "Website"), owned and operated
 		by Civilwatch, an individual business entity registered in Canada, Ontario ("Civilwatch," "we," "us,"
 		or "our"). By accessing or using the Website, you agree to be bound by these Terms.
 	</p>
@@ -44,7 +48,7 @@
 	<p>
 		We respect the intellectual property rights of others and expect our users to do the same. If
 		you believe that your copyright has been infringed, please contact us at <a
-			href="mailto:support@civilwatch.net">support@civilwatch.net</a
+			href="mailto:support@{PUBLIC_DOMAIN}">support@{PUBLIC_DOMAIN}</a
 		>.
 	</p>
 
@@ -83,7 +87,7 @@
 	<h2 class="text-md font-bold">11. Contact Us</h2>
 	<p>
 		If you have any questions or concerns about these Terms, please contact us at <a
-			href="mailto:support@civilwatch.net">support@civilwatch.net</a
+			href="mailto:support@{PUBLIC_DOMAIN}">support@{PUBLIC_DOMAIN}</a
 		>.
 	</p>
 

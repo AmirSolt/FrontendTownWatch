@@ -3,6 +3,7 @@
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 	import PriceCard from './PriceCard.svelte';
 	import type Stripe from 'stripe';
+	import { PUBLIC_DOMAIN } from '$env/static/public';
 
 	export let data;
 	let { user, prices } = data;
@@ -58,7 +59,7 @@
 				<svelte:fragment slot="content">
 					<div class="p-2">
 						You can request a refund within 30 days of payment. Email our support: <span
-							class="badge variant-ghost">support@civilwatch.net</span
+							class="badge variant-ghost">support@{PUBLIC_DOMAIN}</span
 						>
 					</div>
 				</svelte:fragment>

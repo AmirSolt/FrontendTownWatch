@@ -1,3 +1,7 @@
+<script>
+	import { PUBLIC_DOMAIN } from '$env/static/public';
+</script>
+
 <div class="p2">
 	<h1>Privacy Policy</h1>
 	<p>Last updated: March 12, 2024</p>
@@ -93,8 +97,8 @@
 		<li>
 			<p>
 				<strong>Website</strong> refers to Civilwatch, accessible from
-				<a href="https://civilwatch.net/" rel="external nofollow noopener" target="_blank"
-					>https://civilwatch.net/</a
+				<a href="https://{PUBLIC_DOMAIN}/" rel="external nofollow noopener" target="_blank"
+					>https://{PUBLIC_DOMAIN}/</a
 				>
 			</p>
 		</li>
@@ -448,6 +452,6 @@
 	<h2>Contact Us</h2>
 	<p>If you have any questions about this Privacy Policy, You can contact us:</p>
 	<ul>
-		<li>By email: support@civilwatch.net</li>
+		<li>By email: support@{PUBLIC_DOMAIN}</li>
 	</ul>
 </div>
