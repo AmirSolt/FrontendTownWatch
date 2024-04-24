@@ -14,7 +14,7 @@
 		type: 'confirm',
 		// Data
 		title: 'Need an Account',
-		body: 'To create an Area, you need an account.',
+		body: 'Get notifed of police reports within this area. You need an account, to add the area.',
 		buttonTextConfirm: 'Register',
 		response: (r: boolean) => {
 			if (r) {

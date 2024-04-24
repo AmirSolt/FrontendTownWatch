@@ -11,7 +11,8 @@
 	<div class="flex gap-2">
 		{#each orderByFieldAsc(areas, 'created_at') as area, i (area.id)}
 			<div class="relative">
-				<span class="badge-icon variant-filled absolute -top-1 -right-1 widget-layer-map-z-3"
+				<span
+					class="badge-icon variant-filled absolute -top-1 -right-1 widget-layer-map-z-3 select-none"
 					>{i + 1}</span
 				>
 				<AreaThumbnail {area} />
