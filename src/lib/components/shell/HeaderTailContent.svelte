@@ -1,1 +1,1 @@
-<a class="btn variant-filled-tertiary" href="/payment/pricing"> Donate </a>
+<a class="btn variant-filled-tertiary" href="/donate"> Donate </a>
