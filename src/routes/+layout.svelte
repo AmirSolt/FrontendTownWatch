@@ -4,7 +4,6 @@
 	import { Modal } from '@skeletonlabs/skeleton';
 	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
 	import EventsDrawer from '$lib/components/events/EventsDrawer.svelte';
-	import AreaDrawer from '$lib/components/areas/AreaDrawer.svelte';
 	// Explore store
 	import { onMount, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
@@ -55,8 +54,6 @@
 <Drawer zIndex="widget-layer-map-z-2">
 	{#if $drawerStore.id === 'event'}
 		<EventsDrawer />
-	{:else if $drawerStore.id === 'area'}
-		<AreaDrawer />
 	{/if}
 </Drawer>
 <slot />

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import AddressSearch from '$lib/components/search/AddressSearch.svelte';
 	import { MaxRadiusKm } from '$lib/config.js';
-	import MapAreas from './MapAreas.svelte';
 	export let mapControls: MapControls;
 </script>
 
@@ -23,6 +22,4 @@
 			/>
 		</div>
 	</div>
-
-	<MapAreas />
 </div>

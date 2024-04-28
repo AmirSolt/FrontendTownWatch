@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { scanEvents } from '$lib/geo/client/events';
@@ -15,27 +14,14 @@
 	};
 
 	let events: Event[] | undefined;
-	let area: Area | undefined;
 	let home: Point = defaultMapData.home;
 
-	// init
-	if ($page.data.areas && $page.data.areas.length > 0) {
-		let area = $page.data.areas[0];
-		$queueMapData.queue.push({
-			home: { lat: area.lat, long: area.long },
-			area: area,
-			radius: area.radius,
-			address: '',
-			canBeAddedToAreas: false
-		});
-	} else {
-		$queueMapData.queue.push({
-			home: defaultMapData.home,
-			radius: defaultMapData.radius,
-			address: '',
-			canBeAddedToAreas: false
-		});
-	}
+	$queueMapData.queue.push({
+		home: defaultMapData.home,
+		radius: defaultMapData.radius,
+		address: '',
+		canBeAddedToAreas: false
+	});
 
 	onMount(() => {
 		queueMapData.subscribe(async (newQueueMapData) => {
@@ -47,7 +33,6 @@
 			mapControls.radiuskm = newSubmission.radius / 1000;
 			mapControls.address = newSubmission.address;
 			home = newSubmission.home;
-			area = newSubmission.area;
 			events = await scanEvents({
 				lat: newSubmission.home.lat,
 				long: newSubmission.home.long,
@@ -58,4 +43,4 @@
 	});
 </script>
 
-<CustomMap {events} {area} {home} radius={mapControls.radiuskm * 1000} />
+<CustomMap {events} {home} radius={mapControls.radiuskm * 1000} />

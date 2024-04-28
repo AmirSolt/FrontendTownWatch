@@ -7,7 +7,6 @@
 	import type { Writable } from 'svelte/store';
 
 	export let events: Event[] | undefined;
-	export let area: Area | undefined;
 	export let home: Point;
 	export let radius: number;
 
@@ -50,7 +49,7 @@
 
 {#key home.lat + home.long}
 	<Map view={[home.lat, home.long]} zoom={13}>
-		<HomeMarker {area} {home} {radius} />
+		<HomeMarker {home} {radius} />
 		{#key radius}
 			{#each cleanEventsForMap(events ?? []) as groupEvents}
 				<EventMarkers

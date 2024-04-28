@@ -17,13 +17,13 @@ export async function cfetch<T>(options:RequestOptions): Promise<T> {
         body: options.body==null? null : JSON.stringify(options.body)
     }
 
-    console.log(`>> CFETCH REQUEST >> url: ${options.url} |||| Options: ${JSON.stringify(options)}`);
+    // console.log(`>> CFETCH REQUEST >> url: ${options.url} |||| Options: ${JSON.stringify(options)}`);
 
     const response = await fetch(options.url, reqOptions);
     
     const data: any = await response.json();
     
-    console.log(`>> CFETCH RESPONSE >> url: ${options.url} |||| Status: ${response.status} Body: ${JSON.stringify(data)}`);
+    // console.log(`>> CFETCH RESPONSE >> url: ${options.url} |||| Status: ${response.status} Body: ${JSON.stringify(data)}`);
 
 
 

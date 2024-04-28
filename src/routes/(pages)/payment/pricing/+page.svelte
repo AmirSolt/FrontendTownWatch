@@ -29,15 +29,6 @@
 
 		<div class="flex flex-wrap justify-center items-center gap-8">
 			<PriceCard name="Monthly" {user} featureList={['Unlocks event details']} price={prices[0]} />
-
-			<PriceCard
-				name="Yearly"
-				{user}
-				price={prices[1]}
-				featureList={['Unlocks event details']}
-				specialText="Best Value"
-				isSpecialColor={true}
-			/>
 		</div>
 	</div>
 
@@ -46,21 +37,10 @@
 		<Accordion>
 			<AccordionItem>
 				<svelte:fragment slot="lead"><HelpCircle /></svelte:fragment>
-				<svelte:fragment slot="summary"
-					>What are the benefits of being a premium member ?</svelte:fragment
-				>
-				<svelte:fragment slot="content">
-					<div class="p-2">Unlock access to more detailed event information.</div>
-				</svelte:fragment>
-			</AccordionItem>
-			<AccordionItem>
-				<svelte:fragment slot="lead"><HelpCircle /></svelte:fragment>
-				<svelte:fragment slot="summary">What is your refund policy?</svelte:fragment>
+				<svelte:fragment slot="summary">Where do the donations go to?</svelte:fragment>
 				<svelte:fragment slot="content">
 					<div class="p-2">
-						You can request a refund within 30 days of payment. Email our support: <span
-							class="badge variant-ghost">support@{PUBLIC_DOMAIN}</span
-						>
+						Please visit <a class="underline" href="/info/our-data">Our Data</a> for more information
 					</div>
 				</svelte:fragment>
 			</AccordionItem>
