@@ -1,7 +1,7 @@
-This project is currently offline.
-This frontend application is part of the TownWatch project. 
-User Server: [https://github.com/AmirSolt/UserServerTownWatch](https://github.com/AmirSolt/UserServerTownWatch)
-Geo Server: [https://github.com/AmirSolt/GeoServerTownWatch](https://github.com/AmirSolt/GeoServerTownWatch)
+This project is currently offline.<br>
+This frontend application is part of the TownWatch project. <br>
+User Server: [https://github.com/AmirSolt/UserServerTownWatch](https://github.com/AmirSolt/UserServerTownWatch)<br>
+Geo Server: [https://github.com/AmirSolt/GeoServerTownWatch](https://github.com/AmirSolt/GeoServerTownWatch)<br>
 
 Features:
 - Address search (geocoding) using here.com
